@@ -1,0 +1,227 @@
+      /* General layout and spacing */
+      body {
+        background-color: #ffffff; /* Dark background */
+        color: #000000; /* Light text color */
+        font-family: sans-serif; /* Choose a suitable font */
+      }
+
+      .lb{
+        margin-top: 160px;
+        border-radius: 10px;
+        background-color: rgb(0, 0, 0);
+        width: 95%;
+        height: auto;
+      }
+
+      .work-list {
+        display: flex;
+        gap: 10px;
+        row-gap: 10px;
+        column-gap: 10px;
+        justify-content: flex-start;
+        padding: 20px 0;
+        width: 100%;
+        /* border: 1px solid #FFB800; */
+        flex-direction: column;
+      }
+
+      .work-item {
+        display: flex;
+        align-items: center; /* Center items vertically */
+        background-color: #262626; /* Darker background for items */
+        border-radius: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Adjust shadow */
+        overflow: hidden; /* Hide overflowing content */
+        justify-content: flex-start; /* Align items to the left */
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 0 px;
+        border: 1px solid #e0e0e0 
+      }
+
+      /* Image styling */
+      .work-image {
+        width: 120px; 
+        height: 180px; 
+        object-fit: cover;
+        border-radius: 10px; /* Rounded left corners */
+        margin: 10px 20px 10px 10px;
+      }
+
+      .work-image-container {
+        position: relative;
+      }
+
+      /* Work details styling */
+      /* ... other CSS ... */
+
+      .work-details {
+        flex: 1; 
+        display: flex;
+        flex-direction: column;
+        padding: 30px 15px; /* ลด padding ด้านบนและล่าง */
+        line-height: 1.2;    /* ลดระยะห่างระหว่างบรรทัด */
+
+      }
+
+      .work-title {
+        font-size: 1.1em; 
+        margin-bottom: 3px; /* ลดระยะห่างด้านล่าง */
+        margin-top: -20px;
+        color: #e0e0e0;
+        font-weight: bold;
+      }
+
+      .work-author {
+        font-size: 0.9em;
+        color: #ccc; 
+        margin-bottom: 3px; /* ลดระยะห่างด้านล่าง */
+      }
+
+      .work-stats {
+        display: flex;
+      align-items: center; 
+      gap: 15px;
+      font-size: 0.9em;
+      color: #8c8c8c; 
+    margin-bottom: 5px;
+      }
+
+      .work-stats span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .work-description {
+        font-size: 0.9em;
+        color: #ccc; 
+        margin-bottom: 15px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        width: 450px;
+        height: 50px;
+      }
+
+      /* Button styling */
+      .button-container {
+        margin-top: auto; 
+        text-align: right; /* Align button to the right */
+      }
+
+      
+      .add-Novel-button {
+        background-color: #FFB800; 
+        margin-top: 20px; /* Adjust this if you want space between the button and work-list */
+        margin-left: 20px;
+        color: rgb(0, 0, 0);
+        border: none;
+        padding: 8px 16px; 
+        border-radius: 20px; 
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s; 
+        font-size: 1.0em; 
+        margin-bottom: 0
+      }
+
+      .add-Novel-button:hover {
+        background-color: #857808; 
+      }
+
+      
+
+      /* CategoryNav styles (สมมติจากภาพ) */
+      .category-nav {
+        display: flex;
+        justify-content: flex-start; 
+        margin-bottom: 20px;
+        background-color: #262626; /* Dark background for nav */
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .category-nav a {
+        padding: 8px 12px;
+        border-radius: 20px;
+        margin-right: 10px;
+        text-decoration: none;
+        color: #ccc; /* Lighter text color */
+        background-color: transparent; /* No background for inactive */
+        font-weight: 500;
+        border: 1px solid #ccc; /* Add border to inactive items */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+      }
+
+      .category-nav a.active {
+        background-color: #f05454; 
+        color: white;
+        border-color: #f05454; /* Match border color to background */
+      }
+
+      .work-list-container { /* Replace with the actual class name of the parent */
+        padding: 0; /* Remove any padding from the parent */
+        margin: 0; /* Remove any margin from the parent */
+      }
+
+      .work-type{
+        background-color: #FCB3AD; /* สีชมพูอ่อน */
+        color: #900B09; /* สีแดงเข้ม */
+        border: none;
+        border-radius: 5px;
+        font-size: small;
+        font-weight: bold; 
+        text-align: center;
+        font-family: 'Roboto';
+      }
+
+      .work-rate{
+        background-color: #CFF7D3; /* สีชมพูอ่อน */
+        color: #02542D; /* สีแดงเข้ม */
+        border: none;
+        border-radius: 5px;
+        font-size: medium;
+        font-weight: bold; 
+        text-align: center;
+        font-family: 'Roboto';
+      }
+
+      .work-tags {
+        display: flex;
+        align-items: center;
+        gap: 5px; /* หรือค่าอื่นที่เหมาะสม เช่น 3px หรือ 8px */
+      }
+
+      /* .button-group {
+      position: absolute;
+      top: 10px;
+      left: 10px; 
+      display: flex;
+      flex-direction: column; 
+      gap: 5px;
+      } */
+      
+      .edit-button, .finish-button {
+        background-color: #FFB800;
+        color: black;
+        border: none;
+        padding: 0px 5px;  /* ลด padding ลง */
+        border-radius:20px;
+        cursor: pointer;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+      }
+      
+      .edit-button {
+        right: 20px;
+      }
+      .edit-button:hover, .finish-button:hover  {
+        background-color: #857808;
+      }
+      
+      .finish-button {
+        left: 10px;
+      }
+      
+      

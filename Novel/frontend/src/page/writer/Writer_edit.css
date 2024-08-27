@@ -1,0 +1,148 @@
+.wtee-lb {
+    display: flex;
+    padding: 20px;
+    align-content: space-between;
+    background-color: #000;
+    border-radius: 10px;
+    color: #fff;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 200px;
+  }
+  
+  .wtee-left-section {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    /* background-color: green; */
+    padding: 40px;
+  }
+  
+  .wtee-right-section {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    /* background-color: red; */
+  }
+  
+  .wtee-input-row {
+    display: flex;
+    gap: 20px;
+    width: 700px;
+  }
+  
+  .wtee-input-field {
+    background-color: #fff;
+    color: #000;
+    border-radius: 5px;
+    border: none;
+    width: 156px;
+    margin-bottom: 10px;
+  }
+  
+  .wtee-full-width {
+    width: 100%;
+  }
+  
+  .wtee-save-button {
+    background-color: #FFB800;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .wtee-save-button:hover {
+    background-color: #e6a700;
+  }
+  
+  .wtee-upload-label {
+    background-color: #FFB800;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .wtee-input-field.full-width {
+    width: 700px; /* ปรับความกว้างให้ใกล้เคียง A4 ลบ padding */
+    resize: none;
+  }
+  
+  textarea.wtee-input-field.full-width {
+    height: calc(297mm - 20px);
+  }
+  
+  /* ปรับขนาด textarea เมื่อพิมพ์บนหน้าจอขนาดเล็ก */
+  @media (max-width: 768px) {
+    .wtee-input-field.full-width {
+      width: 100%;
+      height: 500px; /* หรือปรับขนาดตามที่ต้องการ */
+    }
+  }
+  
+  /* เพิ่ม CSS สำหรับปุ่มลบ */
+  .wtee-delete-button {
+    background-color: #f00; /* สีแดง */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    width: 200px;
+    margin-top: 10px; /* เพิ่มระยะห่างจากด้านบน */
+  }
+  
+  .wtee-delete-button:hover {
+    background-color: #c00; /* สีแดงเข้มขึ้นเมื่อ hover */
+  }
+  
+  /* เพิ่ม CSS สำหรับจัดรูปแบบปุ่มราคา */
+  .wtee-price-input {
+    display: flex;
+    align-items: center; /* จัดตำแหน่ง label และ input ให้อยู่ในแนวเดียวกัน */
+    justify-content: center;
+  }
+  
+  .wtee-price-label {
+    font-family: 'Dancing Script', cursive; /* ตัวอย่างฟอนต์ที่ดูเหมือนเขียนด้วยลายมือ */
+    font-size: 1.0em;
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่าง label และ input */
+    align-self: flex-start; /* เพิ่มบรรทัดนี้ */
+  }
+  
+  /* เพิ่ม CSS สำหรับ Modal */
+  .ant-modal-content {
+    background-color: rgba(0, 0, 0, 0.7); /* ปรับสีพื้นหลังของ Modal */
+    color: #fff; /* ปรับสีตัวอักษรใน Modal */
+    border-radius: 10px; /* ปรับขอบมุมของ Modal */
+  }
+  
+  .ant-modal-header {
+    background-color: #f00; /* ปรับสีพื้นหลังของ header */
+    color: #fff; /* ปรับสีตัวอักษรใน header */
+    border-radius: 10px 10px 0 0; /* ปรับขอบมุมของ header */
+  }
+  
+  .ant-modal-title {
+    color: #fff; /* ปรับสีตัวอักษรของ title */
+  }
+  
+  .ant-modal-footer {
+    background-color: transparent; /* ปรับสีพื้นหลังของ footer */
+    border-top: none; /* ลบเส้นขอบบนของ footer */
+    text-align: center; /* จัดปุ่มให้อยู่ตรงกลาง */
+  } 

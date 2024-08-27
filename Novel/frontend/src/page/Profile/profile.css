@@ -1,0 +1,57 @@
+.profile-container {
+    background-color: #222;
+    padding: 300px;
+    color: white;
+    width: 2000px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    background-color: #5f5252;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+/*บนรูป*/
+.profile-username {
+    margin-left: -110px;
+    margin-top: -70px;
+    font-size: 18px;
+}
+
+/*กรอบ*/
+.box {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ความห่างของแต่ละข้อความ*/
+.item {
+    margin: 10px 0;
+}
+
+.label {
+    color: rgb(247, 247, 247);
+}
+
+.value {
+    color: white;
+    margin-left: 10px;
+}
+
+.editProfile {
+    color: rgb(43, 43, 219);
+    text-decoration: none;
+    display: block;
+    margin-top: -210px;
+    text-align: right;
+}
