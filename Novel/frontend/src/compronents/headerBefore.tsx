@@ -1,7 +1,8 @@
 import React from 'react';
 import './header.css';
 import { Dropdown, Image } from 'react-bootstrap';
-
+import { Button } from 'react-bootstrap';
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const TOP2: React.FC = () => {
     return (
@@ -12,25 +13,22 @@ const TOP2: React.FC = () => {
             <div className="wrapcoin">
                 <div className="coin">
                 <div className="login">
-            <button id='login'>เข้าสู่ระบบ</button>
+                
+            <Button id='login'>เข้าสู่ระบบ</Button>
+           
             </div>
                 </div>
             </div>
-           
+         
              <div id='profile'>
             <Dropdown align="end">
                 <Dropdown.Toggle variant="light" id="dropdown-profile" as="div">
-                   
-                    <Image
-                        src="/src/assets/p1.jpeg"
-                        roundedCircle
-                        alt="profile"
-                        style={{ borderRadius: '100%', width: '45px', height: '45px' }}
-                    />
+                   <IoPersonCircleOutline id='white' />
+                  
                  
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu id='locks'>
                     <Dropdown.Item id='locks' href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
                     <Dropdown.Item id='locks' href="/writer">งานเขียน</Dropdown.Item>
                     <Dropdown.Item id='locks' href="/bookshelf">ชั้นหนังสือ</Dropdown.Item>

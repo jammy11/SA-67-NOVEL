@@ -68,7 +68,10 @@
   transform: translateX(-50%);
 }
 #login{
-   cursor: pointer;
+  border: 2px solid rgb(124, 122, 122);
+  
+    font-size: 12px;
+    cursor: pointer;
     background-color: #df052f;
     color: white;
     border-radius: 21px;
@@ -78,4 +81,8 @@
 }
 #locks{
   cursor: block;
+}
+#white{
+  color: #ffffff;
+  font-size: 45px;
 }
