@@ -32,7 +32,7 @@ const TOP: React.FC = () => {
                 <Dropdown.Menu>
                     <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
                     <Dropdown.Item href="/writer">งานเขียน</Dropdown.Item>
-                    <Dropdown.Item href="/bookself">ชั้นหนังสือ</Dropdown.Item>
+                    <Dropdown.Item href="/bookshelf">ชั้นหนังสือ</Dropdown.Item>
                     <Dropdown.Item href="/Payment">เหรียญ  & ประวัติธุรกรรม</Dropdown.Item>
                     <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
                     <Dropdown.Item href="/logout">ออกจากระบบ</Dropdown.Item>

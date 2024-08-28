@@ -11,6 +11,7 @@ import EditProfile from './page/Profile/editProfile'
 import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
+import L_Content from './page/Bookshelf/L_Content'
 
 
              
@@ -30,8 +31,13 @@ const router =createBrowserRouter([
     element:<Profile/>
   },
   {
-    path: "/bookself",
+    path: "/bookshelf",
     element:<L_Bookshelf/>
+  }
+  ,
+  {
+    path: "/L_Content",
+    element:<L_Content/>
   }
   ,  {
     path: "/Writer",
