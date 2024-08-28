@@ -72,7 +72,7 @@ const Popup2: React.FC = () => {
       <div className="cardPayment" onClick={handleShowPopup2_2}>
         <div className="box2">
           <div className="box1"></div>
-          <img id="imgC" src="./src/assets/truemoney-wallet.avif" alt="truemoney-wallet" />
+          <img id="imgC" src="./src/assets/true-wallet.png" alt="truemoney-wallet" />
           <div className="box1">
             <span><b>ทรูวอเล็ต</b></span>
           </div>

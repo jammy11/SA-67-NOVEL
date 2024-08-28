@@ -67,3 +67,15 @@
   left: 50%;
   transform: translateX(-50%);
 }
+#login{
+   cursor: pointer;
+    background-color: #df052f;
+    color: white;
+    border-radius: 21px;
+}
+#login:hover{
+   background-color: #8d021e;
+}
+#locks{
+  cursor: block;
+}

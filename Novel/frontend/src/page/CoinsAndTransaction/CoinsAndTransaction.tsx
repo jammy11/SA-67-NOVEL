@@ -21,21 +21,24 @@ const Payment: React.FC = () => {
       
             <div className="g2_1">
                 <a className="backicon" href="/" >
-                    <img src="./src/assets/back.png" alt="back" />
+                    <img id='iback' src="./src/assets/back.png" alt="back" />
                 </a>
-                <h3>เลือกช่องทางการชำระเงิน</h3>
+                <h3>&nbsp;&nbsp;เลือกช่องทางการชำระเงิน</h3>
             </div>
             <div className="g2_2">
             <Popup1/>
             <Popup2/>
             <Popup3/>
             </div>
-            <hr width='90%' />
+            <hr width='98%' />
             <div className="g2_1">
-                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประวัติการทำธุรกรรม</h3>
+               
+                <h3>&nbsp; <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประวัติการทำธุรกรรม</h3>
             </div>
             <div className="table">
+                
                 <Demo />
+                
             </div>
         </div>
         </>

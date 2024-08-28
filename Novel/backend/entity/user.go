@@ -20,7 +20,7 @@ type User struct {
 	Orders []Order `gorm:"foreignKey:UserID"`
 	Transactions []Transaction `gorm:"foreignKey:UserID"`
 	
-	CoinID *uint
+	CoinID uint
 	Coin   Coin `gorm:"foreignKey:CoinID"`
 
 }
