@@ -13,7 +13,7 @@ const L_Content: React.FC = () => {
         <>
         <TOP/>
         <div className='top-box'>
-        <a href='/bookshelf'> <Button_s/> </a>
+        <a href='/L_Bookshelf'> <Button_s/> </a>
         <Off_comment/> 
         </div>
             <div className='lc'>

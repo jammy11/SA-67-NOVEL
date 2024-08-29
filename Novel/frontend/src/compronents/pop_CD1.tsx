@@ -10,8 +10,8 @@ interface CoinCardProps {
   imgSrc: string;
   onClick: () => void;
 }
-const CoinCard = ({ amount, price, imgSrc, onClick } : CoinCardProps )=>(
-// const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, onClick }) => (
+
+const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, onClick }) => (
   <div className="cardCoinp" onClick={onClick}>
     <div className="box11p">
       <img id='iconp' src='./src/assets/coin-refill-50.svg' alt="Gold Coin" />
@@ -27,7 +27,6 @@ const CoinCard = ({ amount, price, imgSrc, onClick } : CoinCardProps )=>(
 );
 
 const Popup3: React.FC = () => {
-
   const [show, setShow] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [showPopup2_2, setShowPopup2_2] = useState<boolean>(false);
@@ -38,8 +37,8 @@ const Popup3: React.FC = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShowPopup2_2(true); // Show coin package popup first
+
   const handleClosePopup2_2 = () => setShowPopup2_2(false);
-  
   const handleCloseVerify = () => setShowVerifyPopup(false);
   const handleCloseAlert = () => setShowAlert(false);
 

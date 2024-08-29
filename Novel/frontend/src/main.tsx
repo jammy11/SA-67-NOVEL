@@ -10,11 +10,16 @@ import Profile from './page/Profile/profile'
 import EditProfile from './page/Profile/editProfile'
 import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
+
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
-import L_Content from './page/Bookshelf/L_Content'
 
 
-             
+                    // <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
+                    // <Dropdown.Item href="/writer">งานเขียน</Dropdown.Item>
+                    // <Dropdown.Item href="/bookself">ชั้นหนังสือ</Dropdown.Item>
+                    // <Dropdown.Item href="/Payment">เหรียญ  & ประวัติธุรกรรม</Dropdown.Item>
+                    // <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
+                    // <Dropdown.Item href="/logout">ออกจากระบบ</Dropdown.Item>
 
 const router =createBrowserRouter([
   {
@@ -31,13 +36,8 @@ const router =createBrowserRouter([
     element:<Profile/>
   },
   {
-    path: "/bookshelf",
+    path: "/bookself",
     element:<L_Bookshelf/>
-  }
-  ,
-  {
-    path: "/L_Content",
-    element:<L_Content/>
   }
   ,  {
     path: "/Writer",

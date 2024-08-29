@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
-import './pop_WL1.css';
+
 import './pop.css';
 import './pop_WL1.css';
 import CountdownButton from './GETOTP';

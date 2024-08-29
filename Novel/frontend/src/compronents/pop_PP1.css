@@ -43,7 +43,7 @@ body{
     /* margin-left:20px ; */
     margin-bottom: 20px;
     border: 1px solid#dcdcdd;
-    background-color: #fffffe;
+    background-color: #6a6a36;
     border-radius: 5%;
     padding: 20px;
     height: auto;
@@ -72,9 +72,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid black; */
+   
     width: 100%;
-    color: #66625c;
 }
 
 #icon{

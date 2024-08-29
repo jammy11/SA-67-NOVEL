@@ -10,7 +10,6 @@ import CardList4 from '../../compronents/path/pathCat4';
 import CardList5 from '../../compronents/path/pathCat5';
 import CategoryNav from '../../compronents/CategoryNav';
 import TOP2 from '../../compronents/headerBefore';
-
 const Home: React.FC = () => {
   
 
