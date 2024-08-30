@@ -109,6 +109,8 @@
       position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
       top: 109px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
       left: 250px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
+      height: 35px;
+      width: 35px;
       
     }
     #coin2 {
@@ -125,6 +127,8 @@
       position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
       top: 168px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
       left: 387px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
+      height: 35px;
+      width: 35px;
       
     }
     .page .container-9 {
@@ -694,7 +698,7 @@
   .pb{
     
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     width: 100%;
     /* border: 2px solid rgb(186, 186, 186); */
   }
@@ -716,3 +720,7 @@
     flex-wrap: wrap;
     /* border: 3px solid rgb(186, 186, 186); */
   }
+  #icart{
+    color: #FFF;
+    font-size: 16px;
+}

@@ -15,7 +15,7 @@ interface CoinCardProps {
 const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, showButton = true, handleCloseParent }) => (
   <div className="cardCoinp">
     <div className="box11p">
-      <img id='iconp' src='./src/assets/coin-refill-50.svg' alt="Gold Coin" />
+      <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />
       <span><b>{amount.toFixed(2)}</b></span>
     </div>
     <div className="box22p">
@@ -95,12 +95,12 @@ const Popup1: React.FC = () => {
             </div>
 
             <div className="g2_2p">
-              <CoinCard amount={70} price={50} imgSrc="./src/assets/coin-refill-50.svg" handleCloseParent={handlePopup1Confirm} />
-              <CoinCard amount={120} price={100} imgSrc="./src/assets/coin-refill-100.svg" handleCloseParent={handlePopup1Confirm} />
-              <CoinCard amount={240} price={200} imgSrc="./src/assets/coin-refill-200.svg" handleCloseParent={handlePopup1Confirm} />
-              <CoinCard amount={360} price={300} imgSrc="./src/assets/coin-refill-300.svg" handleCloseParent={handlePopup1Confirm} />
-              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-refill-500.svg" handleCloseParent={handlePopup1Confirm} />
-              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-refill-1000.svg" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={70} price={50} imgSrc="./src/assets/coin-50.png" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={120} price={100} imgSrc="./src/assets/coin-100.png" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={240} price={200} imgSrc="./src/assets/coin-200.png" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={360} price={300} imgSrc="./src/assets/coin-300.png" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-500.png" handleCloseParent={handlePopup1Confirm} />
+              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-1000.png" handleCloseParent={handlePopup1Confirm} />
             </div>
           </div>
         </div>

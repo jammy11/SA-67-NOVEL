@@ -61,7 +61,7 @@ const data = [
         dataSource={data}
         columns={[
           { title: 'ประเภท', dataIndex: 'Type', key: 'Type' },
-          { title: 'ช่องทางการชำระเงิน', dataIndex: 'Payment', key: 'Payment' },
+          { title: 'ช่องทางการทำธุรกรรม', dataIndex: 'Payment', key: 'Payment' },
           { title: 'ชื่อเรื่อง', dataIndex: 'NovelName', key: 'NovelName' },
           { title: 'วัน/เวลา', dataIndex: 'Time', key: 'Time' },
           {
@@ -71,7 +71,7 @@ const data = [
             align: 'right',
             render: (text) => (
               <>
-                {text} <img id='iconp' src="src/assets/coin-refill-50.svg" alt="" />
+                {text} <img id='icon50' src="src/assets/coin-50.png" alt="" />
               </>
             ),
           },

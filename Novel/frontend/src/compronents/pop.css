@@ -22,6 +22,7 @@
     padding: 20px;
     border: 1px solid#dcdcdd;
     background-color: #fffffe;
+    transform: translateY(-44px);
 }
 .g2_2p{
    
@@ -109,7 +110,7 @@
     width: 100%;
 }
 #iconp{
-    height: 40px;
+    height: 25px;
     padding-right: 8px;
 }
 #imgCp{
@@ -126,8 +127,8 @@
     padding: 0 20px;
     border: 1px solid #ffb900;
     border-radius: 20px;
-    transform: translate(0,-15px);
     cursor: pointer;
+    margin-bottom: 10px;
 }
 .thbp:hover{
     background-color:#ffb900 ;

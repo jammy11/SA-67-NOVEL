@@ -10,8 +10,8 @@ const TOP: React.FC = () => {
             <img id="Logo" src="/src/assets/Logo.png" alt="Logo" />
        
             <div className="wrapcoin">
-                <div className="coin">
-                    <img id="coin" src="/src/assets/coin.png" alt="coin" />
+                <div className="cointop">
+                    <img id="cointop" src="./src/assets/coin-50.png" alt="coin" />
                     <span id="cointxt">500.00</span>
                 </div>
             </div>

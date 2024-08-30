@@ -1,6 +1,7 @@
 import './MM.css';
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import { HiMiniShoppingCart } from "react-icons/hi2";
 
 interface CardProps {
     card: {
@@ -42,7 +43,8 @@ const Card: React.FC<CardProps> = ({ card }) => {
             <div className='tailbox'>
                 <span id='htailb'><b>{card.name}</b></span>
                 <div className='pb'>
-                    <img id="ieyeb" src="/src/assets/0eye.png" alt="eye" />
+                <HiMiniShoppingCart id='icart'/>
+                    {/* <img id="ieyeb" src="/src/assets/0eye.png" alt="eye" /> */}
                     <span id='view_likeb'>{card.views}</span>
                     <img id="ieyeb" src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"} 
                          alt="heart" onClick={toggleLike} />
@@ -99,7 +101,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
                           </div>
                           <div className="component-13">
                             <span className="f-1">
-                              <img id='coin' src="./src/assets/coin.png" alt="coin"></img>
+                              <img id='coin' src="./src/assets/coin-50.png" alt="coin"></img>
                             </span>
                           </div>
                         </div>
@@ -154,7 +156,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
                       <span id='textprice2'>{card.price}</span>
                   </span>
                   <span className="f-1">
-                      <img id='coin2' src="./src/assets/coin.png" alt="coin"></img>
+                      <img id='coin2' src="./src/assets/coin-50.png" alt="coin"></img>
                   </span>
                   <div onClick={handleCloseUnlock}>
                     <span id='buttoncancle'>

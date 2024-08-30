@@ -10,6 +10,8 @@ import CardList4 from '../../compronents/path/pathCat4';
 import CardList5 from '../../compronents/path/pathCat5';
 import CategoryNav from '../../compronents/CategoryNav';
 import TOP2 from '../../compronents/headerBefore';
+import { HiMiniShoppingCart } from "react-icons/hi2";
+
 const Home: React.FC = () => {
   
 
@@ -41,7 +43,7 @@ const Home: React.FC = () => {
             <div className='tail'>
                 <span id='htail'><b>ฝืนชะตาท้าสามภพ</b></span>
                 <div className='p'>
-                <img id="ieye" src="/src/assets/0eye.png" alt="0eye" /><span id='view_like'>200,000</span>
+                <HiMiniShoppingCart id='icart' /><span id='view_like'>200,000</span>
                 <img id="ieye" src="/src/assets/0heart.png" alt="0eye" /><span id='view_like'>200,000</span>
                 </div>
             </div>
@@ -54,7 +56,7 @@ const Home: React.FC = () => {
             <div className='tail'>
                 <span id='htail'><b>จอมเทพโอสถ</b></span>
                 <div className='p'>
-                <img id="ieye" src="/src/assets/0eye.png" alt="0eye" /><span id='view_like'>200,000</span>
+                <HiMiniShoppingCart id='icart' /><span id='view_like'>200,000</span>
                 <img id="ieye" src="/src/assets/0heart.png" alt="0eye" /><span id='view_like'>200,000</span>
                 </div>
             </div>
@@ -67,7 +69,7 @@ const Home: React.FC = () => {
             <div className='tail'>
                 <span id='htail'><b>ฟู่เยี่ยน สาวน้อยเนตรสวรรค์ (นิยายแปล)</b></span>
                 <div className='p'>
-                <img id="ieye" src="/src/assets/0eye.png" alt="0eye" /><span id='view_like'>200,000</span>
+                <HiMiniShoppingCart id='icart' /><span id='view_like'>200,000</span>
                 <img id="ieye" src="/src/assets/0heart.png" alt="0eye" /><span id='view_like'>200,000</span>
                 </div>
             </div>
@@ -80,7 +82,7 @@ const Home: React.FC = () => {
             <div className='tail'>
                 <span id='htail'><b>เมื่อสุดยอดนักฆ่ามาเป็นหนุ่มออฟฟิศ</b></span>
                 <div className='p'>
-                <img id="ieye" src="/src/assets/0eye.png" alt="0eye" /><span id='view_like'>200,000</span>
+                <HiMiniShoppingCart id='icart' /><span id='view_like'>200,000</span>
                 <img id="ieye" src="/src/assets/0heart.png" alt="0eye" /><span id='view_like'>200,000</span>
                 </div>
             </div>
@@ -93,7 +95,7 @@ const Home: React.FC = () => {
             <div className='tail'>
                 <span id='htail'><b>ปลดล็อคระบบอัพพลังไร้ขอบเขต</b></span>
                 <div className='p'>
-                <img id="ieye" src="/src/assets/0eye.png" alt="0eye" /><span id='view_like'>200,000</span>
+                <HiMiniShoppingCart id='icart' /><span id='view_like'>200,000</span>
                 <img id="ieye" src="/src/assets/0heart.png" alt="0eye" /><span id='view_like'>200,000</span>
                 </div>
             </div>
@@ -105,11 +107,11 @@ const Home: React.FC = () => {
         
     </div>
    
-
+    
     
     </div>
 
-
+    <img decoding="async" style={{ marginLeft: '100px' }}src="/src/assets/fafa102c1.gif" alt="PGSLOTเว็บตรง"></img>
     <a id='cat2'  className='hide'>2</a>
     <div className='l1_2' >
         <div className='headder'>

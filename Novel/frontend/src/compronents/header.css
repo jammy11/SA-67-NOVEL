@@ -28,11 +28,11 @@
     transform: translateY(-50%); /* ใช้เพื่อจัดตำแหน่งให้ชัดกลาง */
     cursor: pointer;
     }
-    #coin{
+    #cointop{
       width: 27px;
      
     }
-    .coin{
+    .cointop{
       /* border: 1px solid #FFFFFF; */
       height: 60px;
       width: 80px;
