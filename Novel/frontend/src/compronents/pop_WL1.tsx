@@ -5,15 +5,10 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_WL1.css';
 import CountdownButton from './GETOTP';
+import { CoinCardProps2 } from '../interface/interface';
 
-interface CoinCardProps {
-  amount: number;
-  price: number;
-  imgSrc: string;
-  onClick: () => void;
-}
 
-const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, onClick }) => (
+const CoinCard = ({ amount, price, imgSrc, onClick }: CoinCardProps2) => (
   <div className="cardCoinp" onClick={onClick}>
     <div className="box11p">
       <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />

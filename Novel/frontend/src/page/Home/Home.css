@@ -62,47 +62,70 @@
     width: auto;
  
 }
-.l1_1_2_1{
-    height: 550px;
-    width: 360px;
-    border-radius: 10px;
-    background-color: rgb(29, 29, 28);
-    padding: 10px;
-    margin-left: 30px;
-    border: 1px solid #343434;
-}
-#Treding{
-    color: #d3e50e;
-    margin-left: 40px;
-}
-.l1_1_2_1_x{
-    height: 100px;
-    margin-top: 5px;
-    width: 100%;
-    border-radius: 10px;
-    /* background-color: rgb(37, 35, 32); */
-    padding: 0px;
-    display: flex;
-    align-items: center;
-    color: #FFF;
-    cursor: pointer;
-    
+
+@media (max-width: 1431px) {
+    .l1_1_2_1 {
+        height: auto;
+        width: auto; /* กำหนดค่าความกว้าง */
+        border-radius: 10px;
+        background-color: rgb(29, 29, 28);
+        padding: 10px;
+        margin-left: -50px;
+        border: 1px solid #343434;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 1px;
+    }   
+    #Treding{
+        margin-top: 70px;
+    }
+    .l1_1_2_1_x{
+        height: 400px;
+        margin-top: 5px;
+        width: 220px;
+        border-radius: 10px;
+        background-color: rgb(37, 35, 32);
+        padding: 0px;
+        display:flex;
+        flex-wrap: wrap;
+        
+        color: #FFF;
+        cursor: pointer;
+        position: relative;
+        
 }
 .l1_1_2_1_x:hover{
-  
+      
     background-color: rgb(37, 35, 32); 
     
     border: 0.1px solid  rgb(28, 27, 25); 
  
     
 }
-#number{
-    margin-left: 10px;
+#New{
+    color: #d3e50e;
+    margin-left: 40px;   
+   
+}
+#Treding{
+    color: #d3e50e;
+    margin-left: 40px;
+
+}
+#number{ 
+    position: absolute;
+    top: 5px;
+    left: 10px;
     height: 20px;
+    color: #d3e50e;
+    font-size: 40px;
 }
 #minicard{
-    margin-left: 10px;
-    height: 88px;
+    margin-top: 10px;
+    margin-left: 15px;
+    height: 263px;
+    border-radius: 8px;
     
 }
 .tail{
@@ -148,6 +171,104 @@
     margin: 130px 80px 0;
     
 }
+}
+@media (min-width: 1431px) {
+    .l1_1_2_1_x{
+        height: 100px;
+        margin-top: 5px;
+        width: 100%;
+        border-radius: 10px;
+        /* background-color: rgb(37, 35, 32); */
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        color: #FFF;
+        cursor: pointer;
+        position: relative;
+        
+    }
+    .l1_1_2_1_x:hover{
+      
+        background-color: rgb(37, 35, 32); 
+        
+        border: 0.1px solid  rgb(28, 27, 25); 
+     
+        
+    }
+    #number{
+        margin-left: 10px;
+        height: 20px;
+    }
+    #minicard{
+        margin-left: 10px;
+        height: 88px;
+        
+    }
+    .tail{
+        /* border: 1px solid red; */
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        margin-left: 10px;
+        height: 88px;
+        
+        
+    
+    }
+    #htail{
+        font: 1.2em sans-serif;
+        /* border: 1px solid red; */
+        
+    }
+    #ieye,#iheart{
+        /* border: 1px solid red; */
+        height: 15px;
+    }
+    #view_like{
+        margin-left: 10px;
+        font: 1em sans-serif;
+        padding-right: 10px;
+        color: #8c8888;
+        /* border: 1px solid red; */
+        
+    }
+    .p{
+        margin-top: 10px;
+        display: flex;
+    }
+    
+    
+    .l1_2{
+        display: flex;
+        flex-wrap: wrap;
+        /* border: 1px solid red; */
+        height: auto;
+        width: auto;
+        margin: 130px 80px 0;
+        
+    }
+
+#New{
+    color: #d3e50e;
+    margin-left: 40px;   
+   
+}
+#Treding{
+    color: #d3e50e;
+    margin-left: 40px;
+
+}
+.l1_1_2_1{
+    height: 550px;
+    width: 360px;
+    border-radius: 10px;
+    background-color: rgb(29, 29, 28);
+    padding: 10px;
+    margin-left: 30px;
+    border: 1px solid #343434;
+}
+}
+
 .headder{
     color: #FFF;
     width: 100%;
@@ -160,4 +281,14 @@
 .hide{
     color: #1e1c1c00;
     text-decoration: none;
+    
+}
+.marlk{
+    display: flex;
+    align-items: end;
+}
+#cat1_2{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

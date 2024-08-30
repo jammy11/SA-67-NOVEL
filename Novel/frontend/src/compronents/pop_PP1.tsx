@@ -3,27 +3,20 @@ import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
 import './pop.css';
 import './pop_PP1.css';
+import { CoinCardProps } from '../interface/interface';
 
-interface CoinCardProps {
-  amount: number;
-  price: number;
-  imgSrc: string;
-  showButton?: boolean;
-  handleCloseParent: (price: number) => void;
-}
-
-const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, showButton = true, handleCloseParent }) => (
+const CoinCard = ({ amount, price, imgSrc, showButton = true, handleCloseParent }: CoinCardProps) => (
   <div className="cardCoinp">
     <div className="box11p">
       <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />
       <span><b>{amount.toFixed(2)}</b></span>
     </div>
     <div className="box22p">
-      <img id='imgCp' src={imgSrc} alt={`coin-refill-${amount}`} />
+      <img id='imgCp' src={imgSrc} alt={`coin-${amount}`} />
     </div>
     <div className="box33p">
       {showButton ? (
-        <button className='thbp' onClick={() => handleCloseParent(amount)}>
+        <button className='thbp' onClick={() => handleCloseParent(price)}>
           <b>{price.toFixed(2)}</b>
         </button>
       ) : (
@@ -43,9 +36,9 @@ const Popup1: React.FC = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handlePopup1Confirm = (amount: number) => {
-    setSelectedAmount(amount);
-    setPopup2Price(amount);
+  const handlePopup1Confirm = (price: number) => {
+    setSelectedAmount(price);
+    setPopup2Price(price);
     setShow(false);
     setShowPopup2(true);
   };
@@ -65,7 +58,7 @@ const Popup1: React.FC = () => {
     if (alerts.length > 0) {
       const timer = setTimeout(() => {
         setAlerts(prev => prev.slice(0, -1)); // Remove the last alert after 15 seconds
-      }, 15000);
+      }, 7000);
       return () => clearTimeout(timer);
     }
   }, [alerts]);
