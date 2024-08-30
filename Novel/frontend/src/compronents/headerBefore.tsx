@@ -10,15 +10,16 @@ const TOP2: React.FC = () => {
             <img id="HLogo" src="/src/assets/HLogo.png" alt="HLogo" />
             <img id="Logo" src="/src/assets/Logo.png" alt="Logo" />
        
-            <div className="wrapcoin">
+            {/* <div className="wrapcoin">
                 <div className="coin">
-                <div className="login">
-                
-            <Button id='login'>เข้าสู่ระบบ</Button>
-           
-            </div>
+
                 </div>
-            </div>
+            </div> */}
+            <div className="login">
+                
+                <Button id='login'>เข้าสู่ระบบ</Button>
+               
+                </div>
          
              <div id='profile'>
             <Dropdown align="end">

@@ -48,6 +48,12 @@
       top: 50%; /* วางกลางแนวตั้งของ .topbar */
       transform: translateY(-50%); /* ใช้เพื่อจัดตำแหน่งให้ชัดกลาง */
     }
+    .login{
+      position: absolute;
+      right: 100px; /* ระยะห่างจากขอบขวาของ .topbar */
+      top: 50%; /* วางกลางแนวตั้งของ .topbar */
+      transform: translateY(-50%); /* ใช้เพื่อจัดตำแหน่งให้ชัดกลาง */
+    }
 #dropdown-profile {
       position: absolute;
       right: -43px; /* ปรับค่าให้เหมาะสม */
