@@ -85,7 +85,7 @@
         margin-top: 5px;
         width: 220px;
         border-radius: 10px;
-        background-color: rgb(37, 35, 32);
+        /* background-color: rgb(37, 35, 32); */
         padding: 0px;
         display:flex;
         flex-wrap: wrap;
@@ -97,7 +97,7 @@
 }
 .l1_1_2_1_x:hover{
       
-    background-color: rgb(37, 35, 32); 
+    background-color: rgb(43, 42, 41); 
     
     border: 0.1px solid  rgb(28, 27, 25); 
  

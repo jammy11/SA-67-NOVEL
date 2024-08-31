@@ -648,29 +648,34 @@
     flex-wrap: wrap;
     padding: 15px;
     border-radius: 10px;
-    width: 200px; /* หรือกำหนดความกว้างที่แน่นอน เช่น 300px */
+    width: 230px; /* หรือกำหนดความกว้างที่แน่นอน เช่น 300px */
     max-width: 280px; /* กำหนดความกว้างสูงสุดเพื่อให้แสดงแบบข้างๆ */
     height: auto;
-    /* border: 1px solid #050799; */
-    margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่างการ์ด */
+    
+    background-color: #23202094;
+    /* background-color: #ffffff; */
+    /* เพิ่มช่องว่างด้านล่างการ์ด */
     /* border: 1px solid rgb(89, 0, 255); */
+    margin-bottom: 20px;
   }
   .Mcard:hover{
-    background-color: rgb(17, 16, 16);
+    background-color: rgb(34, 33, 33);
   }
   
   #Mcard {
     height: 283px;
-    width: 167px;
+    width: 193px;
    
     object-fit: cover;
     border-radius: 10px;
+    /* border: 1px solid red; */
    
   }
   #Mcardnew {
     height: 240px;
     width: 167px;
-   
+    
+    
     object-fit: cover;
     border-radius: 10px;
     margin: 15px;
@@ -703,10 +708,10 @@
     /* border: 2px solid rgb(186, 186, 186); */
   }
   .card-list {
-    display: flex;
+    display:flex;
     flex-wrap: wrap;
     gap: 10px; /* ช่องว่างระหว่างการ์ด */
-    justify-content: flex-start;
+    justify-content: center;
     cursor: pointer;
     /* border: 2px solid rgb(186, 186, 186); */
   
