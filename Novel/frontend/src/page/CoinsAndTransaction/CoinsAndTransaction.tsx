@@ -37,7 +37,7 @@ const Payment: React.FC = () => {
             </div>
             <div className="table">
                 
-                <div className='wrapper'><Demo /></div>
+                <Demo />
                 
             </div>
         </div>

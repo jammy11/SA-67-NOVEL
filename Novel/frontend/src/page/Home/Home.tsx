@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     <div className='l1_1'>
 
     <div className='l1_1_1' >
-    <h2 id='New'>New
+    <h2 id='New'>แนะนำ
         <img width="20px" style={{ transform: "translate(0, -5px)" }} src="/src/assets/star.png" alt="star" />
     </h2>
 
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         
     </div>
     <div className='l1_1_2'>
-    <h2 id='Treding'>Treding
+    <h2 id='Treding'>มาแแรง
     <img width="20px" style={{ transform: "translate(0, -5px)" }} src="/src/assets/star.png" alt="star" />
     </h2>
         <div className='l1_1_2_1'>

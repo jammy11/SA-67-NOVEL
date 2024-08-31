@@ -116,7 +116,8 @@
 #number{ 
     position: absolute;
     top: 5px;
-    left: 10px;
+    left: 20px;
+    text-shadow: 2px 2px 4px #120d0d;
     height: 20px;
     color: #d3e50e;
     font-size: 40px;

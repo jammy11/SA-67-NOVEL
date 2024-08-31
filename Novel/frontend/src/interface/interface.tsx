@@ -3,7 +3,7 @@ export interface CoinCardProps {
     price: number;
     imgSrc: string;
     showButton?: boolean;
-    handleCloseParent: (price: number) => void;
+    sendData: (amount: number, price: number) => void;
   }
 
   export interface CoinCardProps2 {

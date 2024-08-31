@@ -7,7 +7,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 const TOP2: React.FC = () => {
     return (
         <div className="topbar">
-            <img id="HLogo" src="/src/assets/HLogo.png" alt="HLogo" />
+          
             <img id="Logo" src="/src/assets/Logo.png" alt="Logo" />
        
             {/* <div className="wrapcoin">
