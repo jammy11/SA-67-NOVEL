@@ -10,7 +10,7 @@ import Profile from './page/Profile/profile'
 import EditProfile from './page/Profile/editProfile'
 import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
-
+import SignInPages from './page/authentication/Login'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
 
 
@@ -60,6 +60,10 @@ const router =createBrowserRouter([
   {
     path: "/Income",
     element:<Income/>
+  },
+  {
+    path: "/a",
+    element:<SignInPages/>
   }
   
 ])

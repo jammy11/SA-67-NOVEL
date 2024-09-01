@@ -4,7 +4,7 @@ import './CoinsAndTransaction.css';
 import Popup1 from '../../compronents/pop_PP1';
 import Popup2 from '../../compronents/pop_WL1';
 import Popup3 from '../../compronents/pop_CD1';
-import TOP from '../../compronents/header';
+import Header from '../../compronents/headerselect';
 
 const Payment: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -16,7 +16,7 @@ const Payment: React.FC = () => {
     };
     return (
         <>
-        <TOP/>
+        <Header />
         <div className="g2">
       
             <div className="g2_1">

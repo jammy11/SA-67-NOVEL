@@ -9,7 +9,7 @@ import CardList3 from '../../compronents/path/pathCat3';
 import CardList4 from '../../compronents/path/pathCat4';
 import CardList5 from '../../compronents/path/pathCat5';
 import CategoryNav from '../../compronents/CategoryNav';
-import TOP2 from '../../compronents/headerBefore';
+import Header from '../../compronents/headerselect';
 import { HiMiniShoppingCart } from "react-icons/hi2";
 
 const Home: React.FC = () => {
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
     return (
         <>
-        <TOP2/>
+        <Header/>
         <a id='cat1' className='hide'>1</a>
         <CategoryNav/>
     <div className='l1'>

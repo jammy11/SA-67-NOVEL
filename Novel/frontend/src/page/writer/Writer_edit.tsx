@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './Writer_edit.css'; 
-import TOP from '../../compronents/header';
+import Header from '../../compronents/headerselect';
 import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
@@ -71,7 +71,7 @@ const Writer_edit: React.FC = () => {
 
   return (
     <>
-      <TOP />
+      <Header />
       <CategoryNavWriter />
       <div className='wtee-lb'> 
         <div className="wtee-left-section"> 
