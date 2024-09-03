@@ -1,6 +1,6 @@
 import React from 'react';
 import './Writer.css'; 
-import TOP from '../../compronents/header';
+import Headers from '../../compronents/headerselect';
 import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { EyeOutlined } from '@ant-design/icons';
@@ -8,6 +8,7 @@ import { HeartOutlined } from '@ant-design/icons';
 import { CommentOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import { EditOutlined } from '@ant-design/icons';
+import { Header } from 'antd/es/layout/layout';
 
 interface Work {
   title: string;
@@ -56,7 +57,7 @@ const Writer: React.FC = () => {
 
   return (
     <>
-      <TOP />
+      <Headers />
       <CategoryNavWriter />
       <div className='lb'>
         <a href = '/Writer_edit'>

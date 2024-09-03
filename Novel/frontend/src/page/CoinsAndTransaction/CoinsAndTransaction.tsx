@@ -4,7 +4,8 @@ import './CoinsAndTransaction.css';
 import Popup1 from '../../compronents/pop_PP1';
 import Popup2 from '../../compronents/pop_WL1';
 import Popup3 from '../../compronents/pop_CD1';
-import Header from '../../compronents/headerselect';
+
+import Headers from '../../compronents/headerselect';
 
 const Payment: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -16,9 +17,10 @@ const Payment: React.FC = () => {
     };
     return (
         <>
-        <Header />
+         <Headers/>
+        
         <div className="g2">
-      
+     
             <div className="g2_1">
                 <a className="backicon" href="/" >
                     <img id='iback' src="./src/assets/back.png" alt="back" />

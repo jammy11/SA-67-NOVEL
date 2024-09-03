@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './L_Bookshelf.css';
-import Header from '../../compronents/headerselect';
+import Headers from '../../compronents/headerselect';
 import Button_s from '../../compronents/Book_components/return_button';
 import { alignPropType } from 'react-bootstrap/esm/types';
 import Pagination from '../../compronents/Book_components/pagination';
@@ -21,7 +21,7 @@ const L_Bookshelf: React.FC = () => {
     
     return(
         <>
-            <Header/>
+            <Headers/>
             <div className='head-box'>
             <a href='/'> <Button_s/>  </a>
             <div className='head'> Bookshelf </div>

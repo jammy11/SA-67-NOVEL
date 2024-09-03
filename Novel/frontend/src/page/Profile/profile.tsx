@@ -1,11 +1,11 @@
 import React from 'react';
 import './profile.css'
-import TOP from '../../compronents/header';
+import Headers from '../../compronents/headerselect';
 import { Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {
     return (
-        <><TOP/>
+        <><Headers/>
         <div className="profile-container">
             <div className="profile-header">
                 <div className="profile-picture"></div>

@@ -5,7 +5,7 @@ import { message, theme } from 'antd';  // Ensure this import matches your actua
 import logo from '../assets/Logo.png';
 import coinImage from '../assets/coin-50.png';
 import profileImage from '../assets/p1.jpeg';
-
+import Balance from './showblance';
 const TOP: React.FC = () => {
     const page = localStorage.getItem("page");
     const [messageApi, contextHolder] = message.useMessage();
@@ -31,7 +31,7 @@ const TOP: React.FC = () => {
             <div className="wrapcoin">
                 <div className="cointop">
                     <img id="cointop" src={coinImage} alt="coin" />
-                    <span id="cointxt">500.00</span>
+                    <span id="cointxt"><Balance /></span>
                 </div>
             </div>
             <div id='profile'>

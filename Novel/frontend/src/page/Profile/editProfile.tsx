@@ -1,11 +1,11 @@
 import React from 'react';
 import './editProfile.css';
-import TOP from '../../compronents/header';
+import Headers from '../../compronents/headerselect';
 import { Link } from 'react-router-dom';
 
 const EditProfile: React.FC = () => {
     return (
-        <><TOP/>
+        <><Headers/>
         <div className="edit-profile-container">
             <div className="head">
                 Profile → <span className="current">แก้ไขข้อมูลส่วนตัว</span>

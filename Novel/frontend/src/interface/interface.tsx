@@ -40,3 +40,55 @@ export interface CoinCardProps {
     Password?: string;
   
   }
+  export interface UsersInterface {
+    id: string;
+    username: string;
+    email: string;
+    password?: string;
+    created_at?: Date;
+    updated_at?: Date;
+  }
+  
+
+  export interface TransactionInterface {
+    id: string;
+    user_id: string;
+    amount: number;
+    type: string;
+    status: string;
+    created_at?: Date;
+    updated_at?: Date;
+  }
+  
+  export interface OrderInterface {
+    id: string;
+    user_id: string;
+    package_id: string;
+    amount: number;
+    status: string;
+    created_at?: Date;
+    updated_at?: Date;
+  }
+  
+  export interface PackageInterface {
+    id: string;
+    Amount: string;
+    price: number;
+    Pic: Date;
+    updated_at?: Date;
+  }
+  
+  export interface CoinInterface {
+    id: string;
+    package_id: string;
+    amount: number;
+    price: number;
+    created_at?: Date;
+    updated_at?: Date;
+  }
+  
+  export interface GendersInterface {
+    id: string;
+    name: string;
+  }
+  

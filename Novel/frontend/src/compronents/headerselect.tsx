@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TOP from './header';  // นำเข้าคอมโพเนนต์ที่แสดงเมื่อผู้ใช้ล็อกอินแล้ว
-import TOP2 from './headerBefore'; // นำเข้าคอมโพเนนต์ที่แสดงเมื่อผู้ใช้ยังไม่ล็อกอิน
+import TOP from './header';
+import TOP2 from './headerBefore';
 import axios from 'axios';
 
-const Header: React.FC = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Headers: React.FC = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null); // แก้ไขตรงนี้
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -20,7 +20,6 @@ const Header: React.FC = () => {
                 };
 
                 try {
-                    // ทดสอบการเข้าถึง API ด้วย token
                     const response = await axios.get('http://localhost:8000/users', requestOptions);
                     if (response.status === 200) {
                         setIsLoggedIn(true);
@@ -38,6 +37,10 @@ const Header: React.FC = () => {
         checkAuth();
     }, []);
 
+    if (isLoggedIn === null) {
+        return null; // หรือสามารถแสดง Loading Spinner ระหว่างรอตรวจสอบได้
+    }
+
     return (
         <div>
             {isLoggedIn ? <TOP /> : <TOP2 />}
@@ -45,4 +48,4 @@ const Header: React.FC = () => {
     );
 };
 
-export default Header;
+export default Headers;
