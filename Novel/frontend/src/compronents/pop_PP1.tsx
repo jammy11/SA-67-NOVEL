@@ -3,9 +3,11 @@ import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
 import './pop.css';
 import './pop_PP1.css';
-import { CoinCardProps } from '../interface/interface';
-
+import { Package } from '../interface/interface';
+import { GetPackages } from '../services/https';
 import CoinCard from './coinCard';
+import { updateCoinBalance } from '../services/https';
+
 
 const Popup1: React.FC = () => {
   const [Package, setPackage] = useState(false);
@@ -20,6 +22,11 @@ const Popup1: React.FC = () => {
 
   const [Price, setPrice] = useState(0);
   const [Amount, setAmount] = useState(0);
+  const [balance, setBalance] = useState<number>(0);
+
+  const refresh = () => {
+    window.location.reload();
+};
 
 
   const ConfirmPackage = (amount: number,price: number) => {
@@ -31,7 +38,10 @@ const Popup1: React.FC = () => {
 
 
   const confirmPayment = () => {
+    
     setPromPay(false);
+    updateCoinBalance(Amount,setBalance);
+    refresh();
     const newAlert = {
       id: Date.now(),
       message: `เสร็จสิ้น , คุณได้รับเหรียญ ${Amount} คอยน์`,
@@ -48,6 +58,18 @@ const Popup1: React.FC = () => {
     }
   }, [alerts]);
 
+  const [packages, setPackages] = useState<Package[]>([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      const response = await GetPackages();
+      const data = response.data; // Extract the data array from the response
+      setPackages(data);
+    };
+
+    fetchPackages();
+  }, []);
+
   return (
     <>
       <div className="cardPayment" onClick={showPackages}>
@@ -62,27 +84,31 @@ const Popup1: React.FC = () => {
 
       
       <Modal show={Package} onHide={closePackage}>
-        <div className='aap'>
-          <div className='prop'>คุ้มสุด!</div>
-          <div className="g2p">
-            <div className="g2_1p">
-              <h3>แพ็กเกจ</h3>
-              <div className="cancelIconp" onClick={closePackage}>
-                <img src="./src/assets/cancel-svgrepo-com.svg" alt="Cancel" />
-              </div>
-            </div>
-
-            <div className="g2_2p">
-              <CoinCard amount={70} price={50} imgSrc="./src/assets/coin-50.png" sendData={ConfirmPackage} />
-              <CoinCard amount={120} price={100} imgSrc="./src/assets/coin-100.png" sendData={ConfirmPackage} />
-              <CoinCard amount={240} price={200} imgSrc="./src/assets/coin-200.png" sendData={ConfirmPackage} />
-              <CoinCard amount={360} price={300} imgSrc="./src/assets/coin-300.png" sendData={ConfirmPackage} />
-              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-500.png" sendData={ConfirmPackage} />
-              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-1000.png" sendData={ConfirmPackage} />
-            </div>
-          </div>
+  <div className='aap'>
+    <div className='prop'>คุ้มสุด!</div>
+    <div className="g2p">
+      <div className="g2_1p">
+        <h3>แพ็กเกจ</h3>
+        <div className="cancelIconp" onClick={closePackage}>
+          <img src="./src/assets/cancel-svgrepo-com.svg" alt="Cancel" />
         </div>
-      </Modal>
+      </div>
+      <div className="g2_2p">
+      {/* Mapping through the packages array */}
+      {packages.filter(data => [1,2,3,4,5,6].includes(data.ID)).map((data) => (
+        <CoinCard 
+          key={data.ID}
+          amount={data.pack_amount} 
+          price={data.pack_price}  
+          imgSrc={data.pack_pic} 
+          sendData={ConfirmPackage} 
+        />
+      ))}
+      </div>
+    </div>
+  </div>
+</Modal>
+
 
       <Modal show={PromPay} onHide={closePromPay}>
         <div className="g2r">

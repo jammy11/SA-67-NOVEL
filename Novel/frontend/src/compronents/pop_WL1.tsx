@@ -5,23 +5,9 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_WL1.css';
 import CountdownButton from './GETOTP';
-import { CoinCardProps2 } from '../interface/interface';
 
-const CoinCard = ({ amount, price, imgSrc, onClick }: CoinCardProps2) => (
-  <div className="cardCoinp" onClick={onClick}>
-    <div className="box11p">
-      <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />
-      <span><b>{amount.toFixed(2)}</b></span>
-    </div>
-    <div className="box22p">
-      <img id='imgCp' src={imgSrc} alt={`coin-refill-${amount}`} />
-    </div>
-    <div className="box33p">
-      <button className='thbp'><b>{price.toFixed(2)}</b></button>
-    </div>
-  </div>
-);
-
+import { GetPackages } from '../services/https';
+import CoinCard from './coinCard'
 const Popup2: React.FC = () => {
   const [Packgage, setPackgage] = useState<boolean>(false);
   const showPackgage =() => setPackgage(true);
@@ -71,6 +57,19 @@ const Popup2: React.FC = () => {
     }
   }, [showAlert]);
 
+  
+  const [packages, setPackages] = useState<Package[]>([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      const response = await GetPackages();
+      const data = response.data; // Extract the data array from the response
+      setPackages(data);
+    };
+
+    fetchPackages();
+  }, []);
+
   return (
     <>
       <div className="cardPayment" onClick={showPackgage}>
@@ -95,12 +94,15 @@ const Popup2: React.FC = () => {
               </div>
             </div>
             <div className="g2_2p">
-              <CoinCard amount={70} price={50} imgSrc="./src/assets/coin-50.png" onClick={() => ConfirmPackage(70, 50)} />
-              <CoinCard amount={120} price={100} imgSrc="./src/assets/coin-100.png" onClick={() => ConfirmPackage(120, 100)} />
-              <CoinCard amount={240} price={200} imgSrc="./src/assets/coin-200.png" onClick={() => ConfirmPackage(240, 200)} />
-              <CoinCard amount={360} price={300} imgSrc="./src/assets/coin-300.png" onClick={() => ConfirmPackage(360, 300)} />
-              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-500.png" onClick={() => ConfirmPackage(699, 500)} />
-              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-1000.png" onClick={() => ConfirmPackage(1200, 1000)} />
+                              {/* Mapping through the packages array */}
+          {packages.map((data) => (
+            <CoinCard 
+              amount={data.pack_amount} 
+              price={data.pack_price}  
+              imgSrc={data.pack_pic} 
+              sendData={ConfirmPackage} 
+            />
+          ))}
             </div>
           </div>
         </div>

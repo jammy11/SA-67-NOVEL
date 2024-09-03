@@ -3,22 +3,10 @@ import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
 import './pop.css';
 import './pop_CD1.css';
-import { CoinCardProps2 } from '../interface/interface';
-
-const CoinCard = ({ amount, price, imgSrc, onClick } : CoinCardProps2 )  => (
-  <div className="cardCoinp" onClick={onClick}>
-    <div className="box11p">
-      <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />
-      <span><b>{amount.toFixed(2)}</b></span>
-    </div>
-    <div className="box22p">
-      <img id='imgCp' src={imgSrc} alt={`coin-refill-${amount}`} />
-    </div>
-    <div className="box33p">
-      <button className='thbp'><b>{price.toFixed(2)}</b></button>
-    </div>
-  </div>
-);
+import { GetPackages } from '../services/https';
+import CoinCard from './coinCard';
+import { updateCoinBalance } from '../services/https';
+import { Package } from '../interface/interface';
 
 const Popup3: React.FC = () => {
   const [Package, setPackage] = useState<boolean>(false);
@@ -30,7 +18,7 @@ const Popup3: React.FC = () => {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-
+  const [balance, setBalance] = useState<number>(0);
   const closePackage = () => setPackage(false);
   const showPackage = () => setPackage(true);
   
@@ -44,20 +32,27 @@ const Popup3: React.FC = () => {
     setIsFormValid(form.checkValidity());
   };
 
+  const refresh = () => {
+    window.location.reload();
+};
+
   const handleConfirm = () => {
     setCredit(false);
     setTimeout(() => setShowVerifyPopup(true), 300);
   };
 
   const ConfirmPackage = (amount: number, price: number) => {
+    updateCoinBalance(amount,setBalance);
     setSelectedAmount(amount);
     setSelectedPrice(price);
     setPackage(false);
     setTimeout(() => setCredit(true), 300); 
   };
 
-  const VerifyConfirm = () => {
+  const VerifyConfirm = (amount: number) => {
     setShowVerifyPopup(false);
+    updateCoinBalance(amount,setBalance);
+    
     setTimeout(() => setShowAlert(true), 300);
   };
 
@@ -73,6 +68,17 @@ const Popup3: React.FC = () => {
     }
   }, [showAlert]);
 
+  const [packages, setPackages] = useState<Package[]>([]);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      const response = await GetPackages();
+      const data = response.data; // Extract the data array from the response
+      setPackages(data);
+    };
+
+    fetchPackages();
+  }, []);
   return (
     <>
       <div className="cardPayment" onClick={showPackage}>
@@ -97,18 +103,19 @@ const Popup3: React.FC = () => {
               </div>
             </div>
             <div className="g2_2p">
-              <CoinCard amount={70} price={50} imgSrc="./src/assets/coin-50.png" onClick={() => ConfirmPackage(70, 50)} />
-              <CoinCard amount={120} price={100} imgSrc="./src/assets/coin-100.png" onClick={() => ConfirmPackage(120, 100)} />
-              <CoinCard amount={240} price={200} imgSrc="./src/assets/coin-200.png" onClick={() => ConfirmPackage(240, 200)} />
-              <CoinCard amount={360} price={300} imgSrc="./src/assets/coin-300.png" onClick={() => ConfirmPackage(360, 300)} />
-              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-500.png" onClick={() => ConfirmPackage(699, 500)} />
-              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-1000.png" onClick={() => ConfirmPackage(1200, 1000)} />
-              <CoinCard amount={699} price={500} imgSrc="./src/assets/coin-500.png" onClick={() => ConfirmPackage(699, 500)} />
-              <CoinCard amount={1200} price={1000} imgSrc="./src/assets/coin-1000.png" onClick={() => ConfirmPackage(1200, 1000)} />
+                 
+          {packages.map((data) => (
+            <CoinCard 
+              amount={data.pack_amount} 
+              price={data.pack_price}  
+              imgSrc={data.pack_pic} 
+              sendData={ConfirmPackage} 
+            />
+          ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </Modal>
+          </Modal>
 
       {/* Popup Credit */}
       <Modal show={Credit} onHide={closeCredit}>
@@ -190,6 +197,7 @@ const Popup3: React.FC = () => {
 
       {/* Alert */}
       {showAlert && (
+      
         <Alert
           message={`เสร็จสิ้น , คุณได้รับเหรียญ ${selectedAmount} คอยน์`}
           type="success"
@@ -198,6 +206,7 @@ const Popup3: React.FC = () => {
           onClose={CloseAlert}
           className="custom-alert"
         />
+      
       )}
     </>
   );

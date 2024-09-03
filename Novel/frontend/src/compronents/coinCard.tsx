@@ -1,11 +1,16 @@
 import React from 'react';
 
 import { CoinCardProps } from '../interface/interface';
-
+interface Package {
+    ID: number;
+    pack_amount: number;
+    pack_price: number;
+    pack_pic: string;
+  }
 const CoinCard: React.FC<CoinCardProps> = ({ amount, price, imgSrc, showButton = true, sendData }) => (
   <div className="cardCoinp">
     <div className="box11p">
-      <img id='iconp' src={imgSrc} alt="Coin" />
+    <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />
       <span><b>{amount.toFixed(2)}</b></span>
     </div>
     <div className="box22p">

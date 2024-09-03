@@ -10,7 +10,7 @@ const Balance: React.FC = () => {
     const fetchBalance = async () => {
       try {
         const response = await GetCoinById(userId);
-        setBalance(response.data.balance); // Assuming response.data contains the balance
+        setBalance(response.data.balance); 
       } catch (error) {
         console.error("Error fetching balance:", error);
       }

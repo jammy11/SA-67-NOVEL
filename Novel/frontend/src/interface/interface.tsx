@@ -6,11 +6,11 @@ export interface CoinCardProps {
     sendData: (amount: number, price: number) => void;
   }
 
-  export interface CoinCardProps2 {
-    amount: number;
-    price: number;
-    imgSrc: string;
-    onClick: () => void;
+  export interface Package {
+    ID: number;
+    pack_amount: number;
+    pack_price: number;
+    pack_pic: string;
   }
   export interface SignInInterface {
 
