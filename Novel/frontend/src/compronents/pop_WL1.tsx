@@ -8,6 +8,9 @@ import CountdownButton from './GETOTP';
 
 import { GetPackages } from '../services/https';
 import CoinCard from './coinCard'
+import { Package } from '../interface/interface';
+import { updateCoinBalance } from '../services/https';
+
 const Popup2: React.FC = () => {
   const [Packgage, setPackgage] = useState<boolean>(false);
   const showPackgage =() => setPackgage(true);
@@ -21,8 +24,9 @@ const Popup2: React.FC = () => {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-
+  const [Balance,setBalance] = useState<number>();
   const ConfirmPackage = (amount: number, price: number) => {
+    updateCoinBalance(amount,setBalance);
     setSelectedAmount(amount);
     setSelectedPrice(price);
     setPackgage(false);
