@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"example.com/novel/config"
-	coins "example.com/novel/controller/coin"
+	"example.com/novel/controller/coin"
 	"example.com/novel/controller/orders"
 	"example.com/novel/controller/packages"
 	"example.com/novel/controller/transactions"

@@ -4,23 +4,13 @@ package users
 import (
 
    "errors"
-
    "net/http"
-
    "time"
-
-
    "github.com/gin-gonic/gin"
-
    "golang.org/x/crypto/bcrypt"
-
    "gorm.io/gorm"
-
-
    "example.com/novel/config"
-
    "example.com/novel/entity"
-
    "example.com/novel/services"
 
 )
@@ -38,7 +28,7 @@ type (
 
    signUp struct {
 	Username    string    `json:"user_name"`
-	Password    string    `json:"-"`
+	Password    string    `json:"password"`
 	Email       string    `json:"email"`
 	ID_Type     string    `json:"id_type"`
 	FirstName   string    `json:"first_name"`

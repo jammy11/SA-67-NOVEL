@@ -59,32 +59,31 @@ func SetupDatabase() {
 
 
    hashedPassword, _ := HashPassword("1")
-
    BirthDate, _ := time.Parse("2006-01-02", "1988-11-12")
 
-   User := &entity.User{
-       Username: "C4sama",
-
-       FirstName: "ท่านเบสท์",
-
-       LastName:  "สุดเท่",
-
-       Email:     "Best@gmail.com",
-       Profile: "",
-       Password:  hashedPassword,
-       BirthDate: BirthDate,
-       Gender: "Male",
-       CoinID: 1,
-
-
-  
+   // Create a Coin entry
+   coin := &entity.Coin{
+       Balance: 0,
    }
-
-   db.FirstOrCreate(User, &entity.User{
-
-       Email: "Best@gmail.com",
-
+   db.FirstOrCreate(coin, &entity.Coin{
+       Balance: 0,
    })
 
+   // Create a User entry linked to the Coin
+   user := &entity.User{
+       Username:  "C4sama",
+       FirstName: "ท่านเบสท์",
+       LastName:  "สุดเท่",
+       Email:     "Best@gmail.com",
+       Profile:   "",
+       Password:  hashedPassword,
+       BirthDate: BirthDate,
+       Gender:    "Male",
+       CoinID:    coin.ID,  // Link the Coin with the User
+   }
 
+   db.FirstOrCreate(user, &entity.User{
+       Email: "Best@gmail.com",
+   })
 }
+

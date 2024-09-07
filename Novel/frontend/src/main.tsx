@@ -14,14 +14,6 @@ import SignInPages from './page/authentication/Login'
 import Test from './page/test/tests'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
 
-
-                    // <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
-                    // <Dropdown.Item href="/writer">งานเขียน</Dropdown.Item>
-                    // <Dropdown.Item href="/bookself">ชั้นหนังสือ</Dropdown.Item>
-                    // <Dropdown.Item href="/Payment">เหรียญ  & ประวัติธุรกรรม</Dropdown.Item>
-                    // <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
-                    // <Dropdown.Item href="/logout">ออกจากระบบ</Dropdown.Item>
-
 const router =createBrowserRouter([
   {
     path: "/Payment",
