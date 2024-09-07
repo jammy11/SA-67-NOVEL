@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
+
 import './pop.css';
 import './pop_CD1.css';
+import { Package } from '../interface/interface';
 import { GetPackages } from '../services/https';
 import CoinCard from './coinCard';
+import { CreateTransaction } from '../services/https';
 import { updateCoinBalance } from '../services/https';
-import { Package } from '../interface/interface';
+
 
 const Popup3: React.FC = () => {
   const [Package, setPackage] = useState<boolean>(false);
@@ -15,8 +18,8 @@ const Popup3: React.FC = () => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   
   const [showVerify, setShowVerifyPopup] = useState<boolean>(false);
-  const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number >(0);
+  const [selectedAmount, setSelectedAmount] = useState<number>(0);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [balance, setBalance] = useState<number>(0);
   const closePackage = () => setPackage(false);
@@ -26,6 +29,12 @@ const Popup3: React.FC = () => {
 
   const CloseVerify = () => setShowVerifyPopup(false);
   const CloseAlert = () => setShowAlert(false);
+  const [Key, setKey] = useState(0);
+  const userIdstr = localStorage.getItem("id");
+  const userId = Number(userIdstr || 0);
+
+
+
 
   const handleFormChange = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
@@ -41,18 +50,25 @@ const Popup3: React.FC = () => {
     setTimeout(() => setShowVerifyPopup(true), 300);
   };
 
-  const ConfirmPackage = (amount: number, price: number) => {
-    updateCoinBalance(amount,setBalance);
+  const ConfirmPackage = (amount: number, price: number,key: number) => {
+    
+    setKey(key);
     setSelectedAmount(amount);
     setSelectedPrice(price);
     setPackage(false);
     setTimeout(() => setCredit(true), 300); 
   };
 
-  const VerifyConfirm = (amount: number) => {
+  const VerifyConfirm = () => {
+    CreateTransaction({
+      trans_type: "เติมเหรียญ",
+      payment: "บัตรเครดิต/เดบิต",
+      user_id: userId,
+      package_id: Key
+    }); 
+    const a = selectedAmount;
+    updateCoinBalance(a,setBalance);
     setShowVerifyPopup(false);
-    updateCoinBalance(amount,setBalance);
-    
     setTimeout(() => setShowAlert(true), 300);
   };
 
@@ -106,10 +122,11 @@ const Popup3: React.FC = () => {
                  
           {packages.map((data) => (
             <CoinCard 
+              key={data.ID}
               amount={data.pack_amount} 
               price={data.pack_price}  
               imgSrc={data.pack_pic} 
-              sendData={ConfirmPackage} 
+              sendData={() => ConfirmPackage(data.pack_amount, data.pack_price, data.ID)} 
             />
           ))}
                 </div>

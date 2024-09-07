@@ -5,10 +5,10 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_WL1.css';
 import CountdownButton from './GETOTP';
-
+import { Package } from '../interface/interface';
 import { GetPackages } from '../services/https';
 import CoinCard from './coinCard'
-import { Package } from '../interface/interface';
+import { CreateTransaction } from '../services/https';
 import { updateCoinBalance } from '../services/https';
 
 const Popup2: React.FC = () => {
@@ -21,16 +21,20 @@ const Popup2: React.FC = () => {
 
   const [Verify, setVerify] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number >(0);
+  const [selectedAmount, setSelectedAmount] = useState<number >(0);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [Balance,setBalance] = useState<number>();
-  
-  const ConfirmPackage = (amount: number, price: number) => {
-    updateCoinBalance(amount,setBalance);
-    setSelectedAmount(amount);
-    setSelectedPrice(price);
-    setPackgage(false);
+  const [Balance,setBalance] = useState<number>(0);
+  const [Key, setKey] = useState(0);
+  const userIdstr = localStorage.getItem("id");
+  const userId = Number(userIdstr || 0);
+
+  const ConfirmPackage = (amount: number, price: number,key: number) => {
+         setSelectedAmount(amount);
+         setKey(key);
+         setSelectedPrice(price);
+         setPackgage(false);
+         
     setTimeout(() => setTrueWallet(true), 300); 
   };
 
@@ -45,6 +49,14 @@ const Popup2: React.FC = () => {
   };
   
   const VerifyConfirm = () => {
+    CreateTransaction({
+      trans_type: "เติมเหรียญ",
+      payment: "ทรูวอเล็ต",
+      user_id: userId,
+      package_id: Key
+    }); 
+    const a = selectedAmount;
+    updateCoinBalance(a,setBalance);
     setVerify(false);
     setTimeout(() => setShowAlert(true), 300); // Show Alert after verifying
   };
@@ -102,10 +114,11 @@ const Popup2: React.FC = () => {
                               {/* Mapping through the packages array */}
           {packages.map((data) => (
             <CoinCard 
+              key={data.ID}
               amount={data.pack_amount} 
               price={data.pack_price}  
               imgSrc={data.pack_pic} 
-              sendData={ConfirmPackage} 
+              sendData={() => ConfirmPackage(data.pack_amount, data.pack_price, data.ID)}
             />
           ))}
             </div>

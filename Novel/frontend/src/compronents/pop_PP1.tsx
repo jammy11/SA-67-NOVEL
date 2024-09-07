@@ -49,7 +49,7 @@ const Popup1: React.FC = () => {
       payment: "พร้อมเพย์",
       user_id: userId,
       package_id: Key
-    })
+    });
     // refresh();
 
     const newAlert = {
