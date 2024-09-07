@@ -70,13 +70,31 @@ async function GetTransactions() {
     .then((res) => res)
     .catch((e) => e.response);
 }
-
-async function GetTransactionById(id: string) {
+async function GetTransactionsByUserID(user_id: string) {
   return await axios
-    .get(`${apiUrl}/transaction/${id}`, requestOptions)
+    .get(`${apiUrl}/transactionbyuser/${user_id}`, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
+async function GetTransactionById(id: string | null) {
+  try {
+    const response = await axios.get(`${apiUrl}/transaction/${id}`, requestOptions);
+    const data = response.data;
+
+    // Extract the desired fields
+    const result = {
+      trans_type: data.trans_type,
+      payment: data.payment,
+      pack_amount: data.Package.pack_amount,
+      Name: data.Order.Novel.Name,
+    };
+
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 
 async function UpdateTransactionById(id: string, data: TransactionInterface) {
   return await axios

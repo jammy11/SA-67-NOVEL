@@ -51,13 +51,11 @@ export interface CoinCardProps {
   
 
   export interface TransactionInterface {
-    id: string;
-    user_id: string;
     amount: number;
     type: string;
-    status: string;
     created_at?: Date;
-    updated_at?: Date;
+    Order: number;
+    Package:number;
   }
   
   export interface OrderInterface {

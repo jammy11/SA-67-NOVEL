@@ -9,22 +9,24 @@ import (
    "github.com/gin-gonic/gin"
 
 
-   "example.com/sa-67-example/config"
+   "example.com/novel/config"
 
-   "example.com/sa-67-example/entity"
+   "example.com/novel/entity"
+   
 
 )
+
 
 
 func GetAll(c *gin.Context) {
 
 
-   var users []entity.Users
+   var users []entity.User
 
 
    db := config.DB()
 
-   results := db.Preload("Gender").Find(&users)
+   results := db.Preload("Coin").Find(&users)
 
    if results.Error != nil {
 
@@ -45,12 +47,12 @@ func Get(c *gin.Context) {
 
    ID := c.Param("id")
 
-   var user entity.Users
+   var user entity.User
 
 
    db := config.DB()
 
-   results := db.Preload("Gender").First(&user, ID)
+   results := db.Preload("Coin").First(&user, ID)
 
    if results.Error != nil {
 
@@ -77,7 +79,7 @@ func Get(c *gin.Context) {
 func Update(c *gin.Context) {
 
 
-   var user entity.Users
+   var users entity.User
 
 
    UserID := c.Param("id")
@@ -85,7 +87,7 @@ func Update(c *gin.Context) {
 
    db := config.DB()
 
-   result := db.First(&user, UserID)
+   result := db.Preload("Coin").First(&users, UserID)
 
    if result.Error != nil {
 
@@ -96,7 +98,7 @@ func Update(c *gin.Context) {
    }
 
 
-   if err := c.ShouldBindJSON(&user); err != nil {
+   if err := c.ShouldBindJSON(&users); err != nil {
 
        c.JSON(http.StatusBadRequest, gin.H{"error": "Bad request, unable to map payload"})
 
@@ -105,7 +107,7 @@ func Update(c *gin.Context) {
    }
 
 
-   result = db.Save(&user)
+   result = db.Save(&users)
 
    if result.Error != nil {
 

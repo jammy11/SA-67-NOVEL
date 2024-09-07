@@ -7,7 +7,7 @@ import (
 
    "time"
 
-   "example.com/sa-67-example/entity"
+   "example.com/novel/entity"
 
    "gorm.io/driver/sqlite"
 
@@ -47,49 +47,42 @@ func SetupDatabase() {
 
 
    db.AutoMigrate(
-
-       &entity.Users{},
-
-       &entity.Genders{},
-
+       &entity.Coin{},
+       &entity.User{},
+       &entity.Writer{},
+       &entity.Order{},
+       &entity.Package{},
+       &entity.Transaction{},
+       &entity.Novel{},
+       &entity.Comment{},
    )
 
 
-   GenderMale := entity.Genders{Gender: "Male"}
+   hashedPassword, _ := HashPassword("1")
 
-   GenderFemale := entity.Genders{Gender: "Female"}
+   BirthDate, _ := time.Parse("2006-01-02", "1988-11-12")
 
+   User := &entity.User{
+       Username: "C4sama",
 
-   db.FirstOrCreate(&GenderMale, &entity.Genders{Gender: "Male"})
+       FirstName: "ท่านเบสท์",
 
-   db.FirstOrCreate(&GenderFemale, &entity.Genders{Gender: "Female"})
+       LastName:  "สุดเท่",
 
-
-   hashedPassword, _ := HashPassword("123456")
-
-   BirthDay, _ := time.Parse("2006-01-02", "1988-11-12")
-
-   User := &entity.Users{
-
-       FirstName: "Software",
-
-       LastName:  "Analysis",
-
-       Email:     "sa@gmail.com",
-
-       Age:       80,
-
+       Email:     "Best@gmail.com",
+       Profile: "",
        Password:  hashedPassword,
+       BirthDate: BirthDate,
+       Gender: "Male",
+       CoinID: 1,
 
-       BirthDay:  BirthDay,
 
-       GenderID:  1,
-
+  
    }
 
-   db.FirstOrCreate(User, &entity.Users{
+   db.FirstOrCreate(User, &entity.User{
 
-       Email: "sa@gmail.com",
+       Email: "Best@gmail.com",
 
    })
 

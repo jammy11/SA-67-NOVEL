@@ -46,6 +46,7 @@ const data = [
     Time: '20/02/2024 15:04:11',
     Amount: '+50',
   },
+  
   {
     Type: 'ถอน',
     Payment: 'ธนาคารกรุงไทย',
@@ -90,52 +91,7 @@ const Demo = () => {
       },
     ],
     Deposit: [
-      { title: 'ประเภท', dataIndex: 'Type', key: 'Type' },
-      { title: 'ช่องทางการทำธุรกรรม', dataIndex: 'Payment', key: 'Payment' },
-      { title: 'วัน/เวลา', dataIndex: 'Time', key: 'Time' },
-      {
-        title: 'ราคาสุทธิ',
-        dataIndex: 'Amount',
-        key: 'Amount',
-        align: 'right',
-        render: (text) => (
-          <>
-            {text} <img id='icon50' src="src/assets/coin-50.png" alt="" />
-          </>
-        ),
-      },
-    ],
-    Withdraw: [
-      { title: 'ประเภท', dataIndex: 'Type', key: 'Type' },
-      { title: 'ช่องทางการทำธุรกรรม', dataIndex: 'Payment', key: 'Payment' },
-      { title: 'วัน/เวลา', dataIndex: 'Time', key: 'Time' },
-      {
-        title: 'ราคาสุทธิ',
-        dataIndex: 'Amount',
-        key: 'Amount',
-        align: 'right',
-        render: (text) => (
-          <>
-            {text} <img id='icon50' src="src/assets/coin-50.png" alt="" />
-          </>
-        ),
-      },
-    ],
-    Purchase: [
-      { title: 'ประเภท', dataIndex: 'Type', key: 'Type' },
-      { title: 'ชื่อเรื่อง', dataIndex: 'NovelName', key: 'NovelName' },
-      { title: 'วัน/เวลา', dataIndex: 'Time', key: 'Time' },
-      {
-        title: 'ราคาสุทธิ',
-        dataIndex: 'Amount',
-        key: 'Amount',
-        align: 'right',
-        render: (text) => (
-          <>
-            {text} <img id='icon50' src="src/assets/coin-50.png" alt="" />
-          </>
-        ),
-      },
+     
     ],
   };
 

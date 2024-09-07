@@ -25,6 +25,7 @@ const Popup2: React.FC = () => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [Balance,setBalance] = useState<number>();
+  
   const ConfirmPackage = (amount: number, price: number) => {
     updateCoinBalance(amount,setBalance);
     setSelectedAmount(amount);

@@ -4,7 +4,6 @@ import './CoinsAndTransaction.css';
 import Popup1 from '../../compronents/pop_PP1';
 import Popup2 from '../../compronents/pop_WL1';
 import Popup3 from '../../compronents/pop_CD1';
-
 import Headers from '../../compronents/headerselect';
 
 const Payment: React.FC = () => {

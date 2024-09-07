@@ -11,6 +11,7 @@ import EditProfile from './page/Profile/editProfile'
 import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
 import SignInPages from './page/authentication/Login'
+import Test from './page/test/tests'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
 
 
@@ -64,6 +65,10 @@ const router =createBrowserRouter([
   {
     path: "/a",
     element:<SignInPages/>
+  },
+  {
+    path: "/test",
+    element:<Test/>
   }
   
 ])

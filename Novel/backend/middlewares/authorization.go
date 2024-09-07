@@ -8,7 +8,7 @@ import (
    "strings"
 
 
-   "example.com/sa-67-example/services"
+   "example.com/novel/services"
 
    "github.com/gin-gonic/gin"
 
