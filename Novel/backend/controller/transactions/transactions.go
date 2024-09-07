@@ -22,7 +22,7 @@ func Create(c *gin.Context) {
 	db := config.DB()
 
 	// ตรวจสอบความถูกต้องของ Foreign Keys (ถ้ามี)
-	if transaction.PackageID != 0 {
+	if transaction.PackageID != nil {
 		var pack entity.Package
 		if err := db.First(&pack, transaction.PackageID).Error; err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid PackageID"})
@@ -38,7 +38,7 @@ func Create(c *gin.Context) {
 		}
 	}
 
-	if transaction.OrderID != 0 {
+	if transaction.OrderID != nil {
 		var order entity.Order
 		if err := db.First(&order, transaction.OrderID).Error; err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid OrderID"})

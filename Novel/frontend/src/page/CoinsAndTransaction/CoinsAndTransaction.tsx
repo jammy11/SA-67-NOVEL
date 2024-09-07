@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Demo from '../../compronents/path/ExampleData';
+import History from '../../compronents/Trasaction_compnents/history_tran';
 import './CoinsAndTransaction.css';
 import Popup1 from '../../compronents/pop_PP1';
 import Popup2 from '../../compronents/pop_WL1';
@@ -38,7 +38,7 @@ const Payment: React.FC = () => {
             </div>
             <div className="table">
                 
-                <Demo />
+                <History />
                 
             </div>
         </div>

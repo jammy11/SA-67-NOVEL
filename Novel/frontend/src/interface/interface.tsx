@@ -1,9 +1,10 @@
 export interface CoinCardProps {
+    key: number;
     amount: number;
     price: number;
     imgSrc: string;
     showButton?: boolean;
-    sendData: (amount: number, price: number) => void;
+    sendData: (amount: number, price: number, key: number) => void
   }
 
   export interface Package {
@@ -12,6 +13,8 @@ export interface CoinCardProps {
     pack_price: number;
     pack_pic: string;
   }
+
+
   export interface SignInInterface {
 
     email?: string;
@@ -50,13 +53,7 @@ export interface CoinCardProps {
   }
   
 
-  export interface TransactionInterface {
-    amount: number;
-    type: string;
-    created_at?: Date;
-    Order: number;
-    Package:number;
-  }
+
   
   export interface OrderInterface {
     id: string;
@@ -89,4 +86,78 @@ export interface CoinCardProps {
     id: string;
     name: string;
   }
-  
+  export interface TransactionCreateInterface {
+    trans_type: string;
+    payment: string;
+    user_id: number;
+    package_id: number | null;
+    order_id?: number | null;  
+  }
+  export interface TransactionInterface {
+  ID: number ;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  trans_type: string;
+  payment: string;
+  package_id: number| null;
+  order_id: number | null;
+  user_id: number;
+  Package: {
+    ID: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    pack_amount: number;
+    pack_price: number;
+    pack_pic: string;
+  };
+  User: {
+    ID: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    user_name: string;
+    email: string;
+    id_type: string;
+    first_name: string;
+    last_name: string;
+    birth_date: string;
+    gender: string;
+    profile: string;
+    CoinID: number;
+    Coin: {
+      ID: number;
+      CreatedAt: string;
+      UpdatedAt: string;
+      DeletedAt: string | null;
+      balance: number;
+    };
+    Transaction: null;
+    Order: null;
+  };
+  Order: {
+    ID: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+    DeletedAt: string | null;
+    order_date: string;
+    UserID: number;
+    NovelID: number;
+    Novel: {
+      ID: number;
+      CreatedAt: string;
+      UpdatedAt: string;
+      DeletedAt: string | null;
+      Name: string;
+      Content: string;
+      Type: string;
+      Rate: string;
+      cover: string;
+      Price: number;
+      Like: number;
+      Buy_amount: number;
+      Bookshelf: null;
+    };
+  };
+}

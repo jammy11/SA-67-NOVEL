@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UsersInterface, SignInInterface, TransactionInterface, OrderInterface, PackageInterface, CoinInterface } from "../../interface/interface"; 
+import { UsersInterface, SignInInterface,TransactionCreateInterface, TransactionInterface, OrderInterface, PackageInterface, CoinInterface } from "../../interface/interface"; 
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -57,7 +57,7 @@ async function DeleteUsersById(id: string) {
 }
 
 // Transaction Functions
-async function CreateTransaction(data: TransactionInterface) {
+async function CreateTransaction(data: TransactionCreateInterface) {
   return await axios
     .post(`${apiUrl}/transaction`, data, requestOptions)
     .then((res) => res)
@@ -70,12 +70,17 @@ async function GetTransactions() {
     .then((res) => res)
     .catch((e) => e.response);
 }
-async function GetTransactionsByUserID(user_id: string) {
-  return await axios
-    .get(`${apiUrl}/transactionbyuser/${user_id}`, requestOptions)
-    .then((res) => res)
-    .catch((e) => e.response);
+
+async function GetTransacUserID(user_id: string) {
+  try {
+    const response = await axios.get(`${apiUrl}/transactionbyuser/${user_id}`, requestOptions);
+    return response.data; // ส่งคืนข้อมูลโดยตรงจาก response.data
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error; // หรือ return ค่าผิดพลาดที่เหมาะสม
+  }
 }
+
 async function GetTransactionById(id: string | null) {
   try {
     const response = await axios.get(`${apiUrl}/transaction/${id}`, requestOptions);
@@ -263,4 +268,5 @@ export {
   DeleteCoinById,
   GetGenders,
   updateCoinBalance,
+  GetTransacUserID,
 };

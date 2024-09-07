@@ -32,9 +32,9 @@ type Transaction struct {
 	gorm.Model
 	TransactionType string    `json:"trans_type"`
 	Payment string `json:"payment"`
-	PackageID       uint
-	OrderID         uint
-	UserID          uint
+	PackageID       *uint `json:"package_id"` 
+	OrderID         *uint `json:"order_id"`
+	UserID          uint `json:"user_id"` 
     Package   Package   `gorm:"foreignKey:PackageID"`
     User      User      `gorm:"foreignKey:UserID"`
     Order     Order     `gorm:"foreignKey:OrderID"`
@@ -57,14 +57,14 @@ type Order struct {
 
 type Novel struct {
 	gorm.Model
-	Name    string
-	Content string
-	Type    string
-	Rate    string
+	Name    string	`json:"novel_name"`
+	Content string	`json:"content"`
+	Type    string	`json:"novel_type"`
+	Rate    string	`json:"rate"`
 	Cover   string  `gorm:"type:text" json:"cover"`
-    Price   float64
-    Like    int
-    Buy_amount int
+    Price   float64 `json:"novel_price"`
+    Like    int		`json:"novel_like"`
+    Buy_amount int	`json:"buy_amont"`
     Bookshelf []*Bookshelf `gorm:"many2many:Bookshelf_List;"`
 }
 type Bookshelf struct{

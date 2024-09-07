@@ -7,7 +7,7 @@ import { Package } from '../interface/interface';
 import { GetPackages } from '../services/https';
 import CoinCard from './coinCard';
 import { updateCoinBalance } from '../services/https';
-
+import { CreateTransaction } from '../services/https';
 
 const Popup1: React.FC = () => {
   const [Package, setPackage] = useState(false);
@@ -16,22 +16,25 @@ const Popup1: React.FC = () => {
   
   const [PromPay, setPromPay] = useState(false);
   const closePromPay = () => setPromPay(false);
-  const showPromPay = () => setPromPay(true);
+
 
   const [alerts, setAlerts] = useState<Array<{ id: number; message: string }>>([]);
 
   const [Price, setPrice] = useState(0);
   const [Amount, setAmount] = useState(0);
+  const [Key, setKey] = useState(0);
   const [balance, setBalance] = useState<number>(0);
-
+  const userIdstr = localStorage.getItem("id");
+  const userId = Number(userIdstr || 0);
   const refresh = () => {
     window.location.reload();
 };
 
 
-  const ConfirmPackage = (amount: number,price: number) => {
+  const ConfirmPackage = (amount: number,price: number,key: number ) => {
     setAmount(amount);
     setPrice(price);
+    setKey(key)
     setPackage(false);
     setPromPay(true);
   };
@@ -41,7 +44,14 @@ const Popup1: React.FC = () => {
     
     setPromPay(false);
     updateCoinBalance(Amount,setBalance);
-    refresh();
+    CreateTransaction({
+      trans_type: "เติมเหรียญ",
+      payment: "พร้อมเพย์",
+      user_id: userId,
+      package_id: Key
+    })
+    // refresh();
+
     const newAlert = {
       id: Date.now(),
       message: `เสร็จสิ้น , คุณได้รับเหรียญ ${Amount} คอยน์`,
@@ -101,7 +111,7 @@ const Popup1: React.FC = () => {
           amount={data.pack_amount} 
           price={data.pack_price}  
           imgSrc={data.pack_pic} 
-          sendData={ConfirmPackage} 
+          sendData={() => ConfirmPackage(data.pack_amount, data.pack_price, data.ID)}
         />
       ))}
       </div>
