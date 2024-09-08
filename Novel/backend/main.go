@@ -6,7 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"example.com/novel/config"
+	"example.com/novel/controller/bookshelf"
 	"example.com/novel/controller/coin"
+	"example.com/novel/controller/novels"
 	"example.com/novel/controller/orders"
 	"example.com/novel/controller/packages"
 	"example.com/novel/controller/transactions"
@@ -68,6 +70,22 @@ func main() {
 		router.GET("/coin/:id", coins.Get)
 		router.PUT("/coins/:id", coins.Update)
 		router.DELETE("/coins/:id", coins.Delete)
+		
+		//Novel Roues
+		router.GET("/novel", novels.GetAll)
+		router.GET("/novel/:id", novels.Get)
+		router.PUT("/novel/:id", novels.Update)
+		router.POST("/novel", novels.Create)
+		router.DELETE("/novel/:id", novels.Delete)
+
+		//Bookshelf
+		router.GET("/bookshelf", bookshelf.GetAllBookshelves)
+		router.GET("/bookshelf/:id", bookshelf.GetBookshelf)
+		router.PUT("/bookshelf/:id", bookshelf.UpdateBookshelf)
+		router.POST("/bookshelf", bookshelf.CreateBookshelf)
+		router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
+
+
 
 	}
 

@@ -4,10 +4,10 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_PP1.css';
 import { Package } from '../interface/interface';
-import { GetPackages } from '../services/https';
+import { GetPackages } from '../services/https/Package/package';
 import CoinCard from './coinCard';
-import { updateCoinBalance } from '../services/https';
-import { CreateTransaction } from '../services/https';
+import { updateCoinBalance } from '../services/https/Coin/coin';
+import { CreateTransaction } from '../services/https/Transaction/transaction';
 
 const Popup1: React.FC = () => {
   const [Package, setPackage] = useState(false);

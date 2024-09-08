@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GetCoinById } from "../services/https";
+import { GetCoinById } from "../services/https/Coin/coin";
 
 const Balance: React.FC = () => {
   const [balance, setBalance] = useState<number | null>(null);

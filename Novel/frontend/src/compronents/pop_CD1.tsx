@@ -5,10 +5,10 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_CD1.css';
 import { Package } from '../interface/interface';
-import { GetPackages } from '../services/https';
+import { GetPackages } from '../services/https/Package/package';
 import CoinCard from './coinCard';
-import { CreateTransaction } from '../services/https';
-import { updateCoinBalance } from '../services/https';
+import { CreateTransaction } from '../services/https/Transaction/transaction';
+import { updateCoinBalance } from '../services/https/Coin/coin';
 
 
 const Popup3: React.FC = () => {
