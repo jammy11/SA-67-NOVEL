@@ -54,7 +54,7 @@ async function CreateTransaction(data: TransactionCreateInterface) {
   
       return result;
     } catch (error) {
-      return result.response;
+      return error.response;
     }
   }
   

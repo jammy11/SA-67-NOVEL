@@ -4,15 +4,15 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-
 	"example.com/novel/config"
-	"example.com/novel/controller/bookshelf"
 	"example.com/novel/controller/coin"
 	"example.com/novel/controller/novels"
 	"example.com/novel/controller/orders"
 	"example.com/novel/controller/packages"
 	"example.com/novel/controller/transactions"
+	"example.com/novel/controller/bookshelfs"
 	"example.com/novel/controller/users"
+	"example.com/novel/controller/writers"
 	"example.com/novel/middlewares"
 )
 
@@ -78,13 +78,19 @@ func main() {
 		router.POST("/novel", novels.Create)
 		router.DELETE("/novel/:id", novels.Delete)
 
-		//Bookshelf
+		//Bookshelf Roues
 		router.GET("/bookshelf", bookshelf.GetAllBookshelves)
 		router.GET("/bookshelf/:id", bookshelf.GetBookshelf)
 		router.PUT("/bookshelf/:id", bookshelf.UpdateBookshelf)
 		router.POST("/bookshelf", bookshelf.CreateBookshelf)
 		router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
 
+		//Writer Roues
+		router.GET("/writer", writers.GetAllWriters)
+		router.GET("/writer/:id", writers.GetWriter)
+		router.PUT("/writer/:id", writers.UpdateWriter)
+		router.POST("/writer", writers.CreateWriter)
+		router.DELETE("/writer/:id", writers.DeleteWriter)
 
 
 	}

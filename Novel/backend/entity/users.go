@@ -8,15 +8,15 @@ import (
 
 type User struct {
 	gorm.Model
-	Username    string    `json:"user_name"`
+	Username    string    `json:"user_name" gorm:"unique"`
 	Password    string    `json:"-"`
-	Email       string    `json:"email"`
+	Email       string    `json:"email" gorm:"unique"`
 	ID_Type     string    `json:"id_type"`
 	FirstName   string    `json:"first_name"`
 	LastName    string    `json:"last_name"`
 	BirthDate   time.Time `json:"birth_date"`
 	Gender      string    `json:"gender"`
-    Profile     string  `gorm:"type:text" json:"profile"`
+    Profile     string    `gorm:"type:text" json:"profile"`
 	CoinID      uint
 	Coin        Coin
 	Transaction []Transaction
@@ -38,6 +38,7 @@ type Transaction struct {
     Package   Package   `gorm:"foreignKey:PackageID"`
     User      User      `gorm:"foreignKey:UserID"`
     Order     Order     `gorm:"foreignKey:OrderID"`
+	Amount_T	float64 `json:"amount_t"` 
 }
 
 type Package struct {
@@ -49,11 +50,12 @@ type Package struct {
 
 type Order struct {
 	gorm.Model
-	Order   time.Time `json:"order_date"`
-	UserID  uint
-    NovelID uint
-    Novel  Novel
+	UserID  uint   `json:"user_id"` 
+	User	User   `gorm:"foreignKey:UserID"`
+    NovelID uint   `json:"novel_id"`
+    Novel   Novel  `gorm:"foreignKey:NovelID"`
 }
+    
 
 type Novel struct {
 	gorm.Model
@@ -63,34 +65,36 @@ type Novel struct {
 	Rate    string	`json:"rate"`
 	Cover   string  `gorm:"type:text" json:"cover"`
     Price   float64 `json:"novel_price"`
-    Like    int		`json:"novel_like"`
-    Buy_amount int	`json:"buy_amont"`
+    Like    int64		`json:"novel_like"`
+    Buy_amount int64	`json:"buy_amont"`
     Bookshelf []*Bookshelf `gorm:"many2many:Bookshelf_List;"`
+    WriterID   uint         `json:"writer_id"`
+    Writer     Writer       `gorm:"foreignKey:WriterID"`
 }
 type Bookshelf struct{
     gorm.Model
-    UserID uint
-    User   User
+    UserID uint		`json:"user_id"` 
+    User   User		`gorm:"foreignKey:UserID"`
     Novel []*Novel `gorm:"many2many:Bookshelf_List;"`
 }
 type Bookshelf_List struct{
     gorm.Model
-    BookshelfID uint
-    Bookshelf   Bookshelf
-    NovelID       uint
-    Novel       Novel
+    BookshelfID uint	`json:"bookshelf_id"`
+    Bookshelf   Bookshelf `gorm:"foreignKey:BookshelfID"`
+    NovelID       uint	`json:"novel_id"`
+    Novel       Novel	`gorm:"foreignKey:NovelID"`
 
 }
 
 type Writer struct{
     gorm.Model
-    Income float64 
-    UserID  uint
-    User    User
+    Income float64   `json:"income"` 
+    UserID  uint	`json:"user_id"` 
+    User    User	`gorm:"foreignKey:UserID"`
 }
 type Comment struct{
     gorm.Model
-    Description string
-    UserID  uint
-    User    User
+    Description string	`json:"description"` 
+    UserID  uint	`json:"user_id"` 
+    User    User	`gorm:"foreignKey:UserID"`
 }

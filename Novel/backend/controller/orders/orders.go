@@ -23,14 +23,14 @@ func Create(c *gin.Context) {
     // ตรวจสอบความถูกต้องของ Foreign Keys (ถ้ามี)
     if order.UserID != 0 {
         var user entity.User
-        if err := db.First(&user, order.UserID).Error; err != nil {
+        if err := db.Preload("User").Preload("Novel").First(&user, order.UserID).Error; err != nil {
             c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid UserID"})
             return
         }
     }
 
     // สร้าง Order ในฐานข้อมูล
-    if err := db.Create(&order).Error; err != nil {
+    if err := db.Preload("Novel").Create(&order).Error; err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create order"})
         return
     }
@@ -42,7 +42,7 @@ func Create(c *gin.Context) {
 func GetAll(c *gin.Context) {
     var orders []entity.Order
     db := config.DB()
-    results := db.Preload("User").Preload("Transactions").Find(&orders)
+    results := db.Preload("User").Preload("Novel").Find(&orders)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -55,7 +55,7 @@ func Get(c *gin.Context) {
     ID := c.Param("id")
     var order entity.Order
     db := config.DB()
-    results := db.Preload("User").Preload("Transactions").First(&order, ID)
+    results := db.Preload("User").Preload("Novel").First(&order, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -68,7 +68,7 @@ func Update(c *gin.Context) {
     var order entity.Order
     OrderID := c.Param("id")
     db := config.DB()
-    result := db.First(&order, OrderID)
+    result := db.Preload("User").Preload("Novel").First(&order, OrderID)
     if result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": "id not found"})
         return

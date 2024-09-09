@@ -1,7 +1,7 @@
     import React from 'react';
     import './Income.css'; 
-    import Header from '../../compronents/headerselect';
-    import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
+    import Headers from '../../compronents/Pubblic_components/headerselect';
+    import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
     // import { arrowleft}
     import { DollarCircleOutlined } from '@ant-design/icons';
 
@@ -19,7 +19,7 @@
 
         return (
             <>
-                <Header />
+                <Headers />
                 <CategoryNavWriter />
                 <div className='lb'>
                     <label className='work-text-income'>รายได้ของคุณ</label>

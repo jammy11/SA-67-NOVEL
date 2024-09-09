@@ -1,6 +1,6 @@
 import React from 'react';
 import './profile.css'
-import Headers from '../../compronents/headerselect';
+import Headers from '../../compronents/Pubblic_components/headerselect';
 import { Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './L_Bookshelf.css';
-import Headers from '../../compronents/headerselect';
+import Headers from '../../compronents/Pubblic_components/headerselect';
 import Button_s from '../../compronents/Book_components/return_button';
 import { alignPropType } from 'react-bootstrap/esm/types';
 import Pagination from '../../compronents/Book_components/pagination';

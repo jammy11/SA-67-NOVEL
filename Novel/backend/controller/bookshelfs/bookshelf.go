@@ -12,7 +12,7 @@ func GetAllBookshelves(c *gin.Context) {
     db := config.DB()
 
     // Preload novels for each bookshelf
-    results := db.Preload("Novel").Find(&bookshelves)
+    results := db.Preload("Novel").Preload("Bookshelf").Find(&bookshelves)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -24,7 +24,7 @@ func GetBookshelf(c *gin.Context) {
     var bookshelf entity.Bookshelf
     db := config.DB()
 
-    results := db.Preload("Novel").First(&bookshelf, ID)
+    results := db.Preload("Novel").Preload("Bookshelf").First(&bookshelf, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -40,7 +40,7 @@ func CreateBookshelf(c *gin.Context) {
     }
 
     db := config.DB()
-    result := db.Create(&bookshelf)
+    result := db.Preload("Novel").Preload("Bookshelf").Create(&bookshelf)
     if result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create bookshelf"})
         return
@@ -53,7 +53,7 @@ func UpdateBookshelf(c *gin.Context) {
     var bookshelf entity.Bookshelf
 
     db := config.DB()
-    result := db.Preload("Novel").First(&bookshelf, ID)
+    result := db.Preload("Novel").Preload("Bookshelf").First(&bookshelf, ID)
     if result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": "Bookshelf not found"})
         return
@@ -76,7 +76,7 @@ func DeleteBookshelf(c *gin.Context) {
     ID := c.Param("id")
     db := config.DB()
 
-    result := db.Delete(&entity.Bookshelf{}, ID)
+    result := db.Preload("Novel").Preload("Bookshelf").Delete(&entity.Bookshelf{}, ID)
     if result.RowsAffected == 0 {
         c.JSON(http.StatusNotFound, gin.H{"error": "Bookshelf not found"})
         return

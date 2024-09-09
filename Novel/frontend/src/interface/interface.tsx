@@ -88,11 +88,16 @@ export interface CoinCardProps {
   }
   export interface TransactionCreateInterface {
     trans_type: string;
-    payment: string;
+    payment?: string;
     user_id: number;
-    package_id: number | null;
-    order_id?: number | null;  
+    package_id?: number | null;
+    order_id?: number | null;
+    amount_t: number; 
+
+
   }
+
+  
   export interface TransactionInterface {
   ID: number ;
   CreatedAt: string;
@@ -160,4 +165,68 @@ export interface CoinCardProps {
       Bookshelf: null;
     };
   };
+}
+interface Coin {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+  balance: number;
+}
+
+interface User {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+  userName: string;
+  email: string;
+  idType: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  gender: string;
+  profile: string;
+  coinID: number;
+  coin: Coin;
+  transaction?: any;
+  order?: any;
+}
+
+interface Writer {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+  income: number;
+  userId: number;
+  user: User;
+}
+
+export interface Novel {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      name: string;
+      content: string;
+      type: string;
+      rate: string;
+      cover: string;
+      price: number;
+      like: number;
+      buyAmount: number;
+      bookshelf?: Bookshelf[];
+      writerId: number;
+      writer: Writer;
+    }
+
+interface Bookshelf {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+  userId: number;
+  user: User;
+  novel: Novel[];
 }

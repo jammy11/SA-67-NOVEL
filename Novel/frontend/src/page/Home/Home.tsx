@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import './Home.css';
-import TOP from '../../compronents/header';
+import TOP from '../../compronents/Pubblic_components/header';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Slider from '../../compronents/slideshow';
+import Slider from '../../compronents/Home_components/slideshow';
 import CardList1 from '../../compronents/path/pathCat1';
 import CardList2 from '../../compronents/path/pathCat2';
 import CardList3 from '../../compronents/path/pathCat3';
 import CardList4 from '../../compronents/path/pathCat4';
 import CardList5 from '../../compronents/path/pathCat5';
-import CategoryNav from '../../compronents/CategoryNav';
-import Headers from '../../compronents/headerselect';
+import CategoryNav from '../../compronents/Home_components/CategoryNav';
+import Headers from '../../compronents/Pubblic_components/headerselect';
 import { HiMiniShoppingCart } from "react-icons/hi2";
 
 const Home: React.FC = () => {

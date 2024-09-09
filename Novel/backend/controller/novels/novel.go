@@ -14,7 +14,7 @@ func GetAll(c *gin.Context) {
     var novels []entity.Novel
     db := config.DB()
 
-    results := db.Find(&novels)
+    results := db.Preload("Writer").Preload("Bookshelf").Find(&novels)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -34,7 +34,7 @@ func Get(c *gin.Context) {
     var novel entity.Novel
     db := config.DB()
 
-    results := db.First(&novel, ID)
+    results := db.Preload("Writer").Preload("Bookshelf").First(&novel, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -54,7 +54,7 @@ func Update(c *gin.Context) {
     var novel entity.Novel
     db := config.DB()
 
-    result := db.First(&novel, ID)
+    result := db.Preload("Writer").Preload("Bookshelf").First(&novel, ID)
     if result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": "Novel not found"})
         return
@@ -85,7 +85,7 @@ func Create(c *gin.Context) {
 
     db := config.DB()
 
-    result := db.Create(&novel)
+    result := db.Preload("Writer").Preload("Bookshelf").Create(&novel)
     if result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create novel"})
         return
@@ -104,7 +104,7 @@ func Delete(c *gin.Context) {
 
     db := config.DB()
 
-    result := db.Delete(&entity.Novel{}, ID)
+    result := db.Preload("Writer").Preload("Bookshelf").Delete(&entity.Novel{}, ID)
     if result.RowsAffected == 0 {
         c.JSON(http.StatusNotFound, gin.H{"error": "Novel not found"})
         return

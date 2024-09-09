@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './Writer_edit.css'; 
-import Header from '../../compronents/headerselect';
-import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
+import Headers from '../../compronents/Pubblic_components/headerselect';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 

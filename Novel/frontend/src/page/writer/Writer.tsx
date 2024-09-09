@@ -1,7 +1,7 @@
 import React from 'react';
 import './Writer.css'; 
-import Headers from '../../compronents/headerselect';
-import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
+import Headers from '../../compronents/Pubblic_components/headerselect';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { EyeOutlined } from '@ant-design/icons';
 import { HeartOutlined } from '@ant-design/icons';

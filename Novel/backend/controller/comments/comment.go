@@ -10,7 +10,7 @@ import (
 func GetAll(c *gin.Context) {
     var comments []entity.Comment
     db := config.DB()
-    results := db.Find(&comments)
+    results := db.Preload("User").Find(&comments)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -22,7 +22,7 @@ func Get(c *gin.Context) {
     ID := c.Param("id")
     var comment entity.Comment
     db := config.DB()
-    results := db.First(&comment, ID)
+    results := db.Preload("User").First(&comment, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -34,7 +34,7 @@ func Update(c *gin.Context) {
     var comment entity.Comment
 
     db := config.DB()
-    result := db.First(&comment, ID)
+    result := db.Preload("User").First(&comment, ID)
     if result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": "Comment not found"})
         return
@@ -45,7 +45,7 @@ func Update(c *gin.Context) {
         return
     }
 
-    result = db.Save(&comment)
+    result = db.Preload("User").Save(&comment)
     if result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update comment"})
         return
@@ -63,7 +63,7 @@ func Create(c *gin.Context) {
     }
 
     db := config.DB()
-    result := db.Create(&comment)
+    result := db.Preload("User").Create(&comment)
     if result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create comment"})
         return
@@ -77,7 +77,7 @@ func Delete(c *gin.Context) {
     ID := c.Param("id")
     db := config.DB()
 
-    result := db.Delete(&entity.Comment{}, ID)
+    result := db.Preload("User").Delete(&entity.Comment{}, ID)
     if result.RowsAffected == 0 {
         c.JSON(http.StatusNotFound, gin.H{"error": "Comment not found"})
         return

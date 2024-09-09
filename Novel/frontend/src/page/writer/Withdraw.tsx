@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Withdraw.css'; 
-import TOP from '../../compronents/header';
+import TOP from '../../compronents/Pubblic_components/header';
 import { DollarCircleOutlined, DownOutlined } from '@ant-design/icons';
-import CategoryNavWriter from '../../compronents/CatogoryNavWriter';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
 
 interface IncomeData {
   income: number;

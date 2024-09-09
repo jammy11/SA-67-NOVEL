@@ -11,55 +11,56 @@ import (
 
 // Create สร้าง Transaction ใหม่
 func Create(c *gin.Context) {
-	var transaction entity.Transaction
+    var transaction entity.Transaction
 
-	// ผูก JSON payload กับ struct Transaction
-	if err := c.ShouldBindJSON(&transaction); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad request, unable to map payload"})
-		return
-	}
+    // Bind JSON payload to the Transaction struct
+    if err := c.ShouldBindJSON(&transaction); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Bad request, unable to map payload"})
+        return
+    }
 
-	db := config.DB()
+    db := config.DB()
 
-	// ตรวจสอบความถูกต้องของ Foreign Keys (ถ้ามี)
-	if transaction.PackageID != nil {
-		var pack entity.Package
-		if err := db.First(&pack, transaction.PackageID).Error; err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid PackageID"})
-			return
-		}
-	}
+    // Validate Foreign Keys
+    if transaction.PackageID != nil {
+        var pack entity.Package
+        if err := db.First(&pack, transaction.PackageID).Error; err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid PackageID"})
+            return
+        }
+    }
 
-	if transaction.UserID != 0 {
-		var user entity.User
-		if err := db.First(&user, transaction.UserID).Error; err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid UserID"})
-			return
-		}
-	}
+    if transaction.UserID != 0 {
+        var user entity.User
+        if err := db.Preload("Coin").First(&user, transaction.UserID).Error; err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid UserID"})
+            return
+        }
+    }
 
-	if transaction.OrderID != nil {
-		var order entity.Order
-		if err := db.First(&order, transaction.OrderID).Error; err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid OrderID"})
-			return
-		}
-	}
+    if transaction.OrderID != nil {
+        var order entity.Order
+        if err := db.Preload("Novel.Writer").First(&order, transaction.OrderID).Error; err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid OrderID"})
+            return
+        }
+    }
 
-	// สร้าง Transaction ในฐานข้อมูล
-	if err := db.Create(&transaction).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create transaction"})
-		return
-	}
+    // Create the Transaction
+    if err := db.Create(&transaction).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create transaction"})
+        return
+    }
 
-	c.JSON(http.StatusCreated, transaction)
+    c.JSON(http.StatusCreated, transaction)
 }
+
 
 // GetAll ดึง Transaction ทั้งหมด
 func GetAll(c *gin.Context) {
 	var transactions []entity.Transaction
 	db := config.DB()
-	results := db.Preload("Package").Preload("User").Preload("Order").Find(&transactions)
+	results := db.Preload("Package").Preload("User.Coin").Preload("Order").Preload("Order.Novel").Preload("Order.Novel.Writer").Find(&transactions)
 	if results.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
 		return
@@ -72,7 +73,7 @@ func Get(c *gin.Context) {
 	ID := c.Param("id")
 	var transaction entity.Transaction
 	db := config.DB()
-	results := db.Preload("Package").Preload("User").Preload("Order").First(&transaction, ID)
+	results := db.Preload("Package").Preload("User.Coin").Preload("Order").Preload("Order.Novel").Preload("Order.Novel.Writer").First(&transaction, ID)
 	if results.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
 		return
@@ -92,7 +93,7 @@ func GetTransactionsByUserID(c *gin.Context) {
     fmt.Printf("Fetching transactions for UserID: %s\n", userID)
 
     // Query transactions by UserID and preload related records
-    results := db.Preload("Package").Preload("User").Preload("Order").Where("user_id = ?", userID).Find(&transactions)
+    results := db.Preload("Package").Preload("User.Coin").Preload("Order").Preload("Order.Novel").Preload("Order.Novel.Writer").Preload("Order").Where("user_id = ?", userID).Find(&transactions)
 
     // Log the raw SQL query for debugging
     fmt.Printf("SQL Query: %s\n", results.Statement.SQL.String())
@@ -116,7 +117,7 @@ func Update(c *gin.Context) {
 	var transaction entity.Transaction
 	TransactionID := c.Param("id")
 	db := config.DB()
-	result := db.First(&transaction, TransactionID)
+	result := db.Preload("Package").Preload("User.Coin").Preload("Order").Preload("Novel").Preload("Writer").First(&transaction, TransactionID)
 	if result.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "id not found"})
 		return
@@ -137,7 +138,7 @@ func Update(c *gin.Context) {
 func Delete(c *gin.Context) {
 	id := c.Param("id")
 	db := config.DB()
-	if tx := db.Exec("DELETE FROM transactions WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := db.Preload("Package").Preload("User.Coin").Preload("Order.Novel.Writer").Exec("DELETE FROM transactions WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "id not found"})
 		return
 	}

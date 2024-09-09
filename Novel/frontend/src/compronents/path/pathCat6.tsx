@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../crad';
+import Card from '../Home_components/crad';
 
 import '../MM.css';
 
