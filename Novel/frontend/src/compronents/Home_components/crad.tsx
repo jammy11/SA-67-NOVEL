@@ -44,7 +44,6 @@ const Card: React.FC<CardProps> = ({ card }) => {
                 <span id='htailb'><b>{card.name}</b></span>
                 <div className='pb'>
                 <HiMiniShoppingCart id='icart'/>
-                    {/* <img id="ieyeb" src="/src/assets/0eye.png" alt="eye" /> */}
                     <span id='view_likeb'>{card.views}</span>
                     <img id="ieyeb" src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"} 
                          alt="heart" onClick={toggleLike} />
@@ -101,7 +100,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
                           </div>
                           <div className="component-13">
                             <span className="f-1">
-                              <img id='coin' src="./src/assets/coin-50.png" alt="coin"></img>
+                              <img id='coin' src="./src/assets/coin.png" alt="coin"></img>
                             </span>
                           </div>
                         </div>
@@ -114,13 +113,14 @@ const Card: React.FC<CardProps> = ({ card }) => {
                     </div>
                     <div className="button">
                       <span className="button-1" onClick={handleUnlock}>
-                        <span id='buttonlock'>
+                        {/* oo*/} <span id='buttonlock'>
                           <span id='button1'>ปลดล็อคเล่มนี้</span>
                         </span>
                         <div id="unlock">
                           <img className="lock" src="./src/assets/unlock.png" alt="unlock" />
                         </div>
                       </span>
+                      {/* oo*/}
                     </div>
                     <div className="accordion">
                       <div className="accordion-item">
@@ -141,38 +141,24 @@ const Card: React.FC<CardProps> = ({ card }) => {
 
         {/* ป๊อปอัพปลดล็อค */}
         <Modal show={showUnlock} onHide={handleCloseUnlock}>
-          <div className='modal-contentnew custom-modal'>
-              <div className='order'><b>ยืนยันการสั่งซื้อ</b></div>
-              <img id='Mcardnew' src={card.imgUrl} alt={card.name} />
-              <div className="text-heading">
-                  <span id='text-heading'>
-                    <span className="text-heading-2 text-cut"><b>{card.name}</b></span>
-                  </span>
-                  <span className="text-1">
-                        <span id='writer2'>By {card.writer}</span>
-                  </span>
-                  <span id='text1'><b>จำนวนเงิน</b></span>
-                  <span id='price2'>
-                      <span id='textprice2'>{card.price}</span>
-                  </span>
-                  <span className="f-1">
-                      <img id='coin2' src="./src/assets/coin-50.png" alt="coin"></img>
-                  </span>
-                  <div onClick={handleCloseUnlock}>
-                    <span id='buttoncancle'>
-                        <span id='button2'>ยกเลิก</span>
-                        <img className="cancle2" src="./src/assets/no.png" alt="cancel" />
-                    </span>
-                  </div>
-                  <div onClick={handleConfirmPurchase}> {/*เมื่อกดยืนยัน จะเปิดป๊อปอัพยืนยัน*/}
-                  <div onClick={handleClose2}>
-                    <span id='buttonsubmit'>
-                        <span id='button2'>ยืนยัน</span>
-                        <img className="submit" src="./src/assets/submit.png" alt="submit" />
-                    </span>
-                    </div>
-                  </div>
+        <div className='modal-contentnew2 custom-modalnew'>
+            <div className='confirmation-message'>
+            <div onClick={handleCloseUnlock}>
+            <div onClick={handleClose2}>
+                <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
               </div>
+              </div>
+              <img className="ready" src="./src/assets/error.png" alt="submit" />
+              <span className='text2'><b>&nbsp;เกิดข้อผิดพลาด</b></span>
+              <span className="text-1">
+                          <span id='ready2'>&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
+                        </span>
+              <div onClick={handleClose2}>
+              <span id='buttonin'>
+                <a href="/bookself"><span id='button3'>เข้าสู่ระบบ</span></a>
+                  </span>
+              </div>
+            </div>
           </div>
         </Modal>
 
@@ -183,16 +169,20 @@ const Card: React.FC<CardProps> = ({ card }) => {
           <div className='modal-contentnew2 custom-modalnew'>
             <div className='confirmation-message'>
             <div onClick={handleCloseConfirmation}>
+            <div onClick={handleClose2}>
                 <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+              </div>
               </div>
               <img className="ready" src="./src/assets/ready.png" alt="submit" />
               <span className='text2'><b>ทำการสั่งซื้อสำเร็จ</b></span>
               <span className="text-1">
                           <span id='ready2'>นิยายจะถูกนำไปไว้<br></br>ในชั้นหนังสือของคุณ</span>
                         </span>
-              <span id='buttonbook' /*href="/Bookself" กดไปหน้าชั้นหนังสือ*/>
-                  <span id='button3'>ชั้นหนังสือ</span>
+              <div onClick={handleClose2}>
+              <span id='buttonbook'>
+                <a href="/bookself"><span id='button3'>ชั้นหนังสือ</span></a>
                   </span>
+              </div>
             </div>
           </div>
         </Modal>

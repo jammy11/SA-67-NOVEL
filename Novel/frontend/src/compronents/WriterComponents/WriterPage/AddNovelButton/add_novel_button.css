@@ -1,0 +1,22 @@
+.addNovelbutton{
+    background-color: #FFB800;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Noto Sans Thai';
+}
+
+.addNovelbutton:hover{
+    font-weight: bold;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: black;
+    background-color: #ebad0f;
+    border: white;
+}

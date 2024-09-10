@@ -21,16 +21,16 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose, onSubmit }
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className={`modal-comment ${isOpen ? 'open' : ''}`}>
+      <div className="modal-content-comment">
         <span className="close" onClick={onClose}>&times;</span>
         <h2>Write a Comment</h2>
-        <input 
+        {/* <input 
           type="text" 
           placeholder="Username" 
           value={username} 
           onChange={(e) => setUsername(e.target.value)} 
-        />
+        /> */}
         <textarea 
           placeholder="Your Comment" 
           value={commentText} 

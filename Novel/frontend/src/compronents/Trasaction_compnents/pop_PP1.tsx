@@ -5,7 +5,7 @@ import './pop.css';
 import './pop_PP1.css';
 import { Package } from '../../interface/interface';
 import { GetPackages } from '../../services/https/Package/package';
-import CoinCard from '../Home_components/coinCard';
+import CoinCard from './coinCard';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 

@@ -1,42 +1,46 @@
-    import React from 'react';
-    import './Income.css'; 
-    import Headers from '../../compronents/Pubblic_components/headerselect';
-    import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
-    // import { arrowleft}
-    import { DollarCircleOutlined } from '@ant-design/icons';
+import React from 'react';
+import './Income.css'; 
+import Headers from '../../compronents/Pubblic_components/headerselect';
+import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
+import { DollarCircleOutlined } from '@ant-design/icons';
+import { InterfaceWriter } from '../../interface/writer_interface/writerPersonalInterface'; 
 
+type IncomeData = Pick<InterfaceWriter, 'WriterID' | 'Income'>;
 
-    interface IncomeData {
-        income: number;
-        date: string; 
-    }
+const Income: React.FC = () => {
+    const loggedInWriterId = "2"; // สมมติว่า writerId ของผู้ใช้ที่ล็อกอินคือ "1"
 
-    const Income: React.FC = () => {
-        const incomes: IncomeData[] = [
-            { income: 5555, date: '2023-12-25' },
-            // ... more income data
-        ];
+    const incomes: IncomeData[] = [
+        { WriterID: "1", Income: 5555 },
+        { WriterID: "2", Income: 6666 }
+    ];
 
-        return (
-            <>
-                <Headers />
-                <CategoryNavWriter />
-                <div className='lb'>
-                    <label className='work-text-income'>รายได้ของคุณ</label>
-                    {incomes.map((IncomeData) => (
-                    <div className='work-text-incomeUser' style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="..\src\assets\coin.png" alt="รายได้" style={{ marginRight: '10px' }} />
-                            {IncomeData.income}&nbsp; <span style={{ color: '#FFB800' }}>เหรียญ</span>
-                    </div>
+    // กรองข้อมูลที่ตรงกับ WriterID ของผู้ใช้ที่ล็อกอิน
+    const filteredIncomes = incomes.filter(incomeData => incomeData.WriterID === loggedInWriterId);
+
+    return (
+        <>
+            <Headers />
+            <CategoryNavWriter />
+            <div className='lb'>
+                <label className='work-text-income'>รายได้ของคุณ</label>
+                {filteredIncomes.map((incomeData, index) => (
+                <div key={index} className='work-text-incomeUser' style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src="..\src\assets\coins.png" alt="รายได้" style={{ marginRight: '10px' }} />
+                    {incomeData.Income}&nbsp; <span style={{ color: '#FFB800' }}>เหรียญ</span>
+                </div>
                 ))}
-                <a href='/Withdraw' style={{ textDecoration: 'none' }}> {/* เพิ่ม textDecoration: 'none' ที่นี่ */}
-                    <button className="work-button-withdraw">
+                <div className='withdraw-button-container'>
+                <a href='/Withdraw' style={{ textDecoration: 'none' }}>      
+                <button className="work-button-withdraw">
                         <DollarCircleOutlined style={{ fontSize: '60px' }} /> WITHDRAW
                     </button>
+              
                 </a>
+                </div>
             </div>
-            </>
-        );
-    };
+        </>
+    );
+};
 
-    export default Income;
+export default Income;

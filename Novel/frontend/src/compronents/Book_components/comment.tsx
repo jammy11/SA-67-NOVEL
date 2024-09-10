@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './comment.css';
 import CPagination from "./c_pagi";
 import CommentModal from "./commentModal";
+import Abutton from "./animatedbutton";
 
 interface CommentProps {
   username: string;
@@ -24,7 +25,7 @@ const Commentsb: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const maxCommentsPerPage = 5;
+  const maxCommentsPerPage = 4;
   const totalPages = Math.ceil(comments.length / maxCommentsPerPage);
 
   const handlePageChange = (page: number) => {

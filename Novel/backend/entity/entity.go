@@ -11,7 +11,6 @@ type User struct {
 	Username    string    `json:"user_name" gorm:"unique"`
 	Password    string    `json:"-"`
 	Email       string    `json:"email" gorm:"unique"`
-	ID_Type     string    `json:"id_type"`
 	FirstName   string    `json:"first_name"`
 	LastName    string    `json:"last_name"`
 	BirthDate   time.Time `json:"birth_date"`
@@ -63,6 +62,7 @@ type Novel struct {
 	Content string	`json:"content"`
 	Type    string	`json:"novel_type"`
 	Rate    string	`json:"rate"`
+	Writename	string `json:"writename"`
 	Cover   string  `gorm:"type:text" json:"cover"`
     Price   float64 `json:"novel_price"`
     Like    int64		`json:"novel_like"`

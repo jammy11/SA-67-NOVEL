@@ -72,7 +72,7 @@ const CategoryNav: React.FC = () => {
           fontWeight: activeLink === '#cat2' ? 'bold' : 'normal',
         }}
       >
-        <span id="category">นิยายใหม่</span>
+        <span id="category">โรแมนติก</span>
       </a>
       <a
         href='#cat3'
@@ -82,7 +82,7 @@ const CategoryNav: React.FC = () => {
           fontWeight: activeLink === '#cat3' ? 'bold' : 'normal',
         }}
       >
-        <span id="category">สุดฮิต</span>
+        <span id="category">แอ็คชั่น</span>
       </a>
       <a
         href='#cat4'
@@ -92,7 +92,7 @@ const CategoryNav: React.FC = () => {
           fontWeight: activeLink === '#cat4' ? 'bold' : 'normal',
         }}
       >
-        <span id="category">โรแมนติก</span>
+        <span id="category">สยองขวัญ</span>
       </a>
       <a
         href='#cat5'
@@ -112,7 +112,7 @@ const CategoryNav: React.FC = () => {
           fontWeight: activeLink === '#cat6' ? 'bold' : 'normal',
         }}
       >
-        <span id="category">สืบสวน</span>
+        <span id="category">คอมเมดี้</span>
       </a>
     </div>
   );

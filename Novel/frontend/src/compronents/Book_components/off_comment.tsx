@@ -3,6 +3,8 @@ import { Button } from 'react-bootstrap';
 import { Offcanvas } from 'react-bootstrap';
 import Commentsb from './comment';
 import './comment.css'
+import Button_s from './return_button';
+import { FaComment } from 'react-icons/fa';
 
 function Off_comment() {
   const [show, setShow] = useState(false);
@@ -12,11 +14,11 @@ function Off_comment() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Comment
-      </Button>
+      <FaComment className='icon-text-icon_fc' onClick={handleShow}>
+        {/* Comment */}
+      </FaComment>
 
-      <Offcanvas show={show} onHide={handleClose} >
+      <Offcanvas show={show} onHide={handleClose}  >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Comment</Offcanvas.Title>
         </Offcanvas.Header>

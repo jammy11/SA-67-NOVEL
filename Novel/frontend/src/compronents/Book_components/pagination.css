@@ -2,14 +2,13 @@
     display: flex;
     list-style: none;
     padding: 0;
-    
   }
   
   .pagination-container {
     display: flex;
     justify-content: center;
     position: fixed;
-    bottom: 10px; /* Adjust this value to move it higher or lower */
+    bottom: 10px;
     width: 100%;
   }
   

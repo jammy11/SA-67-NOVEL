@@ -1,11 +1,8 @@
 import React from 'react';
 import './c_pagi.css';
+import { CPaginationProps } from '../../interface/bookey/bookshelfs';
 
-interface CPaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
+
 
 const CPagination: React.FC<CPaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const maxPageButtons = 5; // Maximum number of pagination buttons to show

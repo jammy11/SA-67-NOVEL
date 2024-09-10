@@ -1,35 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Card3 from './card3';
 import './slideshow.css'
 
-
 function Slider() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(null);
+
+  const slides = [
+    {
+      name: "ชีวิตที่แสนเหงา",
+      imgUrl: 'https://4kwallpapers.com/images/walls/thumbs_3t/9292.jpg',
+      views: "1000",
+      like: "500",
+      tag: "Drama",
+      price: 30,
+      rate: "13+",
+      writer: "John Doe",
+      title: "A brief description of this novel..."
+    },
+    {
+      name: "Second slide label",
+      imgUrl: 'https://4kwallpapers.com/images/walls/thumbs_3t/9311.png',
+      views: "1500",
+      like: "700",
+      tag: "Adventure",
+      price: 30,
+      rate: "13+",
+      writer: "Jane Doe",
+      title: "Another brief description..."
+    },
+    {
+      name: "Third slide label",
+      imgUrl: 'https://4kwallpapers.com/images/walls/thumbs_3t/9254.jpg',
+      views: "1200",
+      like: "800",
+      tag: "Thriller",
+      price: 30,
+      rate: "13+",
+      writer: "Alice",
+      title: "Yet another description..."
+    }
+  ];
+
+  const handleSlideClick = (slide: any) => {
+    setSelectedSlide(slide);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+
   return (
-    <Carousel>
-      <Carousel.Item interval={1000}>
-      <img id='pic' src='https://4kwallpapers.com/images/walls/thumbs_3t/9292.jpg'/>
-        <Carousel.Caption>
-          {/* <h3 id='hd' >ชีวิตที่แสนเหงา</h3> */}
-          {/* <p id='pd'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={500}>
-      <img id='pic' src='https://4kwallpapers.com/images/walls/thumbs_3t/9311.png'/>
-        <Carousel.Caption>
-          {/* <h3 id='hd' >Second slide label</h3> */}
-          {/* <p id='pd'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img id='pic' src='https://4kwallpapers.com/images/walls/thumbs_3t/9254.jpg'/>
-        <Carousel.Caption>
-        {/*   <h3 id='hd' >Third slide label</h3>
-          <p id='pd'> 
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>*/}
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+    <>
+      <Carousel>
+        {slides.map((slide, index) => (
+          <Carousel.Item key={index} interval={1000} onClick={() => handleSlideClick(slide)}>
+            <img id='pic' src={slide.imgUrl} alt={slide.name} />
+            <Carousel.Caption>
+              <h3 id='hd'>{slide.name}</h3>
+              <p id='pd'>{slide.title}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+
+      {/* Modal that shows on slide click */}
+      {selectedSlide && (
+        <Card3
+          card={selectedSlide}
+          showModal={showModal}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
+    </>
   );
 }
 

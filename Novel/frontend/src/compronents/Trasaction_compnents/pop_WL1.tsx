@@ -7,7 +7,7 @@ import './pop_WL1.css';
 import CountdownButton from './GETOTP';
 import { Package } from '../../interface/interface';
 import { GetPackages } from '../../services/https/Package/package';
-import CoinCard from '../Home_components/coinCard'
+import CoinCard from './coinCard'
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
 

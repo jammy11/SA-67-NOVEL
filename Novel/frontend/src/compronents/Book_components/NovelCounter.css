@@ -1,0 +1,21 @@
+
+.novel-counter {
+    display: flex;
+    padding: 16px;
+    width: auto;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    justify-content: center
+  }
+
+.text_counter{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+}
+
+
+  

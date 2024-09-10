@@ -24,12 +24,11 @@ type (
 		Username    string    `json:"user_name"`
 		Password    string    `json:"password"`
 		Email       string    `json:"email"`
-		ID_Type     string    `json:"id_type"`
 		FirstName   string    `json:"first_name"`
 		LastName    string    `json:"last_name"`
 		BirthDate   time.Time `json:"birth_date"`
 		Gender      string    `json:"gender"`
-		Profile     string    `gorm:"type:text" json:"profile"`
+
 	}
 )
 
@@ -76,10 +75,8 @@ func SignUp(c *gin.Context) {
 		FirstName: payload.FirstName,
 		LastName:  payload.LastName,
 		Email:     payload.Email,
-		ID_Type:   payload.ID_Type,
 		BirthDate: payload.BirthDate,
 		Gender:    payload.Gender,
-		Profile:   payload.Profile,
 		Password:  hashedPassword,
 		CoinID:    coin.ID, // Link the Coin with the User
 	}

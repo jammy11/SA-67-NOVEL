@@ -1,54 +1,71 @@
-.lb{
-    margin-top: 160px;
-    border-radius: 10px;
-    background-color: rgb(0, 0, 0);
-    width: 95%;
-    height: auto;
-  }
-  
-  .work-text-income{
-    background-color: #ffffff; 
-    display: flex; /* ใช้ flexbox เพื่อจัดกึ่งกลางง่ายขึ้น */
-    border-radius: 10px;
-    justify-content: center; /* จัดกึ่งกลางแนวนอน */
-    align-items: flex-start; /* จัดชิดด้านบนในแนวตั้ง */
-    margin: 30px auto 0; /* ปรับ margin ให้เป็น auto เพื่อจัดกึ่งกลางแนวนอน และคง margin บนไว้ */
-    width: max-content; /* ปรับความกว้างให้พอดีกับเนื้อหา */
-    font-size: 100px;
-    border-radius: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  
-  .work-text-incomeUser{
-    margin: 60px; 
-    text-align: center; /* จัดกึ่งกลางแนวนอน */
-    position: relative;
-    display: flex;
-    justify-content: center; /* จัดกึ่งกลางแนวนอน */
-    align-items: center; /* จัดกึ่งกลางแนวตั้ง */
-    color: #FFB800;
-    font-size: 60px;
-    font-weight: bold;
-    font-family: 'Roboto';
-  }
-  
-  .work-button-withdraw {
-    background-color: #FFB800; 
-    color: rgb(0, 0, 0);
-    display: block; 
-    margin: 0 auto; 
-    border: none;
-    padding: 8px 16px; 
-    border-radius: 30px; 
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s; 
-    font-size: 2.0em; 
-    margin-bottom: 0;
-  }
+.lb {
+  margin-top: 160px;
+  border-radius: 15px;
+  background-color: #1e1e1e; /* สีพื้นหลังเข้มเพื่อเพิ่มความหรูหรา */
+  width: 90%;
+  max-width: 1200px; /* จำกัดความกว้างสูงสุด */
+  padding: 20px; /* เพิ่ม padding รอบ ๆ เนื้อหา */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเพื่อให้มีมิติ */
+}
 
-  .work-button-withdraw:hover {
-    background-color: #857808;
-  }
-  
+.work-text-income {
+  background-color: #ffffff; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  width: max-content;
+  font-size: 2.5em; /* ขนาดตัวอักษรที่เหมาะสม */
+  border-radius: 25px;
+  padding: 20px 40px;
+  color: #333; /* สีข้อความ */
+  font-weight: bold;
+  text-transform: uppercase; /* ข้อความเป็นตัวพิมพ์ใหญ่ทั้งหมด */
+}
+
+.work-text-incomeUser {
+  margin: 40px auto; 
+  text-align: center;
+  color: #FFB800;
+  font-size: 2.5em;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column; /* จัดข้อความให้อยู่ในแนวตั้ง */
+  align-items: center; /* จัดกึ่งกลางแนวนอน */
+}
+
+.work-text-incomeUser img {
+  margin-bottom: 10px;
+  width: 50px; /* ปรับขนาดของไอคอน */
+  height: 50px; /* ปรับขนาดของไอคอน */
+}
+
+.withdraw-button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.work-button-withdraw {
+  background-color: #FFB800; 
+  color: rgb(0, 0, 0); 
+  margin: 20px auto; /* เพิ่ม margin ด้านล่าง */
+  border: none;
+  padding: 12px 24px; 
+  gap: 10px;
+  border-radius: 30px; 
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5em; /* ขนาดฟอนต์ที่เหมาะสม */
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* เพิ่มการเปลี่ยนแปลงขนาดปุ่มเมื่อ hover */
+}
+
+.work-button-withdraw:hover {
+  background-color: #e6a700; /* สีเมื่อ hover */
+  transform: scale(1.05); /* ขยายขนาดปุ่มเล็กน้อยเมื่อ hover */
+}

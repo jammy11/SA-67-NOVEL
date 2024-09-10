@@ -1,4 +1,4 @@
-.modal {
+.modal-comment {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,13 +11,15 @@
     z-index: 1000;
   }
   
-  .modal-content {
+  .modal-content-comment {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     width: 400px;
     max-width: 90%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50px);
+    animation: slideIn 0.3s forwards ease-in-out;
   }
   
   .close {
@@ -39,7 +41,7 @@
   
   button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #6874df;
     color: white;
     border: none;
     border-radius: 4px;
@@ -48,4 +50,15 @@
   
   button:hover {
     background-color: #0056b3;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }

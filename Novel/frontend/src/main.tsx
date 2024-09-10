@@ -8,10 +8,13 @@ import Withdraw from './page/writer/Withdraw'
 import Writer_edit from './page/writer/Writer_edit'
 import Profile from './page/Profile/profile'
 import EditProfile from './page/Profile/editProfile'
+import Login from './page/authentication/Login/Login'
+import Register from './page/authentication/Register/register'
 import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
-import SignInPages from './page/authentication/Login'
+import SignInPages from './page/authentication/Logintest'
 import Test from './page/test/tests'
+import L_Content from './page/Bookshelf/L_Content'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
 
 const router =createBrowserRouter([
@@ -27,10 +30,6 @@ const router =createBrowserRouter([
   {
     path: "/profile",
     element:<Profile/>
-  },
-  {
-    path: "/bookself",
-    element:<L_Bookshelf/>
   }
   ,  {
     path: "/Writer",
@@ -59,10 +58,27 @@ const router =createBrowserRouter([
     element:<SignInPages/>
   },
   {
+    path: "/login",
+    element:<Login/>
+  },
+  {
+    path: "/register",
+    element:<Register/>
+  },
+  {
     path: "/test",
     element:<Test/>
+  },
+  {
+    path: "/L_Content",
+    element:<L_Content/>
   }
-  
+    
+    ,
+    {
+      path: "/bookself",
+      element:<L_Bookshelf/>
+    },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
