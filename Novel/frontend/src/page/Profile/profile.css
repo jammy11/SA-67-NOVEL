@@ -3,55 +3,96 @@
     padding: 300px;
     color: white;
     width: 2000px;
-}
-
-.profile-header {
+    position: relative;
+  }
+  
+  .profile-header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.profile-picture {
+  }
+  
+  .profile-picture {
     width: 100px;
     height: 100px;
     background-color: #5f5252;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
-}
-
-/*บนรูป*/
-.profile-username {
-    margin-left: -110px;
-    margin-top: -70px;
+    position: relative; /* Make the profile picture relative */
+  }
+  
+  .profile-username {
+    position: absolute;
+    top: 7%;
+    transform: translateX(50%);
     font-size: 18px;
-}
-
-/*กรอบ*/
-.box {
+  }
+  
+  .box {
     background-color: #333;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
-}
-
-/* ความห่างของแต่ละข้อความ*/
-.item {
+    margin-top: 10px;
+  }
+  
+  .item {
     margin: 10px 0;
-}
-
-.label {
-    color: rgb(247, 247, 247);
-}
-
-.value {
+  }
+  
+  .label {
+    color: #ccc;
+  }
+  
+  .value {
     color: white;
     margin-left: 10px;
+  }
+  
+  .editProfile {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #131111;
+    background-color: #fff;
+    border: none; 
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 20px auto;
+    position: absolute;
+    top: 250px;
+    right: 300px;
+    text-decoration: none;
+  }
+  
+  .editProfile:hover {
+    background-color: #3bd3cb;
+    box-shadow: 0px 15px 20px rgba(78, 179, 238, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  
+  .editProfile:active {
+    transform: translateY(-1px);
+  }
+
+.return {
+    position: absolote;
+    top: 20px;
+    left: 20px;
 }
 
-.editProfile {
-    color: rgb(43, 43, 219);
+.Home {
+    color: #333;
     text-decoration: none;
-    display: block;
-    margin-top: -210px;
-    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.Home {
+    text-decoration: underline;
 }

@@ -3,13 +3,16 @@ import './profile.css'
 import TOP from '../../compronents/header';
 import { Link } from 'react-router-dom';
 
-const Profile: React.FC = () => {
+const profile: React.FC = () => {
     return (
         <><TOP/>
         <div className="profile-container">
+            <div className="return">
+                    <span className='return'>กลับ</span>
+                <Link to ="/Home" className="Home"></Link>
+            </div>
             <div className="profile-header">
                 <div className="profile-picture"></div>
-                <div className="profile-username">@ชื่อผู้ใช้</div>
             </div>
             <div className="box">
                 <div className="item">
@@ -21,12 +24,12 @@ const Profile: React.FC = () => {
                     <span className="value">: ---------</span>
                 </div>
                 <div className="item">
-                    <span className="label">รหัสผ่าน</span>
-                    <span className="value">: ********</span>
-                </div>
-                <div className="item">
                     <span className="label">เพศ</span>
                     <span className="value">: ไม่ระบุ</span>
+                </div>
+                <div className="item">
+                    <span className="label">วันเกิด</span>
+                    <span className="value">: </span>
                 </div>
             </div>
             <Link to="/editProfile" className="editProfile">แก้ไขข้อมูลส่วนตัว</Link>
@@ -34,4 +37,4 @@ const Profile: React.FC = () => {
     );
 }
 
-export default Profile;
+export default profile;

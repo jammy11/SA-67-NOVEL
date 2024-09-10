@@ -12,6 +12,8 @@ import L_Bookshelf from './page/Bookshelf/L_Bookshelf'
 import Income from './page/writer/Income'
 import {createBrowserRouter,RouterProvider,Router,Link} from 'react-router-dom'
 import L_Content from './page/Bookshelf/L_Content'
+import Login from './page/Authentication/Login/login'
+import Register from './page/Authentication/Register/register'
 
 
              
@@ -60,7 +62,16 @@ const router =createBrowserRouter([
   {
     path: "/Income",
     element:<Income/>
+  },
+  {
+    path: "/login",
+    element:<Login/>
+  },
+  {
+    path: "/register",
+    element:<Register/>
   }
+
   
 ])
 

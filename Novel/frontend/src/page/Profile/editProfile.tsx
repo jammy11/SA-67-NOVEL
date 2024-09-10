@@ -1,9 +1,9 @@
 import React from 'react';
-import './editProfile.css';
+import './EditProfile.css';
 import TOP from '../../compronents/header';
 import { Link } from 'react-router-dom';
 
-const EditProfile: React.FC = () => {
+const editProfile: React.FC = () => {
     return (
         <><TOP/>
         <div className="edit-profile-container">
@@ -29,10 +29,15 @@ const EditProfile: React.FC = () => {
                     <div className="edit-item">
                         <span className="label">ชื่อ นามสกุล</span>
                         <span className="value">: </span>
+                        <a href="#" className="change">เปลี่ยนชื่อ-นามสกุล</a>
                     </div>
                     <div className="edit-item">
                         <span className="label">เพศ</span>
                         <span className="value">: ไม่ระบุ</span>
+                    </div>
+                    <div className="edit-item">
+                        <span className="label">วันเกิด</span>
+                        <span className="value">:</span>
                     </div>
                     <div className="buttons">
                     <Link to="/profile"className="cancel-button">ยกเลิก</Link>
@@ -48,4 +53,4 @@ const EditProfile: React.FC = () => {
     );
 }
 
-export default EditProfile;
+export default editProfile;

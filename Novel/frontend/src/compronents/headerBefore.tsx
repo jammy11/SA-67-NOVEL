@@ -3,8 +3,10 @@ import './header.css';
 import { Dropdown, Image } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const TOP2: React.FC = () => {
+    const navigate = useNavigate(); 
     return (
         <div className="topbar">
             <img id="HLogo" src="/src/assets/HLogo.png" alt="HLogo" />
@@ -14,9 +16,11 @@ const TOP2: React.FC = () => {
                 <div className="coin">
                 <div className="login">
                 
-            <Button id='login'>เข้าสู่ระบบ</Button>
-           
-            </div>
+                <Button id='login' onClick={() => navigate("/login")}>
+                            เข้าสู่ระบบ
+                        </Button>
+                        <a onClick={() => navigate("/login")}></a>
+                    </div>
                 </div>
             </div>
          
