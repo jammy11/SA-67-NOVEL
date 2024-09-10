@@ -60,7 +60,8 @@ type Novel struct {
 	gorm.Model
 	Name    string	`json:"novel_name"`
 	Content string	`json:"content"`
-	Type    string	`json:"novel_type"`
+	Type1    string	`json:"novel_type1"`
+	Type2    string	`json:"novel_type2"`
 	Rate    string	`json:"rate"`
 	Writename	string `json:"writename"`
 	Cover   string  `gorm:"type:text" json:"cover"`
