@@ -7,7 +7,7 @@ interface CardProps {
     card: {
         name: string;
         imgUrl: string;
-        views: string;
+        buy_amount: string;
         like: string;
         tag: string;
         price: number;
@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
                 <span id='htailb'><b>{card.name}</b></span>
                 <div className='pb'>
                 <HiMiniShoppingCart id='icart'/>
-                    <span id='view_likeb'>{card.views}</span>
+                    <span id='view_likeb'>{card.buy_amount}</span>
                     <img id="ieyeb" src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"} 
                          alt="heart" onClick={toggleLike} />
                     <span id='view_likeb'>{isLiked ? parseInt(card.like) + 1 : card.like}</span>

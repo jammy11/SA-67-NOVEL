@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 	"example.com/novel/config"
 	"example.com/novel/entity"
 	"example.com/novel/services"
+	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 type (
@@ -44,21 +44,30 @@ func SignUp(c *gin.Context) {
 	db := config.DB()
 	var userCheck entity.User
 
-	// Check if the user with the provided email already exists
-	result := db.Where("email = ?", payload.Email).First(&userCheck)
+	// Check if the user with the provided email or username already exists
+	result := db.Where("email = ? OR username = ?", payload.Email, payload.Username).First(&userCheck)
 	if result.Error != nil && !errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
 		return
 	}
 
 	if userCheck.ID != 0 {
-		// If the user with the provided email already exists
-		c.JSON(http.StatusConflict, gin.H{"error": "Email is already registered"})
+		if userCheck.Email == payload.Email {
+			// If the user with the provided email already exists
+			c.JSON(http.StatusConflict, gin.H{"error": "Email is already registered"})
+		} else if userCheck.Username == payload.Username {
+			// If the user with the provided username already exists
+			c.JSON(http.StatusConflict, gin.H{"error": "Username is already taken"})
+		}
 		return
 	}
 
 	// Hash the user's password
-	hashedPassword, _ := config.HashPassword(payload.Password)
+	hashedPassword, err := config.HashPassword(payload.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
+		return
+	}
 
 	// Create a new Coin entry
 	coin := entity.Coin{
@@ -69,16 +78,24 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
+	// Create a new Bookshelf entry for the user
+	bookshelf := entity.Bookshelf{}
+	if err := db.Create(&bookshelf).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create bookshelf"})
+		return
+	}
+
 	// Create a new user
 	user := entity.User{
-		Username:  payload.Username,
-		FirstName: payload.FirstName,
-		LastName:  payload.LastName,
-		Email:     payload.Email,
-		BirthDate: payload.BirthDate,
-		Gender:    payload.Gender,
-		Password:  hashedPassword,
-		CoinID:    coin.ID, // Link the Coin with the User
+		Username:    payload.Username,
+		FirstName:   payload.FirstName,
+		LastName:    payload.LastName,
+		Email:       payload.Email,
+		BirthDate:   payload.BirthDate,
+		Gender:      payload.Gender,
+		Password:    hashedPassword,
+		CoinID:      coin.ID,         // Link the Coin with the User
+		BookshelfID: bookshelf.ID,    // Link the Bookshelf with the User
 	}
 
 	// Save the user to the database
@@ -127,3 +144,4 @@ func SignIn(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"token_type": "Bearer", "token": signedToken, "id": user.ID})
 }
+

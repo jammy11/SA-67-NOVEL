@@ -35,6 +35,7 @@ func SetupDatabase() {
 		&entity.Transaction{},
 		&entity.Novel{},
 		&entity.Comment{},
+		&entity.Bookshelf{}, // Ensure Bookshelf is included in migration
 	)
 
 	// Hash password for default user
@@ -45,26 +46,30 @@ func SetupDatabase() {
 	coin := &entity.Coin{
 		Balance: 0,
 	}
-	db.FirstOrCreate(coin, &entity.Coin{
+	db.FirstOrCreate(&coin, &entity.Coin{
 		Balance: 0,
 	})
 
-	// Create or update a User entry linked to the Coin
+	// Create or update a Bookshelf entry
+	bookshelf := &entity.Bookshelf{}
+	db.FirstOrCreate(&bookshelf, &entity.Bookshelf{})
+
+	// Create or update a User entry linked to the Coin and Bookshelf
 	user := &entity.User{
-		Username:  "C4sama",
-		FirstName: "ท่านเบสท์",
-		LastName:  "สุดเท่",
-		Email:     "Best@gmail.com",
-		Profile:   "",
-		Password:  hashedPassword,
-		BirthDate: BirthDate,
-		Gender:    "Male",
-		CoinID:    coin.ID,  // Link the Coin with the User
+		Username:    "C4sama",
+		FirstName:   "ท่านเบสท์",
+		LastName:    "สุดเท่",
+		Email:       "Best@gmail.com",
+		Profile:     "",
+		Password:    hashedPassword,
+		BirthDate:   BirthDate,
+		Gender:      "Male",
+		CoinID:      coin.ID,       // Link the Coin with the User
+		BookshelfID: bookshelf.ID,  // Link the Bookshelf with the User
 	}
 
 	// Ensure that the User is created only if it does not already exist
-	// Unique constraint on Email ensures no duplicate email entries
-	db.FirstOrCreate(user, &entity.User{
+	db.FirstOrCreate(&user, &entity.User{
 		Email: "Best@gmail.com",
 	})
 }
