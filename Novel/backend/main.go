@@ -85,6 +85,8 @@ func main() {
 		router.POST("/bookshelf", bookshelf.CreateBookshelf)
 		router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
 
+		
+
 		//Writer Roues
 		router.GET("/writer", writers.GetAllWriters)
 		// router.GET("/writer/:id", writers.GetWriter)

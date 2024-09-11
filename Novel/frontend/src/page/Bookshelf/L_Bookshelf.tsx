@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './L_Bookshelf.css';
 import Headers from '../../compronents/Pubblic_components/headerselect';
 import Button_s from '../../compronents/Book_components/return_button';
-
+import Booky from '../../compronents/Book_components/BookText';
 import NCardList2 from '../../compronents/Book_components/Bookpath2';
 import Tooltip from '../../compronents/Book_components/mario';
 
@@ -30,7 +30,8 @@ const L_Bookshelf: React.FC = () => {
         <a href="/">
           <Button_s />
         </a>
-        <div className="head">Bookshelf</div>
+        <div className="head"></div>
+        <Booky/>
       </div>
 
       {/* Main content area */}
