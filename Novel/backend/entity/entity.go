@@ -67,11 +67,14 @@ type User struct {
 	BookshelfID uint
 	Bookshelf   Bookshelf
 
+	
+
 	Transactions []Transaction
 	Orders       []Order
 
 	CommentedNovels []*Novel `gorm:"many2many:comment;"`
-	LikedNovels    []*Novel  `gorm:"many2many:like;"`
+	Writer bool `json:"writer"`
+	Income float64 `json:"income"`
 }
 
 type Like struct {
@@ -99,10 +102,10 @@ type Novel struct {
 
 	Bookshelves  []*Bookshelf `gorm:"many2many:Bookshelf_List;"`
 	CommentUsers []*User      `gorm:"many2many:comment;"`
-	LikedUsers   []*User      `gorm:"many2many:like;"`
+	LikedUsers   []*Like      `gorm:"foreignKey:NovelID"`
 	
 	WriterID uint    `json:"writer_id"`
-	Writer   Writer  `gorm:"foreignKey:WriterID"`
+	Writer   User  `gorm:"foreignKey:WriterID"`
 }
 
 type Bookshelf struct {
@@ -132,12 +135,14 @@ type Comment struct {
 }
 
 
-type Writer struct{
+type WriterTransaction struct{
     gorm.Model
     Income float64   `json:"income"` 
 
-    UserID  uint	`json:"user_id"` 
-    User    User	`gorm:"foreignKey:UserID"`
+    WriterID  uint	`json:"writer_id"` 
+    Writer    User	`gorm:"foreignKey:WriterID"`
 
-	Novel []Novel
+	NovelID uint   `json:"novel_id"`
+    Novel   Novel  `gorm:"foreignKey:NovelID"`
+
 }

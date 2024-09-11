@@ -29,11 +29,12 @@ func SetupDatabase() {
 	db.AutoMigrate(
 		&entity.Coin{},
 		&entity.User{},
-		&entity.Writer{},
+		&entity.WriterTransaction{},
 		&entity.Order{},
 		&entity.Package{},
 		&entity.Transaction{},
 		&entity.Novel{},
+		&entity.Like{},
 		&entity.Comment{},
 		&entity.Bookshelf{}, // Ensure Bookshelf is included in migration
 	)
