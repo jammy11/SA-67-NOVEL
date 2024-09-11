@@ -87,10 +87,10 @@ func main() {
 
 		//Writer Roues
 		router.GET("/writer", writers.GetAllWriters)
-		router.GET("/writer/:id", writers.GetWriter)
-		router.PUT("/writer/:id", writers.UpdateWriter)
-		router.POST("/writer", writers.CreateWriter)
-		router.DELETE("/writer/:id", writers.DeleteWriter)
+		// router.GET("/writer/:id", writers.GetWriter)
+		// router.PUT("/writer/:id", writers.UpdateWriter)
+		// router.POST("/writer", writers.CreateWriter)
+		// router.DELETE("/writer/:id", writers.DeleteWriter)
 
 
 	}
