@@ -3,6 +3,8 @@ import './Withdraw.css';
 import Headers from '../../compronents/Pubblic_components/headerselect';
 import { DollarCircleOutlined, DownOutlined } from '@ant-design/icons';
 import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
+import WithdrawConfirm from '../../compronents/WriterComponents/withdraw/WithdrawConfirmPopup';
+import SuccessPopup from '../../compronents/WriterComponents/withdraw/SuccessPopup_withdraw';
 import { InterfaceWriter } from '../../interface/writer_interface/writerPersonalInterface';
 
 interface WithdrawProps extends Pick<InterfaceWriter, 'WriterID' | 'Income'> {}
@@ -13,6 +15,7 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
   const [accountNumber, setAccountNumber] = useState("");
   const [fullName, setFullName] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false); 
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false); // For success popup
   const [netIncomeValue, setNetIncomeValue] = useState<string>("");
 
   const handleClick = () => {
@@ -25,10 +28,10 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
   };
 
   const banks = [
-    "ธนาคารไทยพาณิชย์ (SCB)",
-    "ธนาคารกรุงเทพ (BBL)",
-    "ธนาคารกสิกรไทย (KBank)",
-    "ธนาคารกรุงไทย (KTB)"
+    { name: "ธนาคารไทยพาณิชย์ (SCB)", logo: "../src/assets/scb-logo.png" },
+    { name: "ธนาคารกรุงเทพ (BBL)", logo: "../src/assets/bbl-logo.png" },
+    { name: "ธนาคารกสิกรไทย (KBank)", logo: "../src/assets/kbank-logo.png" },
+    { name: "ธนาคารกรุงไทย (KTB)", logo: "../src/assets/ktb-logo.png" }
   ];
 
   const handleWithdraw = () => {
@@ -40,10 +43,10 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
     const incomeValue = Income * 0.5;
     const taxValue = incomeValue * 0.03;
     const commissionValue = incomeValue * 0.4;
-    const netIncomeValue = (incomeValue - taxValue - commissionValue).toFixed(2); // ปัดเศษทศนิยมตัวที่สาม
+    const netIncomeValue = (incomeValue - taxValue - commissionValue).toFixed(2);
 
     setNetIncomeValue(netIncomeValue);
-    setIsPopupOpen(true);
+    setIsPopupOpen(true); // Open confirmation popup
   };
 
   const handleClosePopup = () => {
@@ -51,25 +54,23 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
   };
 
   const handleConfirmWithdraw = () => {
-    // TODO: ดำเนินการถอนเงินจริงที่นี่
-
-    // แสดง alert หรือทำอย่างอื่นหลังจากบันทึกข้อมูลสำเร็จ
     alert("บันทึกข้อมูลการถอนเงินเรียบร้อยแล้ว");
-
-    // เคลียร์ข้อมูลใน input
     setAccountNumber("");
     setFullName("");
     handleClosePopup();
-  }
+    setIsSuccessPopupOpen(true); // Open success popup after confirmation
+  };
+
+  const handleCloseSuccessPopup = () => {
+    setIsSuccessPopupOpen(false); // Close success popup
+  };
 
   const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // อนุญาตเฉพาะตัวเลข
     const inputValue = e.target.value.replace(/[^0-9]/g, '');
     setAccountNumber(inputValue);
   };
 
   const handleFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // ไม่อนุญาตให้มีตัวเลข
     const inputValue = e.target.value.replace(/[0-9]/g, '');
     setFullName(inputValue);
   };
@@ -78,14 +79,12 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
     <>
       <Headers />
       <CategoryNavWriter />
-      <div className='lb'>
+      <div className='bg-withdraw'>
         <label className='work-text-income'>WITHDRAW</label>
         <div className='work-text-incomeUser' style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="..\src\assets\coins.png" alt="รายได้" style={{ marginRight: '10px', width: '40px', height: '40px' }} />
+          <img src="..\src\assets\coin.png"  style={{ marginRight: '10px', width: '80px', height: '80px' }} />
           {Income} &nbsp; <span>เหรียญ</span>
-          &nbsp;{/* เพิ่มช่องว่าง */}
-          ภาษี 3% และ คอมมิชชั่น =
-          &nbsp;{/* เพิ่มช่องว่าง */}
+          &nbsp; = &nbsp;
           {(Income * 0.5 - Income * 0.5 * 0.03 - Income * 0.5 * 0.4).toFixed(2)} บาท
         </div>
         <div className="work-dropdown-item" onClick={handleClick}>
@@ -95,8 +94,9 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
         {isOpen && (
           <div className="dropdown-list">
             {banks.map((bank, index) => (
-              <div key={index} className="work-dropdown-item" onClick={() => handleSelectBank(bank)}>
-                {bank}
+              <div key={index} className="work-dropdown-item" onClick={() => handleSelectBank(bank.name)}>
+                <img src={bank.logo} alt={bank.name} style={{ width: '30px', marginRight: '10px' }} />
+                {bank.name}
               </div>
             ))}
           </div>
@@ -116,29 +116,28 @@ const Withdraw: React.FC<WithdrawProps> = ({ WriterID, Income }) => {
           value={fullName}
           onChange={handleFullNameChange} 
         />
-        <button className="work-button-withdraw-save" onClick={handleWithdraw}> 
-          <DollarCircleOutlined style={{ fontSize: '30px' }} /> ยืนยันการถอนเงิน
-        </button>
+        <div className='withdrawButton-container'>
+          <button className="button-withdraw-save" onClick={handleWithdraw}> 
+            <DollarCircleOutlined style={{ fontSize: '30px' }} /> ยืนยันการถอนเงิน
+          </button>
+        </div>
 
-        {/* Popup */}
-        {isPopupOpen && (
-          <div className="popup-overlay">
-            <div className="popup-content">
-              <h2>ยืนยันการถอนเงิน</h2>
-              <p>
-                คุณต้องการถอนเงินจำนวน {netIncomeValue} บาท ไปยังบัญชี {selectedBank} ใช่หรือไม่?
-              </p>
-              <p>
-                ชื่อผู้ถอน: {fullName}<br />
-                เลขบัญชี: {accountNumber}
-              </p>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button onClick={handleClosePopup} style={{ marginRight: '10px'}}>ยกเลิก</button>
-                <button onClick={handleConfirmWithdraw} >ยืนยัน</button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Withdraw Confirm Popup */}
+        <WithdrawConfirm 
+          isOpen={isPopupOpen}
+          onClose={handleClosePopup}
+          netIncomeValue={netIncomeValue}
+          selectedBank={selectedBank}
+          fullName={fullName}
+          accountNumber={accountNumber}
+          onConfirm={handleConfirmWithdraw}
+        />
+
+        {/* Success Popup */}
+        <SuccessPopup 
+          isOpen={isSuccessPopupOpen} 
+          onClose={handleCloseSuccessPopup} 
+        />
       </div>
     </>
   );

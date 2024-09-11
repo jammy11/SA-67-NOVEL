@@ -1,71 +1,85 @@
-.lb {
-  margin-top: 160px;
-  border-radius: 15px;
-  background-color: #1e1e1e; /* สีพื้นหลังเข้มเพื่อเพิ่มความหรูหรา */
-  width: 90%;
-  max-width: 1200px; /* จำกัดความกว้างสูงสุด */
-  padding: 20px; /* เพิ่ม padding รอบ ๆ เนื้อหา */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเพื่อให้มีมิติ */
+.bg-Income {
+  margin-top: 140px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  width: 60%;
+  padding: 20px; /* เพิ่ม padding */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* เพิ่มเงา */
 }
 
-.work-text-income {
-  background-color: #ffffff; 
+.text-income-container{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px auto;
-  width: max-content;
-  font-size: 2.5em; /* ขนาดตัวอักษรที่เหมาะสม */
-  border-radius: 25px;
-  padding: 20px 40px;
-  color: #333; /* สีข้อความ */
+  border-bottom: 2px solid #FFB800; /* เพิ่มเส้นขอบด้านล่าง */
+  padding-bottom: 20px; /* เพิ่ม padding ด้านล่าง */
+}
+
+.text-income {
+  background-color: #ffffff;
+  font-size: 2.5em;
+  color: #333;
   font-weight: bold;
-  text-transform: uppercase; /* ข้อความเป็นตัวพิมพ์ใหญ่ทั้งหมด */
+  text-transform: uppercase;
 }
 
 .work-text-incomeUser {
-  margin: 40px auto; 
+  margin: 40px auto;
   text-align: center;
-  color: #FFB800;
+  color: #000000;
   font-size: 2.5em;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
   display: flex;
-  flex-direction: column; /* จัดข้อความให้อยู่ในแนวตั้ง */
-  align-items: center; /* จัดกึ่งกลางแนวนอน */
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 .work-text-incomeUser img {
-  margin-bottom: 10px;
-  width: 50px; /* ปรับขนาดของไอคอน */
-  height: 50px; /* ปรับขนาดของไอคอน */
+  width: 50px;
+  height: 50px;
 }
 
-.withdraw-button-container{
+.withdraw-button-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
+.withdraw-input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 60%;
+}
+
 .work-button-withdraw {
-  background-color: #FFB800; 
-  color: rgb(0, 0, 0); 
-  margin: 20px auto; /* เพิ่ม margin ด้านล่าง */
+  background-color: #FFB800;
+  color: rgb(0, 0, 0);
+  margin: 20px auto;
   border: none;
-  padding: 12px 24px; 
-  gap: 10px;
-  border-radius: 30px; 
+  padding: 12px 24px;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.5em; /* ขนาดฟอนต์ที่เหมาะสม */
+  font-size: 1.5em;
   transition: background-color 0.3s, transform 0.3s;
   display: flex;
   justify-content: center;
-  align-items: center; /* เพิ่มการเปลี่ยนแปลงขนาดปุ่มเมื่อ hover */
+  align-items: center;
 }
 
 .work-button-withdraw:hover {
-  background-color: #e6a700; /* สีเมื่อ hover */
-  transform: scale(1.05); /* ขยายขนาดปุ่มเล็กน้อยเมื่อ hover */
+  background-color: #e6a700;
+  transform: scale(1.05);
+}
+
+.withdraw-success-message {
+  color: #4CAF50; /* สีเขียว */
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
 }

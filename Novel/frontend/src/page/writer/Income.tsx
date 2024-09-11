@@ -22,11 +22,13 @@ const Income: React.FC = () => {
         <>
             <Headers />
             <CategoryNavWriter />
-            <div className='lb'>
-                <label className='work-text-income'>รายได้ของคุณ</label>
+            <div className='bg-Income'>
+                <div className="text-income-container">
+                <label className='text-income'>รายได้ของคุณ</label>
+                </div>
                 {filteredIncomes.map((incomeData, index) => (
                 <div key={index} className='work-text-incomeUser' style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src="..\src\assets\coins.png" alt="รายได้" style={{ marginRight: '10px' }} />
+                    <img src="..\..\src\assets\coin.png"  style={{ marginRight: '10px' }} />
                     {incomeData.Income}&nbsp; <span style={{ color: '#FFB800' }}>เหรียญ</span>
                 </div>
                 ))}

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { UsersInterface, SignInInterface} from "../../../interface/interface"; 
+import { UsersInterface, SignInInterface, InterfaceStatusWriter} from "../../../interface/interface"; 
+
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -50,6 +51,13 @@ async function UpdateUsersById(id: string, data: UsersInterface) {
     .catch((e) => e.response);
 }
 
+async function UpdateStatusWriterById(id: string, data: InterfaceStatusWriter) {
+  return await axios
+    .put(`${apiUrl}/user/${id}`, data, requestOptions)
+    .then((res) => res)
+    .catch((e) => e.response);
+}
+
 async function DeleteUsersById(id: string) {
   return await axios
     .delete(`${apiUrl}/user/${id}`, requestOptions)
@@ -65,4 +73,5 @@ export {
   GetUsersById,
   UpdateUsersById,
   DeleteUsersById,
+  UpdateStatusWriterById
 };

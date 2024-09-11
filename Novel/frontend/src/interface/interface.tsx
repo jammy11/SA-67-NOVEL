@@ -41,8 +41,18 @@ export interface CoinCardProps {
     GenderID?: number;
   
     Password?: string;
-  
   }
+    
+    export interface InterfaceStatusWriter {
+
+      ID?: number;
+  
+      Writer?: boolean;
+      
+    
+    }
+  
+  
   export interface UsersInterface {
     id: string;
     username: string;
