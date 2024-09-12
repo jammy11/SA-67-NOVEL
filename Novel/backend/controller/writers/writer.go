@@ -12,12 +12,12 @@ func GetAllWriters(c *gin.Context) {
 
 	db := config.DB()
 	// Fetch all writers from the database and preload associated User and their Coin if needed
-	if err := db.Where("writr = true").Find(&writers).Error; err != nil {
+	if err := db.Where("writer = true").Find(&writers).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve writers"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"writers": writers})
+	c.JSON(http.StatusOK, gin.H{"writer": writers})
 }
 
 

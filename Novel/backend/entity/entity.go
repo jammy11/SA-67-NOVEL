@@ -73,6 +73,7 @@ type User struct {
 	Orders       []Order
 
 	CommentedNovels []*Novel `gorm:"many2many:comment;"`
+	
 	Writer bool `json:"writer"`
 	Income float64 `json:"income"`
 }
