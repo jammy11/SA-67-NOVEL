@@ -1,4 +1,4 @@
-import React, { useState } from 'react';   
+import React, { useState, useEffect } from 'react';   
 import './header.css';
 import { Dropdown, Image, Modal, Button } from 'react-bootstrap';
 import { message, theme } from 'antd';  
@@ -10,62 +10,85 @@ import { GetUsersById, UpdateStatusWriterById } from '../../services/https/User/
 
 const TOP: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
-    const [collapsed, setCollapsed] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isWriter, setIsWriter] = useState(false);
 
     const { token: { colorBgContainer } } = theme.useToken();
 
+    useEffect(() => {
+        checkWriterStatus();
+    }, []);
+
+    const checkWriterStatus = async () => {
+        console.log("Checking writer status...");
+        const userId = localStorage.getItem('id');
+        if (userId) {
+            try {
+                const result = await GetUsersById(userId);
+                if (result.status === 200) {
+                    const writerStatus = result.data.Writer;
+                    console.log("Writer status from API:", writerStatus);
+                    localStorage.setItem('isWriter', writerStatus.toString());
+                    setIsWriter(writerStatus);
+                    console.log("isWriter state and localStorage updated:", writerStatus);
+                }
+            } catch (error) {
+                console.error("Error checking writer status:", error);
+            }
+        } else {
+            console.log("User ID not found in localStorage");
+        }
+    };
+
     const Logout = () => {
         localStorage.clear();
+        setIsWriter(false);
         messageApi.success("Logout successful");
         setTimeout(() => {
             window.location.href = "/";
         }, 2000);
     };
 
-    // Check if the user is a writer
-    const checkIfWriter = async () => {
-        const userId = localStorage.getItem('id');
-        if (userId) {
-            try {
-                const result = await GetUsersById(userId);
-                if (result.status === 200) {
-                    if (result.data.Writer) {
-                        window.location.href = '/writer'; // Automatically redirects
-                    } else {
-                        // Update writer status immediately without showing a modal
-                        await handleWriterClick(); // Trigger the writer update immediately
-                    }
-                } else {
-                    messageApi.error("Failed to get user status");
-                }
-            } catch (error) {
-                messageApi.error("Error checking user status");
-            }
+    const checkIfWriter = () => {
+        const storedWriterStatus = localStorage.getItem('isWriter') === 'true';
+        console.log("Stored writer status:", storedWriterStatus);
+        console.log("Current isWriter state:", isWriter);
+        
+        if (storedWriterStatus || isWriter) {
+            console.log("User is a writer, redirecting to /writer");
+            window.location.href = '/writer';
         } else {
-            messageApi.error("User not logged in");
+            console.log("User is not a writer, showing modal");
+            setShowModal(true);
         }
     };
-    
 
     const handleWriterClick = async () => {
+        console.log("Attempting to update writer status...");
         const userId = localStorage.getItem('id');
         if (userId) {
             try {
                 const result = await UpdateStatusWriterById(userId, { Writer: true });
                 if (result.status === 200) {
+                    console.log("Writer status successfully updated in the backend");
+                    localStorage.setItem('isWriter', 'true');
+                    setIsWriter(true);
                     messageApi.success("Successfully updated writer status");
-                    window.location.href = '/writer'; // Redirect after successful update
+                    setShowModal(false);
+                    console.log("Redirecting to /writer");
+                    window.location.href = '/writer';
                 } else {
+                    console.error("Failed to update writer status:", result);
                     messageApi.error("Failed to update writer status");
                 }
             } catch (error) {
+                console.error("Error updating writer status:", error);
                 messageApi.error("Error updating writer status");
             }
         } else {
+            console.error("User ID not found in localStorage");
             messageApi.error("User not logged in");
         }
-        setShowModal(false); // Close the modal
     };
 
     const handleCloseModal = () => {
@@ -74,6 +97,7 @@ const TOP: React.FC = () => {
 
     return (
         <div className="topbar">
+            {contextHolder}
             <img id="Logo" src={logo} alt="Logo" />
             <div className="wrapcoin">
                 <div className="cointop">
@@ -102,7 +126,6 @@ const TOP: React.FC = () => {
                 </Dropdown>
             </div>
 
-            {/* Modal for "สมัครเป็นนักเขียน" */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>การสมัครเป็นนักเขียน</Modal.Title>
@@ -123,4 +146,4 @@ const TOP: React.FC = () => {
     );
 };
 
-export default TOP;
+export default TOP; 
