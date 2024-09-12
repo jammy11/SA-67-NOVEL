@@ -29,12 +29,12 @@ const TOP: React.FC = () => {
         if (userId) {
             try {
                 const result = await GetUsersById(userId);
-                console.log('User data:', result.data); // Debug: Log user data
                 if (result.status === 200) {
                     if (result.data.Writer) {
-                        window.location.href = '/writer'; // Redirect if the user is a writer
+                        window.location.href = '/writer'; // Automatically redirects
                     } else {
-                        setShowModal(true); // Show modal if the user is not a writer
+                        // Update writer status immediately without showing a modal
+                        await handleWriterClick(); // Trigger the writer update immediately
                     }
                 } else {
                     messageApi.error("Failed to get user status");
@@ -46,6 +46,7 @@ const TOP: React.FC = () => {
             messageApi.error("User not logged in");
         }
     };
+    
 
     const handleWriterClick = async () => {
         const userId = localStorage.getItem('id');
