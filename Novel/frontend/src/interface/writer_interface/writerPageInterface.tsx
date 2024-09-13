@@ -1,15 +1,12 @@
-export interface InterfaceNovelOfWriter {
-    ID: number; 
+export interface InterfaceNovelOfWriter { 
+    ID: number;
+    novel_name: string; // เปลี่ยนจาก Name
+    Cover: string;
+    Description?: string;
     WriterName: string;
-    Name: string;
-    Description: string;
-    Content: string;
-    Type: string; 
-    Rate: string; 
-    Cover: string; 
-    WriterID: number; 
-    Visibility: boolean;
-    Price: number;
-    Like: number;
+    Visibility?: boolean;
     BuyAmount: number;
+    Like: number;
+    Rate?: string;
+    Type?: string;
 }

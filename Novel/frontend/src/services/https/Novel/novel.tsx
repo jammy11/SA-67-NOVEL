@@ -35,12 +35,16 @@ async function CreateNovel(data: Novel) {
       .catch((e) => e.response);
   }
   
-  async function GetNovelByUser(id: string){
+  async function GetNovelByUser(id: string) {
     return await axios
-    .get(`${apiUrl}/novel/writer/${id}`, requestOptions)
-    .then((res) => res)
-    .catch((e) => e.response);
+      .get(`${apiUrl}/novels/writer/${id}`, requestOptions) // ตรวจสอบว่า URL ตรงกับที่ backend กำหนดไว้
+      .then((res) => res)
+      .catch((e) => {
+        console.error("Error response:", e.response);
+        return e.response;
+      });
   }
+  
 
   async function UpdateNovelById(id: string, data: Novel) {
     return await axios
