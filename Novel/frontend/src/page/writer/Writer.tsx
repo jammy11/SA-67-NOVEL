@@ -5,7 +5,6 @@ import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWri
 import DetailNovelOfWriter from '../../compronents/WriterComponents/WriterPage/detailNovel/detailNovelOfWriter';
 import Add_novel_button from '../../compronents/WriterComponents/WriterPage/AddNovelButton/add_novel_button';
 
-
 const Writer: React.FC = () => {
 
   return (
