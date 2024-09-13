@@ -35,7 +35,7 @@ func Get(c *gin.Context) {
     var novel entity.Novel
     db := config.DB()
 
-    results := db.Preload("Writer").Preload("Bookshelf").First(&novel, ID)
+    results := db.Preload("Writer").Preload("Booksheves").First(&novel, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return

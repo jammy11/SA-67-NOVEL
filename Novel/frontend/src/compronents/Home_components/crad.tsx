@@ -1,135 +1,152 @@
 import './MM.css';
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { HiMiniShoppingCart } from "react-icons/hi2";
+import { HiMiniShoppingCart } from 'react-icons/hi2';
 
-interface CardProps {
-    card: {
-        name: string;
-        imgUrl: string;
-        buy_amount: string;
-        like: string;
-        tag: string;
-        price: number;
-        rate: string;
-        writer: string;
-        title: string;
-    };
+interface Novel {
+  ID: number;
+  novel_name: string;
+  content: string;
+  description: string;
+  novel_type1: string;
+  novel_type2: string;
+  rate: string;
+  writername: string;
+  cover: string;
+  novel_price: number;
+  novel_like: number;
+  buy_amount: number;
+  writer_id: number;
+  Writer: {
+    user_name: string;
+    email: string;
+  };
 }
 
-const Card: React.FC<CardProps> = ({ card }) => {
-    const [show2, setShow2] = useState(false);
-    const [showUnlock, setShowUnlock] = useState(false);
-    const [showConfirmation, setShowConfirmation] = useState(false); // สถานะใหม่สำหรับป๊อปอัพยืนยัน
-    const [isLiked, setIsLiked] = useState(false);
+interface CardProps {
+  novel: Novel;
+}
 
-    const handleClose2 = () => setShow2(false);
-    const handleShow2 = () => setShow2(true);
-    const handleUnlock = () => setShowUnlock(true);
-    const handleCloseUnlock = () => setShowUnlock(false);
+const Card: React.FC<CardProps> = ({ novel }) => {
+  const [show2, setShow2] = useState(false);
+  const [showUnlock, setShowUnlock] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-    const handleConfirmPurchase = () => {
-        setShowUnlock(false); // ปิดป๊อปอัพปลดล็อค
-        setShowConfirmation(true); // เปิดป๊อปอัพยืนยัน
-    };
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+  const handleUnlock = () => setShowUnlock(true);
+  const handleCloseUnlock = () => setShowUnlock(false);
 
-    const handleCloseConfirmation = () => setShowConfirmation(false); // ปิดป๊อปอัพยืนยัน
-    const toggleLike = () => setIsLiked(!isLiked);
+  const handleConfirmPurchase = () => {
+    setShowUnlock(false);
+    setShowConfirmation(true);
+  };
 
-    return (
-        <>
-        <div className='Mcard' onClick={handleShow2}>
-            <img id='Mcard' src={card.imgUrl} alt={card.name} />
-            <div className='tailbox'>
-                <span id='htailb'><b>{card.name}</b></span>
-                <div className='pb'>
-                <HiMiniShoppingCart id='icart'/>
-                    <span id='view_likeb'>{card.buy_amount}</span>
-                    <img id="ieyeb" src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"} 
-                         alt="heart" onClick={toggleLike} />
-                    <span id='view_likeb'>{isLiked ? parseInt(card.like) + 1 : card.like}</span>
-                </div>
-            </div>   
+  const handleCloseConfirmation = () => setShowConfirmation(false);
+  const toggleLike = () => setIsLiked(!isLiked);
+
+  return (
+    <>
+      <div className='Mcard' onClick={handleShow2}>
+        <img id='Mcard' src={novel.cover} alt={novel.novel_name} />
+        <div className='tailbox'>
+          <span id='htailb'><b>{novel.novel_name}</b></span>
+          <div className='pb'>
+            <HiMiniShoppingCart id='icart' />
+            <span id='view_likeb'>{novel.buy_amount}</span>
+            <img
+              id="ieyeb"
+              src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
+              alt="heart"
+              onClick={toggleLike}
+            />
+            <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
+          </div>
         </div>
+      </div>
 
-        <Modal show={show2} onHide={handleClose2}>
-          <div className='modal-content custom-modal'>
-            <div className="page-product">
-              <div onClick={handleClose2}>
-                <img className="cancle" src="./src/assets/no.png" alt="cancel" />
-              </div>
-              
-              <img id='Mcardnew' src={card.imgUrl} alt={card.name} />
-              <img className="like1" src={isLiked ? "./src/assets/like.png" : "./src/assets/0heart.png"} 
-                   alt="heart" onClick={toggleLike} />
-              <div className="container-26">
-                <div className="section">
-                  <div className="column">
-                    <div className="body">
-                      <div className="title">
-                        <div className="text-heading">
-                          <span id='text-heading'>
-                            <span className="text-heading-1 text-cut"><b>{card.name}</b></span>
-                          </span>
-                        </div>
-                        <div className="container-11">
-                          <div className="container-4">
-                            <div className="price">
-                              <div className="tag-1">
-                                <span id='tag1'>
-                                  <span className="tag2">
-                                    <span id='tag2'>{card.tag}</span>
-                                  </span>
+      <Modal show={show2} onHide={handleClose2}>
+        <div className='modal-content custom-modal'>
+          <div className="page-product">
+            <div onClick={handleClose2}>
+              <img className="cancle" src="./src/assets/no.png" alt="cancel" />
+            </div>
+            
+            <img id='Mcardnew' src={novel.cover} alt={novel.novel_name} />
+            <img
+              className="like1"
+              src={isLiked ? "./src/assets/like.png" : "./src/assets/0heart.png"}
+              alt="heart"
+              onClick={toggleLike}
+            />
+            <div className="container-26">
+              <div className="section">
+                <div className="column">
+                  <div className="body">
+                    <div className="title">
+                      <div className="text-heading">
+                        <span id='text-heading'>
+                          <span className="text-heading-1 text-cut"><b>{novel.novel_name}</b></span>
+                        </span>
+                      </div>
+                      <div className="container-11">
+                        <div className="container-4">
+                          <div className="price">
+                            <div className="tag-1">
+                              <span id='tag1'>
+                                <span className="tag2">
+                                  <span id='tag2'>{novel.novel_type1}</span>
+                              
                                 </span>
-                              </div>
-                              <div className="tag">
-                                <span id='tag'>
-                                  <span className="tag-3">
-                                    <span id='tag3'><b>{card.rate}</b></span>
-                                  </span>
+                              </span>
+                            </div>
+                            <div className="tag">
+                              <span id='tag'>
+                                <span className="tag-3">
+                                  <span id='tag3'><b>{novel.rate}</b></span>
                                 </span>
-                              </div>
-                              <div className="text-price">
-                                <span className="container-9">
-                                  <span id='price'>
-                                    <span id='textprice'>{card.price}</span>
-                                  </span>
+                              </span>
+                            </div>
+                            <div className="text-price">
+                              <span className="container-9">
+                                <span id='price'>
+                                  <span id='textprice'>{novel.novel_price}</span>
                                 </span>
-                              </div>
+                              </span>
                             </div>
                           </div>
-                          <div className="component-13">
-                            <span className="f-1">
-                              <img id='coin' src="./src/assets/coin.png" alt="coin"></img>
-                            </span>
-                          </div>
                         </div>
-                      </div>
-                      <div className="text">
-                        <span className="text-1">
-                          <span id='writer'>By {card.writer}</span>
-                        </span>
+                        <div className="component-13">
+                          <span className="f-1">
+                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <div className="button">
-                      <span className="button-1" onClick={handleUnlock}>
-                        {/* oo*/} <span id='buttonlock'>
-                          <span id='button1'>ปลดล็อคเล่มนี้</span>
-                        </span>
-                        <div id="unlock">
-                          <img className="lock" src="./src/assets/unlock.png" alt="unlock" />
-                        </div>
+                    <div className="text">
+                      <span className="text-1">
+                        <span id='writer'>By {novel.writername}</span>
                       </span>
-                      {/* oo*/}
                     </div>
-                    <div className="accordion">
-                      <div className="accordion-item">
-                        <div className="title1">
-                          <span className="title1">เรื่องย่อ</span>
-                        </div>
-                        <div className="accordion-content">
-                          <span className='title2'>{card.title}</span>
-                        </div>
+                  </div>
+                  <div className="button">
+                    <span className="button-1" onClick={handleUnlock}>
+                      <span id='buttonlock'>
+                        <span id='button1'>ปลดล็อคเล่มนี้</span>
+                      </span>
+                      <div id="unlock">
+                        <img className="lock" src="./src/assets/unlock.png" alt="unlock" />
+                      </div>
+                    </span>
+                  </div>
+                  <div className="accordion">
+                    <div className="accordion-item">
+                      <div className="title1">
+                        <span className="title1">Summary</span>
+                      </div>
+                      <div className="accordion-content">
+                        <span className='title2'>{novel.description}</span>
                       </div>
                     </div>
                   </div>
@@ -137,7 +154,8 @@ const Card: React.FC<CardProps> = ({ card }) => {
               </div>
             </div>
           </div>
-        </Modal>
+        </div>
+      </Modal>
 
         {/* ป๊อปอัพปลดล็อค */}
         <Modal show={showUnlock} onHide={handleCloseUnlock}>

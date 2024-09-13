@@ -26,7 +26,7 @@ const TOP: React.FC = () => {
             try {
                 const result = await GetUsersById(userId);
                 if (result.status === 200) {
-                    const writerStatus = result.data.writer;
+                    const writerStatus = result.data.Writer;
                     console.log("Writer status from API:", writerStatus);
                     localStorage.setItem('isWriter', writerStatus.toString());
                     setIsWriter(writerStatus);
@@ -146,4 +146,4 @@ const TOP: React.FC = () => {
     );
 };
 
-export default TOP; 
+export default TOP;
