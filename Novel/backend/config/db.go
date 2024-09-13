@@ -41,7 +41,7 @@ func SetupDatabase() {
 
 	// Hash password for default user
 	hashedPassword, _ := HashPassword("1")
-	BirthDate, _ := time.Parse("2006-01-02", "1988-11-12")
+	BirthDate, _ := time.Parse("2006-01-02", "1999-11-12")
 
 	// Create or update a Coin entry
 	coin := &entity.Coin{

@@ -23,9 +23,10 @@ export interface CoinCardProps {
   
   }
   export interface UsersInterface {
-
+    Profile: string | undefined;
     ID?: number;
-  
+    Username?: string;
+
     FirstName?: string;
   
     LastName?: string;
@@ -55,7 +56,6 @@ export interface CoinCardProps {
   
   export interface UsersInterface {
     id: string;
-    username: string;
     email: string;
     password?: string;
     created_at?: Date;
