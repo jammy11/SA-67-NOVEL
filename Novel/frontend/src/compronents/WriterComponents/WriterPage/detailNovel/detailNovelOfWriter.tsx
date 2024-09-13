@@ -3,8 +3,7 @@ import './detailNovelOfWriter.css';
 import { HeartOutlined, CommentOutlined, UserOutlined, EditOutlined } from '@ant-design/icons';
 import { HiMiniShoppingCart } from "react-icons/hi2";
 import Delete_novel_button from '../DeleteButton/deleteNovel';
-import { InterfaceNovelOfWriter } from '../../../../interfaces/writer_interface/writerPageInterface';
-
+import { InterfaceNovelOfWriter } from '../../../../interface/writer_interface/writerPageInterface';
 const DetailNovelOfWriter: React.FC = () => {
     const detailNovels: InterfaceNovelOfWriter[] = [
       {

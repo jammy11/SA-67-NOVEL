@@ -43,6 +43,42 @@ func Get(c *gin.Context) {
 
     c.JSON(http.StatusOK, gin.H{"novel": novel})
 }
+//GETNOVELBYuserID
+func GetNovelsByUser(c *gin.Context) { 
+    // รับ UserID จากพารามิเตอร์ของ URL
+    userIDStr := c.Param("id")
+    userID, err := strconv.Atoi(userIDStr)
+    if err != nil {
+        // หากแปลงค่าล้มเหลว ให้ตอบกลับ HTTP 400 (Bad Request)
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid User ID"})
+        return
+    }
+
+    // สร้างตัวแปรเพื่อเก็บรายการนิยาย
+    var novels []entity.Novel
+
+    // เชื่อมต่อฐานข้อมูล
+    db := config.DB()
+
+    // ค้นหานิยายทั้งหมดที่เชื่อมโยงกับ UserID ที่ได้รับ
+    results := db.Where("writer_id = ?", userID).
+        Preload("Writer").            // preload ความสัมพันธ์กับ Writer (User ที่เขียนนิยาย)
+        Preload("CommentUsers").      // preload ความสัมพันธ์กับผู้ใช้ที่คอมเมนต์นิยาย
+        Preload("Bookshelves").       // preload ความสัมพันธ์กับ Bookshelf
+        Find(&novels)
+
+    // ตรวจสอบข้อผิดพลาด
+    if results.Error != nil {
+        // หากเกิดข้อผิดพลาดในการค้นหา ให้ตอบกลับ HTTP 500 (Internal Server Error)
+        c.JSON(http.StatusInternalServerError, gin.H{"error": results.Error.Error()})
+        return
+    }
+
+    // ส่งข้อมูลนิยายกลับไป
+    c.JSON(http.StatusOK, novels)
+}
+
+
 
 // Update modifies an existing novel
 func Update(c *gin.Context) {

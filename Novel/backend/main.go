@@ -71,12 +71,14 @@ func main() {
 		router.PUT("/coins/:id", coins.Update)
 		router.DELETE("/coins/:id", coins.Delete)
 		
-		//Novel Roues
-		router.GET("/novel", novels.GetAll)
-		router.GET("/novel/:id", novels.Get)
-		router.PUT("/novel/:id", novels.Update)
-		router.POST("/novel", novels.Create)
-		router.DELETE("/novel/:id", novels.Delete)
+		// Novel Routes
+	router.GET("/novels", novels.GetAll)                    // ดึงนิยายทั้งหมด
+	router.GET("/novels/:id", novels.Get)                   // ดึงนิยายตาม ID
+	router.GET("/novels/writer/:id", novels.GetNovelsByUser) // ดึงนิยายทั้งหมดตาม Writer ID
+	router.PUT("/novels/:id", novels.Update)                // แก้ไขนิยายตาม ID
+	router.POST("/novels", novels.Create)                   // เพิ่มนิยายใหม่
+	router.DELETE("/novels/:id", novels.Delete)             // ลบนิยายตาม ID
+
 
 		//Bookshelf Roues
 		router.GET("/bookshelf", bookshelf.GetAllBookshelves)
