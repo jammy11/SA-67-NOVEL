@@ -1,4 +1,3 @@
-// TOP2 Component (with swapped modal)
 import React, { useState } from 'react';
 import './header.css';
 import { Dropdown, Image, Modal, Button } from 'react-bootstrap';
@@ -41,21 +40,24 @@ const TOP2: React.FC = () => {
             </div>
 
             {/* Modal for login */}
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>การเข้าถึงงานเขียน</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    กรุณาเข้าสู่ระบบก่อนเข้าถึงงานเขียน
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        ปิด
-                    </Button>
-                    <Button variant="primary" href="/login">
-                        เข้าสู่ระบบ
-                    </Button>
-                </Modal.Footer>
+            <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
+                <div className='modal-contentnew2 custom-modalnew'>
+                    <div className='confirmation-message'>
+                        <div onClick={handleCloseModal}>
+                            <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+                        </div>
+                        <img className="ready" src="./src/assets/error.png" alt="submit" />
+                        <span className='text2'><b>&nbsp;เกิดข้อผิดพลาด</b></span>
+                        <span className="text-1">
+                            <span id='ready2'>&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
+                        </span>
+                        <div>
+                            <span id='buttonin'>
+                                <a href="/login"><span id='button3'>เข้าสู่ระบบ</span></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </Modal>
         </div>
     );

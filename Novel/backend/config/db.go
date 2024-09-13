@@ -69,26 +69,10 @@ func SetupDatabase() {
 		BookshelfID: bookshelf.ID,  // Link the Bookshelf with the User
 	}
 
-	userkim := &entity.User{
-		Username:    "rihito",
-		FirstName:   "ท่านคิม",
-		LastName:    "สุดหล่อ",
-		Email:       "handsomesomuch@gmail.com",
-		Profile:     "",
-		Password:    hashedPassword,
-		BirthDate:   BirthDate,
-		Gender:      "Male",
-		CoinID:      coin.ID,       // Link the Coin with the User
-		BookshelfID: bookshelf.ID,  // Link the Bookshelf with the User
-	}
 
 	// Ensure that the User is created only if it does not already exist
 	db.FirstOrCreate(&user, &entity.User{
 		Email: "Best@gmail.com",
-	})
-
-	db.FirstOrCreate(&userkim, &entity.User{
-		Email: "handsomesomuch@gmail.com",
 	})
 
 

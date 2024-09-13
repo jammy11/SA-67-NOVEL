@@ -34,6 +34,9 @@ const Login: React.FC = () => {
 
                 setTimeout(() => {
                     navigate('/');
+                    setTimeout(() => {
+                        window.location.reload(); // รีโหลดหน้าเว็บหลังจากที่นำทางเสร็จ
+                    }, 500); // รอให้หน้าเว็บเปลี่ยนก่อน
                 }, 2000);
             } else {
                 messageApi.error(res.data.error);

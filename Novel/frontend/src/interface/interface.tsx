@@ -47,7 +47,7 @@ export interface CoinCardProps {
 
       ID?: number;
   
-      Writer?: boolean;
+      Writer: boolean;
       
     
     }
