@@ -14,7 +14,8 @@ func GetAll(c *gin.Context) {
     var novels []entity.Novel
     db := config.DB()
 
-    results := db.Preload("Writer").Preload("Bookshelf").Find(&novels)
+    results := db.Preload("Bookshelves").Preload("CommentUsers").Preload("LikedUsers").Preload("Writer").Find(&novels)
+
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return

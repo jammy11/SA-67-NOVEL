@@ -43,6 +43,7 @@ const History: React.FC = () => {
           if (selectedType === 'Deposit' && item.trans_type === 'เติมเหรียญ') return true;
           if (selectedType === 'Withdraw' && item.trans_type === 'ถอน') return true;
           if (selectedType === 'Purchase' && item.trans_type === 'ซื้อนิยาย') return true;
+          if (selectedType === 'Income' && item.trans_type === 'รายได้') return true;
           return false;
         });
     setFilteredData(newFilteredData);
@@ -124,6 +125,22 @@ const History: React.FC = () => {
         ) : '-',
       },
     ],
+    Income: [
+      { title: 'ประเภท', dataIndex: 'trans_type', key: 'Type', render: (text: string) => text },
+      { title: 'ชื่อเรื่อง', dataIndex: 'Order', key: 'NovelName',align: 'center', render: (text: any) => text.Novel ? text.Novel.novel_name : '-' },
+      { title: 'วัน/เวลา', dataIndex: 'CreatedAt', key: 'date',align: 'center', render: (text: string) => format(new Date(text), 'yyyy-MM-dd HH:mm:ss') },
+      {
+        title: 'ราคาสุทธิ',
+        dataIndex: 'amount_t',
+        key: 'Amount',
+        align: 'right',
+        render: (text: any) => text ? (
+          <>
+            {text} <img id='icon50' src="src/assets/coin-50.png" alt="" />
+          </>
+        ) : '-',
+      },
+    ],
   };
 
   if (loading) {
@@ -141,6 +158,7 @@ const History: React.FC = () => {
         <Option value="Deposit">เติมเหรียญ</Option>
         <Option value="Withdraw">ถอน</Option>
         <Option value="Purchase">ซื้อนิยาย</Option>
+        <Option value="Income">รายได้</Option>
       </Select>
       <Table
         dataSource={filteredData}

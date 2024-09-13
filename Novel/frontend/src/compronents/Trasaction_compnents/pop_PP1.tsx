@@ -44,13 +44,20 @@ const Popup1: React.FC = () => {
     
     setPromPay(false);
     updateCoinBalance(Amount,setBalance);
+    // CreateTransaction({
+    //   trans_type: "เติมเหรียญ",
+    //   payment: "พร้อมเพย์",
+    //   user_id: userId,
+    //   amount_t: Amount,
+    // });
     CreateTransaction({
-      trans_type: "เติมเหรียญ",
-      payment: "พร้อมเพย์",
-      user_id: userId,
-      package_id: Key,
-      amount_t: Amount
+      trans_type: "รายได้",
+      user_id: 1,
+      amount_t: 50,
+      order_id:1,
     });
+
+
     setTimeout(() => {
       refresh();
     }, 2000);

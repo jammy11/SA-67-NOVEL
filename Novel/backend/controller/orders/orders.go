@@ -20,20 +20,31 @@ func Create(c *gin.Context) {
 
     db := config.DB()
 
-    // ตรวจสอบความถูกต้องของ Foreign Keys (ถ้ามี)
+    // ตรวจสอบความถูกต้องของ Foreign Keys (UserID, NovelID)
     if order.UserID != 0 {
         var user entity.User
-        if err := db.Preload("User").Preload("Novel").First(&user, order.UserID).Error; err != nil {
+        if err := db.First(&user, order.UserID).Error; err != nil {
             c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid UserID"})
             return
         }
     }
 
+    if order.NovelID != 0 {
+        var novel entity.Novel
+        if err := db.First(&novel, order.NovelID).Error; err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid NovelID"})
+            return
+        }
+    }
+
     // สร้าง Order ในฐานข้อมูล
-    if err := db.Preload("Novel").Create(&order).Error; err != nil {
+    if err := db.Create(&order).Error; err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create order"})
         return
     }
+
+    // ดึงข้อมูล Order พร้อม Preload User และ Novel
+    db.Preload("User").Preload("Novel").First(&order)
 
     c.JSON(http.StatusCreated, order)
 }
@@ -67,31 +78,45 @@ func Get(c *gin.Context) {
 func Update(c *gin.Context) {
     var order entity.Order
     OrderID := c.Param("id")
+
     db := config.DB()
-    result := db.Preload("User").Preload("Novel").First(&order, OrderID)
+    result := db.First(&order, OrderID)
     if result.Error != nil {
-        c.JSON(http.StatusNotFound, gin.H{"error": "id not found"})
+        c.JSON(http.StatusNotFound, gin.H{"error": "Order not found"})
         return
     }
+
+    // ตรวจสอบ payload และ map ไปที่ order struct
     if err := c.ShouldBindJSON(&order); err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Bad request, unable to map payload"})
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid JSON payload"})
         return
     }
-    result = db.Save(&order)
-    if result.Error != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Bad request"})
+
+    // อัพเดทข้อมูลในฐานข้อมูล
+    if err := db.Save(&order).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update order"})
         return
     }
-    c.JSON(http.StatusOK, gin.H{"message": "Updated successful"})
+
+    c.JSON(http.StatusOK, gin.H{"message": "Order updated successfully", "order": order})
 }
 
 // Delete ลบ Order ตาม ID
 func Delete(c *gin.Context) {
     id := c.Param("id")
+
     db := config.DB()
-    if tx := db.Exec("DELETE FROM orders WHERE id = ?", id); tx.RowsAffected == 0 {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "id not found"})
+    result := db.Delete(&entity.Order{}, id)
+
+    if result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete order"})
         return
     }
-    c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
+
+    if result.RowsAffected == 0 {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Order not found"})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"message": "Order deleted successfully"})
 }
