@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Card from '../Home_components/crad';
-import { GetNovels } from '../../services/https/Novel/novel';
-
+import { GetPublicNovels } from '../../services/https/Novel/novel';
 
 export interface Novel {
   ID: number;
@@ -17,14 +15,12 @@ export interface Novel {
   novel_price: number;
   novel_like: number;
   buy_amount: number;
-  writer_id: number;
+  writer_id: string;
   Writer: {
     user_name: string;
     email: string;
   };
 }
-
-
 
 const YourComponent: React.FC = () => {
   const [novels, setNovels] = useState<Novel[]>([]);
@@ -33,8 +29,15 @@ const YourComponent: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await GetNovels();
-        setNovels(response.data.novels); // Assuming response.data contains 'novels'
+        const response = await GetPublicNovels();
+        
+        // Filter novels where novel_type1 or novel_type2 is 'โรแมนติก'
+        const romanticNovels = response.data.novels.filter(
+          (novel: Novel) =>
+            novel.novel_type1 === 'โรแมนติก' || novel.novel_type2 === 'โรแมนติก'
+        );
+        
+        setNovels(romanticNovels);
       } catch (error) {
         console.error('Error fetching novels:', error);
       }

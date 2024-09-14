@@ -28,6 +28,17 @@ func main() {
 	r := gin.Default()
 
 	r.Use(CORSMiddleware())
+	
+	r.GET("/public-novels", func(c *gin.Context) {
+		novels, err := novels.GetPublicNovels()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(200, gin.H{
+			"novels": novels,
+		})
+	})
 
 	// Auth Routes
 	r.POST("/signup", users.SignUp)
@@ -72,12 +83,12 @@ func main() {
 		router.DELETE("/coins/:id", coins.Delete)
 		
 		// Novel Routes
-	router.GET("/novels", novels.GetAll)                    // ดึงนิยายทั้งหมด
-	router.GET("/novels/:id", novels.Get)                   // ดึงนิยายตาม ID
-	router.GET("/novels/writer/:id", novels.GetNovelsByUser) // ดึงนิยายทั้งหมดตาม Writer ID
-	router.PUT("/novels/:id", novels.Update)                // แก้ไขนิยายตาม ID
-	router.POST("/novels", novels.Create)                   // เพิ่มนิยายใหม่
-	router.DELETE("/novels/:id", novels.Delete)             // ลบนิยายตาม ID
+		router.GET("/novels", novels.GetAll)                    // ดึงนิยายทั้งหมด
+		router.GET("/novels/:id", novels.Get)                   // ดึงนิยายตาม ID
+		// router.GET("/novels/writer/:id", novels.GetNovelsByUser) // ดึงนิยายทั้งหมดตาม Writer ID
+		router.PUT("/novels/:id", novels.Update)                // แก้ไขนิยายตาม ID
+		router.POST("/novels", novels.Create)                   // เพิ่มนิยายใหม่
+		router.DELETE("/novels/:id", novels.Delete)             // ลบนิยายตาม ID
 
 
 		//Bookshelf Roues
@@ -91,11 +102,6 @@ func main() {
 
 		//Writer Roues
 		router.GET("/writer", writers.GetAllWriters)
-		// router.GET("/writer/:id", writers.GetWriter)
-		// router.PUT("/writer/:id", writers.UpdateWriter)
-		// router.POST("/writer", writers.CreateWriter)
-		// router.DELETE("/writer/:id", writers.DeleteWriter)
-
 
 	}
 

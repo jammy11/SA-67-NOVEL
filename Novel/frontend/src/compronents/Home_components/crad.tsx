@@ -1,8 +1,11 @@
 import './MM.css';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { HiMiniShoppingCart } from 'react-icons/hi2';
-
+import { useAuth } from '../Pubblic_components/AuthContextType'; // Import useAuth สำหรับดึงสถานะการล็อกอิน
+import { GetCoinById } from '../../services/https/Coin/coin';
+import { CreateOrder } from '../../services/https/Order/order';
+import { CreateTransaction } from '../../services/https/Transaction/transaction';
 interface Novel {
   ID: number;
   novel_name: string;
@@ -16,7 +19,7 @@ interface Novel {
   novel_price: number;
   novel_like: number;
   buy_amount: number;
-  writer_id: number;
+  writer_id: string;
   Writer: {
     user_name: string;
     email: string;
@@ -29,23 +32,92 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ novel }) => {
   const [show2, setShow2] = useState(false);
-  const [showUnlock, setShowUnlock] = useState(false);
+  const [showNotLogin, setshowNotLogin] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-
+  const [showCoinAlert, setShowCoinAlert] = useState(false);
+  const [showToShelf,setshowToShelf] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-  const handleUnlock = () => setShowUnlock(true);
-  const handleCloseUnlock = () => setShowUnlock(false);
 
-  const handleConfirmPurchase = () => {
-    setShowUnlock(false);
-    setShowConfirmation(true);
+  const handleCloseUnlock = () => setshowNotLogin(false);
+  const closeCoinAlert = () => setShowCoinAlert(false);
+  const CloseshowToShelf  = () => setshowToShelf(false);
+  const CloseConfirmation = () => setShowConfirmation(false);
+
+  const [balance, setBalance] = useState<number | null>(null);
+  const userId = localStorage.getItem("id");
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await GetCoinById(userId);
+        setBalance(response.data.balance); 
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+      }
+    };
+
+    fetchBalance();
+  }, [userId]);
+  // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
+  const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
+
+  const checkLogin = async () => {
+    console.log("checkLogin called");
+    if (isLoggedIn) {
+      console.log("User is logged in");
+      console.log("Current balance:", balance);
+      console.log("Novel price:", novel.novel_price);
+
+      if (balance !== null && novel.novel_price < balance) {
+        console.log("Balance is insufficient");
+        setShow2(false);
+        setShowConfirmation(true);
+      } else {
+        console.log("Balance is sufficient or null");
+        setShow2(false);
+        setShowCoinAlert(true);
+      }
+    } else {
+      console.log("User is not logged in");
+      setshowNotLogin(true);
+    }
   };
 
-  const handleCloseConfirmation = () => setShowConfirmation(false);
-  const toggleLike = () => setIsLiked(!isLiked);
+  const verifyPurchase = async () => {
+    setShowConfirmation(false);
+    try {
+      console.log("Creating order...");
+      const newOrder = await CreateOrder({
+        user_id: Number(userId),
+        novel_id: novel.ID,
+      });
+      const orderId = newOrder?.order_id;
+      console.log("Creating income transaction...");
+      await CreateTransaction({
+        trans_type: "รายได้",
+        user_id: Number(novel.writer_id),
+        order_id: orderId,
+        amount_t: novel.novel_price,
+      });
 
+      console.log("Creating purchase transaction...");
+      await CreateTransaction({
+        trans_type: "ซื้อนิยาย",
+        user_id: Number(userId),
+        order_id: orderId,
+        amount_t: novel.novel_price,
+      });
+    } catch (error) {
+      console.error("Error creating order or transaction:", error);
+    }
+
+    setshowToShelf(true);
+  };
+
+
+
+  const toggleLike = () => setIsLiked(!isLiked);
   return (
     <>
       <div className='Mcard' onClick={handleShow2}>
@@ -97,7 +169,13 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                               <span id='tag1'>
                                 <span className="tag2">
                                   <span id='tag2'>{novel.novel_type1}</span>
-                              
+                                </span>
+                              </span>
+                            </div>
+                            <div className="tag-1">
+                              <span id='tag4'>
+                                <span className="tag2">
+                                  <span id='tag2'>{novel.novel_type2}</span>
                                 </span>
                               </span>
                             </div>
@@ -131,7 +209,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                     </div>
                   </div>
                   <div className="button">
-                    <span className="button-1" onClick={handleUnlock}>
+                    <span className="button-1" onClick={checkLogin}>
                       <span id='buttonlock'>
                         <span id='button1'>ปลดล็อคเล่มนี้</span>
                       </span>
@@ -143,7 +221,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                   <div className="accordion">
                     <div className="accordion-item">
                       <div className="title1">
-                        <span className="title1">Summary</span>
+                        <span className="title1">เรื่องย่อ</span>
                       </div>
                       <div className="accordion-content">
                         <span className='title2'>{novel.description}</span>
@@ -157,37 +235,88 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         </div>
       </Modal>
 
-        {/* ป๊อปอัพปลดล็อค */}
-        <Modal show={showUnlock} onHide={handleCloseUnlock}>
+
+      {/* ป๊อปอัพเหรียญไม่พอ */}
+      <Modal show={showCoinAlert} onHide={closeCoinAlert}>
         <div className='modal-contentnew2 custom-modalnew'>
-            <div className='confirmation-message'>
+          <div className='confirmation-message'>
+            <div onClick={closeCoinAlert}>
+              <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+            </div>
+            <img className="ready" src="./src/assets/error.png" alt="submit" />
+            <span className='text2'><b>เกิดข้อผิดพลาด</b></span>
+            <span className="text-1">
+              <span id='nocoin'>จำนวนเหรียญไม่เพียงพอ<br />กรุณาเติมเหรียญ</span>
+            </span>
+            <span id='buttoncoin'>
+            <a href="/Payment"><span id='button3'>เติมเหรียญ</span></a>
+            </span>
+          </div>
+        </div>
+      </Modal>
+
+      {/* ป๊อปอัพยังไม่เข้าสู่ระบบ */}
+      <Modal show={showNotLogin} onHide={handleCloseUnlock}>
+        <div className='modal-contentnew2 custom-modalnew'>
+          <div className='confirmation-message'>
             <div onClick={handleCloseUnlock}>
-            <div onClick={handleClose2}>
-                <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
-              </div>
-              </div>
-              <img className="ready" src="./src/assets/error.png" alt="submit" />
-              <span className='text2'><b>&nbsp;เกิดข้อผิดพลาด</b></span>
-              <span className="text-1">
-                          <span id='ready2'>&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
-                        </span>
-              <div onClick={handleClose2}>
+              <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+            </div>
+            <img className="ready" src="./src/assets/error.png" alt="submit" />
+            <span className='text2'><b>เกิดข้อผิดพลาด</b></span>
+            <span className="text-1">
+              <span id='ready2'>กรุณาเข้าสู่ระบบ</span>
+            </span>
+            <div onClick={handleCloseUnlock}>
               <span id='buttonin'>
-                <a href="/bookself"><span id='button3'>เข้าสู่ระบบ</span></a>
-                  </span>
-              </div>
+                <a href="/login"><span id='button3'>เข้าสู่ระบบ</span></a>
+              </span>
             </div>
           </div>
-        </Modal>
+        </div>
+      </Modal>
 
-        {/* ป๊อปอัพยืนยัน */}
-        
+           {/* ป๊อปอัพปลดล็อค */}
 
-        <Modal show={showConfirmation} onHide={handleCloseConfirmation}>
+           <Modal show={showConfirmation} onHide={CloseConfirmation}>
+        <div className='modal-contentnew custom-modal'>
+          <div className='order'><b>ยืนยันการสั่งซื้อ</b></div>
+          <img id='Mcardnew' src={novel.cover} alt={novel.novel_name} />
+          <div className="text-heading">
+            <span id='text-heading'>
+              <span className="text-heading-2 text-cut"><b>{novel.novel_name}</b></span>
+            </span>
+            <span className="text-1">
+              <span id='writer2'>By {novel.writername}</span>
+            </span>
+            <span id='text1'><b>จำนวนเงิน</b></span>
+            <span id='price2'>
+              <span id='textprice2'>{novel.novel_price}</span>
+            </span>
+            <span className="f-1">
+              <img id='coin2' src="./src/assets/coin.png" alt="coin" />
+            </span>
+            <div onClick={CloseConfirmation}>
+              <span id='buttoncancle'>
+                <span id='button2'>ยกเลิก</span>
+                <img className="cancle2" src="./src/assets/no.png" alt="cancel" />
+              </span>
+            </div>
+            <div onClick={verifyPurchase}>
+              <span id='buttonsubmit'>
+                <span id='button2'>ยืนยัน</span>
+                <img className="submit" src="./src/assets/submit.png" alt="submit" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+        <Modal show={showToShelf} onHide={CloseshowToShelf}>
           <div className='modal-contentnew2 custom-modalnew'>
             <div className='confirmation-message'>
-            <div onClick={handleCloseConfirmation}>
-            <div onClick={handleClose2}>
+            <div onClick={CloseshowToShelf}>
+            <div onClick={CloseshowToShelf}>
                 <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
               </div>
               </div>
@@ -196,7 +325,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               <span className="text-1">
                           <span id='ready2'>นิยายจะถูกนำไปไว้<br></br>ในชั้นหนังสือของคุณ</span>
                         </span>
-              <div onClick={handleClose2}>
+              <div onClick={CloseshowToShelf}>
               <span id='buttonbook'>
                 <a href="/bookself"><span id='button3'>ชั้นหนังสือ</span></a>
                   </span>

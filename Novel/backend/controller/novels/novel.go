@@ -118,3 +118,23 @@ func Delete(c *gin.Context) {
 
     c.JSON(http.StatusOK, gin.H{"message": "Novel deleted successfully"})
 }
+
+
+// GetPublicNovels retrieves all novels from the database
+func GetPublicNovels() ([]entity.Novel, error) {
+	var novels []entity.Novel
+	db := config.DB()
+
+	// Fetch public novels with related entities
+	results := db.Preload("Bookshelves").
+		Preload("CommentUsers").
+		Preload("LikedUsers").
+		Preload("Writer").
+		Find(&novels)
+
+	if results.Error != nil {
+		return nil, results.Error
+	}
+
+	return novels, nil
+}

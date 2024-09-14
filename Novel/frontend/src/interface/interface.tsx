@@ -66,14 +66,10 @@ export interface CoinCardProps {
 
   
   export interface OrderInterface {
-    id: string;
-    user_id: string;
-    package_id: string;
-    amount: number;
-    status: string;
-    created_at?: Date;
-    updated_at?: Date;
-  }
+      // id?: number;     // Make `id` optional
+      user_id: number;
+      novel_id: number ;
+    }
   
   export interface PackageInterface {
     id: string;

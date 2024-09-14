@@ -155,7 +155,7 @@
         box-sizing: border-box;
         position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
     top: 55px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
-    left: 265px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
+    left: 342px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
   }
 #tag1 {
         border-radius: 6.9px;
@@ -176,6 +176,17 @@
     line-height: var(--single-line-body-base-line-height, 1);
     color: #682D03;
   }
+  #tag4 {
+    border-radius: 6.9px;
+    background: #FCB3AD;
+    margin-bottom: 3.4px;
+    display: flex;
+    padding: 2px 6px 2px 6px ;
+    box-sizing: border-box;
+    position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
+top: 55px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
+left: 270px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
+}
 #buttonlock {
     border-radius: 6.9px;
     border: 1px solid #F5F5F5;

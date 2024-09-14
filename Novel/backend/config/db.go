@@ -26,7 +26,7 @@ func ConnectionDB() {
 
 func SetupDatabase() {
 	// Migrate the schema
-	db.AutoMigrate(
+	err := db.AutoMigrate(
 		&entity.Coin{},
 		&entity.User{},
 		&entity.WriterTransaction{},
@@ -38,6 +38,9 @@ func SetupDatabase() {
 		&entity.Comment{},
 		&entity.Bookshelf{}, // Ensure Bookshelf is included in migration
 	)
+	if err != nil {
+		panic("Failed to migrate database schema: " + err.Error())
+	}
 
 	// Hash password for default user
 	hashedPassword, _ := HashPassword("1")
@@ -68,7 +71,6 @@ func SetupDatabase() {
 		CoinID:      coin.ID,       // Link the Coin with the User
 		BookshelfID: bookshelf.ID,  // Link the Bookshelf with the User
 	}
-
 
 	// Ensure that the User is created only if it does not already exist
 	db.FirstOrCreate(&user, &entity.User{

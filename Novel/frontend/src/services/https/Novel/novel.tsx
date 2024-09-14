@@ -20,13 +20,21 @@ async function CreateNovel(data: Novel) {
       .then((res) => res)
       .catch((e) => e.response);
   }
-  
+ 
   async function GetNovels() {
     return await axios
-      .get(`${apiUrl}/novel`, requestOptions)
+      .get(`${apiUrl}/novels`, requestOptions)
       .then((res) => res)
       .catch((e) => e.response);
   }
+
+  async function GetPublicNovels() {
+    return await axios
+      .get(`${apiUrl}/public-novels`, requestOptions)
+      .then((res) => res)
+      .catch((e) => e.response);
+  }
+
   
   async function GetNovelById(id: string) {
     return await axios
@@ -65,5 +73,6 @@ async function CreateNovel(data: Novel) {
     GetNovelById,
     GetNovelByUser,
     UpdateNovelById,
-    DeleteNovelById
+    DeleteNovelById,
+    GetPublicNovels
   };
