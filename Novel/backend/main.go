@@ -10,7 +10,8 @@ import (
 	"example.com/novel/controller/orders"
 	"example.com/novel/controller/packages"
 	"example.com/novel/controller/transactions"
-	"example.com/novel/controller/bookshelfs"
+	// "example.com/novel/controller/bookshelfs"
+	"example.com/novel/controller/bookshelf_lists"
 	"example.com/novel/controller/users"
 	"example.com/novel/controller/writers"
 	"example.com/novel/middlewares"
@@ -39,6 +40,8 @@ func main() {
 			"novels": novels,
 		})
 	})
+
+	r.GET("/packages", packages.GetAll)
 
 	// Auth Routes
 	r.POST("/signup", users.SignUp)
@@ -70,7 +73,7 @@ func main() {
 		router.DELETE("/order/:id", orders.Delete)
 
 		// Package Routes
-		router.GET("/packages", packages.GetAll)
+		
 		router.GET("/package/:id", packages.Get)
 		router.PUT("/package/:id", packages.Update)
 		router.POST("/package", packages.Create)
@@ -92,11 +95,17 @@ func main() {
 
 
 		//Bookshelf Roues
-		router.GET("/bookshelf", bookshelf.GetAllBookshelves)
-		router.GET("/bookshelf/:id", bookshelf.GetBookshelf)
-		router.PUT("/bookshelf/:id", bookshelf.UpdateBookshelf)
-		router.POST("/bookshelf", bookshelf.CreateBookshelf)
-		router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
+		// router.GET("/bookshelf", bookshelf.GetAllBookshelves)
+		// router.GET("/bookshelf/:id", bookshelf.GetBookshelf)
+		// router.PUT("/bookshelf/:id", bookshelf.UpdateBookshelf)
+		// router.POST("/bookshelf", bookshelf.CreateBookshelf)
+		// router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
+
+		router.GET("/bookshelf", bookshelfList.GetAllBookshelves)
+		router.GET("/bookshelf/:id", bookshelfList.GetLBookshelf)
+		router.PUT("/bookshelf/:id", bookshelfList.UpdateLBookshelf)
+		router.POST("/bookshelf", bookshelfList.CreateLBookshelf)
+		router.DELETE("/bookshelf/:id", bookshelfList.DeleteLBookshelf)
 
 		
 

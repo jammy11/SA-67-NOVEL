@@ -1,34 +1,58 @@
-import React from 'react';
-import Card from '../Home_components/maincard';
+import React, { useEffect, useState } from 'react';
+import Card from '../Home_components/crad';
+import { GetPublicNovels } from '../../services/https/Novel/novel';
 
-import '../Home_components/MM.css';
-
-
-
-
-const fullcards = [
-    
-    {
-        name: 'เส้นทางสู่หมอดูผู้เกรียงไกรของเด็กน้อยจอมตะกละ',
-        imgUrl: 'https://s3.ap-southeast-1.amazonaws.com/media.fictionlog/books/66acd5d4a5f59d001c62f79b/66acd6bdNQDcceYA.jpeg',
-        views: '12345',
-        like: '1003',
-        tag: 'โรแมนติก',
-        price: 30,
-        rate: '13+',
-        writer: 'MaeMae',
-        title: '"อี้เจีย" เด็กน้อยที่เติบโตในหมู่บ้านเล็ก ๆ ของชนบทจีนยุคโบราณ เขามีชีวิตเรียบง่ายแต่เต็มไปด้วยความฝันที่จะเป็นหมอดูที่เก่งกาจ ไม่เพียงแต่เพราะความสนใจในศาสตร์ลึกลับของลัทธิเต๋าและการทำนาย แต่ยังเพราะเขามีความสามารถในการมองเห็นสัญญาณและพลังลึกลับที่ไม่ธรรมดา',
-    }
-];
+export interface Novel {
+  ID: number;
+  novel_name: string;
+  content: string;
+  description: string;
+  novel_type1: string;
+  novel_type2: string;
+  rate: string;
+  writername: string;
+  cover: string;
+  novel_price: number;
+  novel_like: number;
+  buy_amount: number;
+  writer_id: string;
+  Writer: {
+    user_name: string;
+    email: string;
+  };
+}
 
 const CardList1: React.FC = () => {
-    return (
-        <div className='card-list'>
-            {fullcards.map((card, index) => (
-                <Card key={index} card={card} />
-            ))}
-        </div>
-    );
+  const [novels, setNovels] = useState<Novel[]>([]);
+  const userId = localStorage.getItem('id');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await GetPublicNovels();
+        
+        // Filter novels where novel_type1 or novel_type2 is 'โรแมนติก'
+        const romanticNovels = response.data.novels.filter(
+          (novel: Novel) =>
+            novel.novel_type1 === 'โรแมนติก' || novel.novel_type2 === 'โรแมนติก'
+        );
+        
+        setNovels(romanticNovels);
+      } catch (error) {
+        console.error('Error fetching novels:', error);
+      }
+    };
+ 
+    fetchData();
+  }, [userId]);
+
+  return (
+    <div className='card-list'>
+      {novels.map((novel, index) => (
+        <Card key={index} novel={novel} />
+      ))}
+    </div>
+  );
 };
 
 

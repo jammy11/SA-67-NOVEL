@@ -14,14 +14,13 @@ const requestOptions = {
 
 
 
-// Package Functions
-async function GetPackages() {
-    return await axios
-      .get(`${apiUrl}/packages`, requestOptions)
-      .then((res) => res)
-      .catch((e) => e.response);
-  }
-  
+async function GetPackages () {
+  return await axios
+    .get(`${apiUrl}/packages`, requestOptions)
+    .then((res) => res)
+    .catch((e) => e.response);
+}
+
   async function GetPackageById(id: string) {
     return await axios
       .get(`${apiUrl}/package/${id}`, requestOptions)
@@ -32,6 +31,7 @@ async function GetPackages() {
   
 export {
     GetPackages,
-    GetPackageById
+    GetPackageById,
+    
   };
   

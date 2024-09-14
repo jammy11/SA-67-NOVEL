@@ -7,6 +7,7 @@ import (
     "example.com/novel/entity"
 )
 
+// GetAll retrieves all packages
 func GetAll(c *gin.Context) {
     var packages []entity.Package
     db := config.DB()
@@ -18,6 +19,7 @@ func GetAll(c *gin.Context) {
     c.JSON(http.StatusOK, packages)
 }
 
+// Get retrieves a single package by ID
 func Get(c *gin.Context) {
     ID := c.Param("id")
     var pack entity.Package
@@ -29,6 +31,8 @@ func Get(c *gin.Context) {
     }
     c.JSON(http.StatusOK, pack)
 }
+
+// Update modifies an existing package by ID
 func Update(c *gin.Context) {
     ID := c.Param("id")
     var pack entity.Package
@@ -54,6 +58,7 @@ func Update(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"message": "Package updated successfully"})
 }
 
+// Create adds a new package
 func Create(c *gin.Context) {
     var pack entity.Package
 
@@ -72,7 +77,7 @@ func Create(c *gin.Context) {
     c.JSON(http.StatusCreated, gin.H{"message": "Package created successfully", "package": pack})
 }
 
-
+// Delete removes a package by ID
 func Delete(c *gin.Context) {
     ID := c.Param("id")
     db := config.DB()
@@ -90,3 +95,4 @@ func Delete(c *gin.Context) {
 
     c.JSON(http.StatusOK, gin.H{"message": "Package deleted successfully"})
 }
+

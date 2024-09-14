@@ -3,9 +3,11 @@ import React, { useState,useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { HiMiniShoppingCart } from 'react-icons/hi2';
 import { useAuth } from '../Pubblic_components/AuthContextType'; // Import useAuth สำหรับดึงสถานะการล็อกอิน
-import { GetCoinById } from '../../services/https/Coin/coin';
+import { GetCoinById, updateCoinBalanceReduce } from '../../services/https/Coin/coin';
 import { CreateOrder } from '../../services/https/Order/order';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
+import { updateIncome } from '../../services/https/User/user';
+import { useBalanceContext } from './BalanceContext';
 interface Novel {
   ID: number;
   novel_name: string;
@@ -39,13 +41,14 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const [showToShelf,setshowToShelf] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-
+  
   const handleCloseUnlock = () => setshowNotLogin(false);
   const closeCoinAlert = () => setShowCoinAlert(false);
   const CloseshowToShelf  = () => setshowToShelf(false);
   const CloseConfirmation = () => setShowConfirmation(false);
 
-  const [balance, setBalance] = useState<number | null>(null);
+  const [income, setIncome] = useState<number>(0);
+  const [balance, setBalance] = useState<number>(0);
   const userId = localStorage.getItem("id");
   useEffect(() => {
     const fetchBalance = async () => {
@@ -61,6 +64,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   }, [userId]);
   // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
   const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
+  const { triggerRefresh } = useBalanceContext(); 
 
   const checkLogin = async () => {
     console.log("checkLogin called");
@@ -80,6 +84,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       }
     } else {
       console.log("User is not logged in");
+      setShow2(false);
       setshowNotLogin(true);
     }
   };
@@ -104,7 +109,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
-
+  
       console.log("Creating purchase transaction...");
       await CreateTransaction({
         trans_type: "ซื้อนิยาย",
@@ -112,10 +117,17 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
+  
+      await updateCoinBalanceReduce(novel.novel_price, setBalance); // Wait for this to complete
+      triggerRefresh(); // Trigger refresh after balance is updated
+  
+      // Continue with updating income and showing to shelf
+      await updateIncome(novel.novel_price, novel.writer_id, setIncome);
+      setshowToShelf(true);
+  
     } catch (error) {
       console.error("Error creating order or transaction:", error);
-    }
-
+  }
     setshowToShelf(true);
   };
 
@@ -129,8 +141,12 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         <div className='tailbox'>
           <span id='htailb'><b>{novel.novel_name}</b></span>
           <div className='pb'>
+            <div className='ffffx'>
             <HiMiniShoppingCart id='icart' />
             <span id='view_likeb'>{novel.buy_amount}</span>
+            </div>
+            
+            <div className='ffffx'>
             <img
               id="ieyeb"
               src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
@@ -138,6 +154,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               onClick={toggleLike}
             />
             <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,9 +1,10 @@
 // index.tsx หรือ main.tsx
+import './style.css'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './compronents/Pubblic_components/AuthContextType';
-
+import { BalanceProvider } from './compronents/Home_components/BalanceContext';
 import Payment from './page/CoinsAndTransaction/CoinsAndTransaction';
 import Home from './page/Home/Home';
 import Writer from './page/writer/Writer';
@@ -38,8 +39,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider>
+    
+    <AuthProvider><BalanceProvider>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </BalanceProvider></AuthProvider>
   </React.StrictMode>
 );

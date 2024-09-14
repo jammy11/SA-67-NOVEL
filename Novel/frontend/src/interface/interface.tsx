@@ -43,15 +43,20 @@ export interface CoinCardProps {
     Password?: string;
   }
     
-    export interface InterfaceStatusWriter {
+  export interface InterfaceStatusWriter {
 
       ID?: number;
   
       Writer: boolean;
       
-    
     }
+  export interface InterfaceIncome {
+
+      ID?: number;
   
+      income: number;
+      
+    }
   
   export interface UsersInterface {
     id: string;

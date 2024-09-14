@@ -11,83 +11,71 @@ import { GetUsersById, UpdateStatusWriterById } from '../../services/https/User/
 const TOP: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [showModal, setShowModal] = useState(false);
-    const [isWriter, setIsWriter] = useState(false);
+    const [isWriter, setIsWriter] = useState<boolean | null>(null);
 
     const { token: { colorBgContainer } } = theme.useToken();
 
     useEffect(() => {
-        checkWriterStatus();
-    }, []);
-
-    const checkWriterStatus = async () => {
-        console.log("Checking writer status...");
-        const userId = localStorage.getItem('id');
-        if (userId) {
+        const checkWriterStatus = async () => {
             try {
-                const result = await GetUsersById(userId);
-                if (result.status === 200) {
-                    const writerStatus = result.data.Writer;
-                    console.log("Writer status from API:", writerStatus);
-                    localStorage.setItem('isWriter', writerStatus.toString());
-                    setIsWriter(writerStatus);
-                    console.log("isWriter state and localStorage updated:", writerStatus);
+                const userId = localStorage.getItem('id');
+                if (userId) {
+                    const userData = await GetUsersById(String(userId));
+                    if (userData.status === 200) {
+                        setIsWriter(userData.data.writer);
+                        if (userData.data.writer) {
+                            // Optionally, redirect if it's the initial load
+                            // window.location.href = '/bookself'; // Uncomment this if you want initial load redirection
+                        }
+                    }
                 }
             } catch (error) {
-                console.error("Error checking writer status:", error);
+                messageApi.error("Error fetching user data");
             }
-        } else {
-            console.log("User ID not found in localStorage");
+        };
+
+        checkWriterStatus();
+    }, [messageApi]);
+
+    const handleWriterClick = async () => {
+        try {
+            const userId = localStorage.getItem('id');
+            if (userId) {
+                // อัปเดตสถานะนักเขียนในฐานข้อมูล
+                await UpdateStatusWriterById(String(userId), { writer: true });
+                
+                // อัปเดตสถานะใน localStorage และ state
+                localStorage.setItem('isWriter', 'true');
+                setIsWriter(true);
+
+                // เปลี่ยนเส้นทางไปยังหน้า bookshelf
+                window.location.href = '/bookself';
+            }
+        } catch (error) {
+            messageApi.error("Error updating writer status");
         }
     };
 
     const Logout = () => {
         localStorage.clear();
-        setIsWriter(false);
         messageApi.success("Logout successful");
         setTimeout(() => {
             window.location.href = "/";
         }, 2000);
     };
 
-    const checkIfWriter = () => {
-        const storedWriterStatus = localStorage.getItem('isWriter') === 'true';
-        console.log("Stored writer status:", storedWriterStatus);
-        console.log("Current isWriter state:", isWriter);
-        
-        if (storedWriterStatus || isWriter) {
-            console.log("User is a writer, redirecting to /writer");
-            window.location.href = '/writer';
-        } else {
-            console.log("User is not a writer, showing modal");
-            setShowModal(true);
-        }
-    };
-
-    const handleWriterClick = async () => {
-        console.log("Attempting to update writer status...");
-        const userId = localStorage.getItem('id');
-        if (userId) {
-            try {
-                const result = await UpdateStatusWriterById(userId, { Writer: true });
-                if (result.status === 200) {
-                    console.log("Writer status successfully updated in the backend");
-                    localStorage.setItem('isWriter', 'true');
-                    setIsWriter(true);
-                    messageApi.success("Successfully updated writer status");
-                    setShowModal(false);
-                    console.log("Redirecting to /writer");
-                    window.location.href = '/writer';
+    const handleDropdownSelect = async (eventKey: string | null) => {
+        switch (eventKey) {
+            case 'bookself':
+                if (isWriter) {
+                    window.location.href = '/bookself';
                 } else {
-                    console.error("Failed to update writer status:", result);
-                    messageApi.error("Failed to update writer status");
+                    setShowModal(true);
                 }
-            } catch (error) {
-                console.error("Error updating writer status:", error);
-                messageApi.error("Error updating writer status");
-            }
-        } else {
-            console.error("User ID not found in localStorage");
-            messageApi.error("User not logged in");
+                break;
+            // handle other dropdown options if necessary
+            default:
+                break;
         }
     };
 
@@ -106,23 +94,24 @@ const TOP: React.FC = () => {
                 </div>
             </div>
             <div id='profile'>
-                <Dropdown align="end">
-                    <Dropdown.Toggle variant="light" id="dropdown-profile" as="div">
-                        <Image
-                            src={profileImage}
-                            roundedCircle
-                            alt="profile"
-                            style={{ borderRadius: '100%', width: '45px', height: '45px' }}
-                        />
-                    </Dropdown.Toggle>
+                <Dropdown align="end" onSelect={handleDropdownSelect}>
+                    <div className='hindesometing'>
+                        <Dropdown.Toggle variant="light" id="dropdown-profile" as="div">
+                            <Image
+                                src={profileImage}
+                                roundedCircle
+                                alt="profile"
+                                style={{ borderRadius: '100%', width: '45px', height: '45px' }}
+                            />
+                        </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu>
                         <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
-                        <Dropdown.Item onClick={checkIfWriter}>งานเขียน</Dropdown.Item>
-                        <Dropdown.Item href="/bookself">ชั้นหนังสือ</Dropdown.Item>
+                        <Dropdown.Item eventKey="bookself">ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
                         <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
                         <Dropdown.Item onClick={Logout}>ออกจากระบบ</Dropdown.Item>
-                    </Dropdown.Menu>
+                    </Dropdown.Menu> 
                 </Dropdown>
             </div>
 

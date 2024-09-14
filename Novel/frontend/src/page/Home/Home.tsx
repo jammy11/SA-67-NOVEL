@@ -41,7 +41,7 @@ const Home: React.FC = () => {
         <div className='headder'>
     <h2>นิยายใหม่</h2>
     </div>
-    
+   
     <CardList1 />
     
    </div>

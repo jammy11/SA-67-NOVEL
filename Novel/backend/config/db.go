@@ -36,7 +36,8 @@ func SetupDatabase() {
 		&entity.Novel{},
 		&entity.Like{},
 		&entity.Comment{},
-		&entity.Bookshelf{}, // Ensure Bookshelf is included in migration
+		&entity.Bookshelf{},
+		// &entity.Bookshelf_List{},
 	)
 	if err != nil {
 		panic("Failed to migrate database schema: " + err.Error())
