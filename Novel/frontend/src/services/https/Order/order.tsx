@@ -14,11 +14,11 @@ const requestOptions = {
 
 // Order Functions
 async function CreateOrder(data: OrderInterface) {
-    return await axios
-      .post(`${apiUrl}/order`, data, requestOptions)
-      .then((res) => res)
-      .catch((e) => e.response);
-  }
+  return await axios
+    .post(`${apiUrl}/order`, data, requestOptions)
+    .then((res) => res.data)  // Access the `data` field directly
+    .catch((e) => e.response?.data);  // Handle errors by returning only the error response data
+}
   
   async function GetOrders() {
     return await axios

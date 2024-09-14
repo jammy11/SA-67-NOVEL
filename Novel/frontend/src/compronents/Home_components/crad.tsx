@@ -92,7 +92,11 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         user_id: Number(userId),
         novel_id: novel.ID,
       });
-      const orderId = newOrder?.order_id;
+      
+      console.log("Order response:", newOrder);  // Log the entire response
+      const orderId = newOrder?.ID;
+      console.log("Order ID:", orderId); 
+      
       console.log("Creating income transaction...");
       await CreateTransaction({
         trans_type: "รายได้",
