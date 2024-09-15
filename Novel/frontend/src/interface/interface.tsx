@@ -215,23 +215,28 @@ interface Writer {
 }
 
 export interface Novel {
-      id: number;
-      createdAt: string;
-      updatedAt: string;
-      deletedAt?: string | null;
-      name: string;
-      content: string;
-      type: string;
-      rate: string;
-      cover: string;
-      price: number;
-      like: number;
-      buyAmount: number;
-      bookshelf?: Bookshelf[];
-      writerId: number;
-      writer: Writer;
-    }
+  ID: number;
+  novel_name: string;
+  content: string;
+  description: string;
+  novel_type1: string;
+  novel_type2: string;
+  rate: string;
+  writername: string;
+  cover: string;
+  novel_price: number;
+  novel_like: number;
+  buy_amount: number;
+  writer_id: string;
+  Writer: {
+    user_name: string;
+    email: string;
+  };
+}
 
+export interface NovelBuy {
+  buy_amount: number;
+}
 interface Bookshelf {
   id: number;
   createdAt: string;

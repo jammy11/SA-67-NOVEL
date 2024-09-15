@@ -32,6 +32,7 @@ const Home: React.FC = () => {
     </div>
     
         <Trand />
+     
 
     </div>
 

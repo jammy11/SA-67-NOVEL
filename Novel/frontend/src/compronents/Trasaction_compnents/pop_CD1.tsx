@@ -142,7 +142,7 @@ const Popup3: React.FC = () => {
             </div>
             <div className="g2_2p">
                  
-          {packages.map((data) => (
+          {packages.filter(data => [1,2,3,4,5,6].includes(data.ID)).map((data) => (
             <CoinCard 
               key={data.ID}
               amount={data.pack_amount} 

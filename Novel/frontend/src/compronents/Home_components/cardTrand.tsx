@@ -33,10 +33,11 @@ interface Novel {
 
 interface CardProps {
   novel: Novel;
+  index: number; 
 
 }
 
-const Card: React.FC<CardProps> = ({ novel }) => {
+const Card: React.FC<CardProps> = ({ novel, index }) => {
   const [show2, setShow2] = useState(false);
   const [showNotLogin, setshowNotLogin] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -156,28 +157,19 @@ const Card: React.FC<CardProps> = ({ novel }) => {
 
   return (
     <>
-      <div className='Mcard' onClick={cheackHave}>
-        <img id='Mcard' src={novel.cover} alt={novel.novel_name} />
-        <div className='tailbox'>
-          <span id='htailb'><b>{novel.novel_name}</b></span>
-          <div className='pb'>
-            <div className='ffffx'>
-            <HiMiniShoppingCart id='icart' />
-            <span id='view_likeb'>{novel.buy_amount}</span>
+            <div className='l1_1_2_1_x' onClick={cheackHave}>
+              <img id="number"  src={`/src/assets/0${index + 1}.png`} alt={`0${index + 1}`} />
+              <img id="minicard" src={novel.cover} alt={novel.novel_name} />
+              <div className='tail'>
+                <span id='htail'><b>{novel.novel_name}</b></span>
+                <div className='p'>
+                <HiMiniShoppingCart id='icart'/>
+                  <span id='view_like'>{novel.buy_amount}</span>
+                  <img id="ieye" src="/src/assets/0heart.png" alt="heart" />
+                  <span id='view_like'>{novel.novel_like}</span>
+                </div>
+              </div>
             </div>
-            
-            <div className='ffffx'>
-            <img
-              id="ieyeb"
-              src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
-              alt="heart"
-              onClick={toggleLike}
-            />
-            <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <Modal show={showCanRead} onHide={handlCloseCanRead}>
         <div className='modal-content custom-modal'>

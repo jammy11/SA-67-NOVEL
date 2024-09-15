@@ -24,7 +24,6 @@ func GetAll(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"novels": novels})
 }
 
-// Get returns a novel by ID
 func Get(c *gin.Context) {
     ID, err := strconv.Atoi(c.Param("id"))
     if err != nil {
@@ -35,7 +34,7 @@ func Get(c *gin.Context) {
     var novel entity.Novel
     db := config.DB()
 
-    results := db.Preload("Writer").Preload("Booksheves").First(&novel, ID)
+    results := db.Preload("Writer").Preload("Bookshelves").First(&novel, ID)
     if results.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": results.Error.Error()})
         return
@@ -44,7 +43,6 @@ func Get(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"novel": novel})
 }
 
-// Update modifies an existing novel
 func Update(c *gin.Context) {
     ID, err := strconv.Atoi(c.Param("id"))
     if err != nil {
@@ -55,7 +53,7 @@ func Update(c *gin.Context) {
     var novel entity.Novel
     db := config.DB()
 
-    result := db.Preload("Writer").Preload("Bookshelf").First(&novel, ID)
+    result := db.Preload("Writer").Preload("Bookshelves").First(&novel, ID)
     if result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": "Novel not found"})
         return
@@ -74,7 +72,6 @@ func Update(c *gin.Context) {
 
     c.JSON(http.StatusOK, gin.H{"message": "Novel updated successfully", "novel": novel})
 }
-
 // Create adds a new novel
 func Create(c *gin.Context) {
     var novel entity.Novel
