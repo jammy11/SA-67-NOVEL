@@ -23,10 +23,6 @@ const TOP: React.FC = () => {
                     const userData = await GetUsersById(String(userId));
                     if (userData.status === 200) {
                         setIsWriter(userData.data.writer);
-                        if (userData.data.writer) {
-                            // Optionally, redirect if it's the initial load
-                            // window.location.href = '/bookself'; // Uncomment this if you want initial load redirection
-                        }
                     }
                 }
             } catch (error) {
@@ -48,8 +44,8 @@ const TOP: React.FC = () => {
                 localStorage.setItem('isWriter', 'true');
                 setIsWriter(true);
 
-                // เปลี่ยนเส้นทางไปยังหน้า bookshelf
-                window.location.href = '/bookself';
+                // เปลี่ยนเส้นทางไปยังหน้า writer
+                window.location.href = '/writer';
             }
         } catch (error) {
             messageApi.error("Error updating writer status");
@@ -73,7 +69,13 @@ const TOP: React.FC = () => {
                     setShowModal(true);
                 }
                 break;
-            // handle other dropdown options if necessary
+            case 'writer':
+                if (isWriter) {
+                    window.location.href = '/writer';
+                } else {
+                    setShowModal(true);
+                }
+                break;
             default:
                 break;
         }
@@ -107,6 +109,7 @@ const TOP: React.FC = () => {
                     </div>
                     <Dropdown.Menu>
                         <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
+                        <Dropdown.Item eventKey="writer">งานเขียน</Dropdown.Item> {/* เพิ่มงานเขียนกลับมา */}
                         <Dropdown.Item eventKey="bookself">ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
                         <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
@@ -115,21 +118,28 @@ const TOP: React.FC = () => {
                 </Dropdown>
             </div>
 
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>การสมัครเป็นนักเขียน</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    คุณไม่ใช่นักเขียน กรุณาสมัครเป็นนักเขียนเพื่อเข้าถึงงานเขียน
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        ปิด
-                    </Button>
-                    <Button variant="primary" onClick={handleWriterClick}>
-                        สมัครเป็นนักเขียน
-                    </Button>
-                </Modal.Footer>
+        
+            <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
+                <div className='modal-contentnew2 custom-modalnew'>
+                    <div className='confirmation-message'>
+                        <div onClick={handleCloseModal}>
+                            <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+                        </div>
+                        <div style={{ transform: 'translate(-50px, -40px)' ,width:'300%'}}>
+                        <img className="ready" src="./src/assets/error.png" alt="submit" />
+                        <span className='text2'><b>คุณต้องเป็นนักเขียนก่อน</b></span>
+                        </div>
+                        <span className="text-1">
+                            <span id='ready2'style={{ transform: 'translate(-20px, 0)' }}>สมัครเข้าร่วมเป็นนักเขียน</span>
+                        </span>
+                        <div>
+                     
+                            <span id='buttonin'  onClick={handleWriterClick} style={{cursor:'pointer'}}>
+                                <span id='button3'>&nbsp;&nbsp;&nbsp;&nbsp;สมัคร</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </Modal>
         </div>
     );

@@ -10,10 +10,9 @@ import (
 	"example.com/novel/controller/orders"
 	"example.com/novel/controller/packages"
 	"example.com/novel/controller/transactions"
-	// "example.com/novel/controller/bookshelfs"
+	"example.com/novel/controller/bookshelfs"
 	"example.com/novel/controller/bookshelf_lists"
 	"example.com/novel/controller/users"
-	"example.com/novel/controller/writers"
 	"example.com/novel/middlewares"
 )
 
@@ -94,23 +93,20 @@ func main() {
 		router.DELETE("/novels/:id", novels.Delete)             // ลบนิยายตาม ID
 
 
-		//Bookshelf Roues
-		// router.GET("/bookshelf", bookshelf.GetAllBookshelves)
-		// router.GET("/bookshelf/:id", bookshelf.GetBookshelf)
-		// router.PUT("/bookshelf/:id", bookshelf.UpdateBookshelf)
-		// router.POST("/bookshelf", bookshelf.CreateBookshelf)
-		// router.DELETE("/bookshelf/:id", bookshelf.DeleteBookshelf)
+		// BookshelfList Routes
+		router.GET("/bookshelf_list", bookshelfList.GetAllBookshelves) // List all bookshelf list entries
+		router.GET("/bookshelf_list/:id", bookshelfList.GetLBookshelf)  // Get a specific bookshelf list by ID
+		router.POST("/bookshelf_list", bookshelfList.CreateLBookshelf)  // Create a new bookshelf list
+		router.PUT("/bookshelf_list/:id", bookshelfList.UpdateLBookshelf) // Update a bookshelf list by ID
+		router.DELETE("/bookshelf_list/:id", bookshelfList.DeleteLBookshelf) // Delete a bookshelf list by ID
 
-		router.GET("/bookshelf", bookshelfList.GetAllBookshelves)
-		router.GET("/bookshelf/:id", bookshelfList.GetLBookshelf)
-		router.PUT("/bookshelf/:id", bookshelfList.UpdateLBookshelf)
-		router.POST("/bookshelf", bookshelfList.CreateLBookshelf)
-		router.DELETE("/bookshelf/:id", bookshelfList.DeleteLBookshelf)
+		router.GET("/bookshelf", bookshelf.GetAllBookshelves)
+		// router.GET("/bookshelf/:id", bookshelf.GetLBookshelf)
+		// router.PUT("/bookshelf/:id", bookshelf.UpdateLBookshelf)
+		// router.POST("/bookshelf", bookshelf.CreateLBookshelf)
+		// router.DELETE("/bookshelf/:id", bookshelf.DeleteLBookshelf)
 
 		
-
-		//Writer Roues
-		router.GET("/writer", writers.GetAllWriters)
 
 	}
 

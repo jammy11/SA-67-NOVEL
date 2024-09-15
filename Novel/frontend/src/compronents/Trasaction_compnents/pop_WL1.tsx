@@ -10,6 +10,8 @@ import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard'
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
+import { useBalanceContext } from '../Home_components/BalanceContext';
+import { useHistoryContext } from './HistoryContext';
 
 const Popup2: React.FC = () => {
   const [Packgage, setPackgage] = useState<boolean>(false);
@@ -28,9 +30,9 @@ const Popup2: React.FC = () => {
   const [Key, setKey] = useState(0);
   const userIdstr = localStorage.getItem("id");
   const userId = Number(userIdstr || 0);
-  const refresh = () => {
-    window.location.reload();
-};
+  const { triggerRefresh } = useBalanceContext(); 
+  const { triggerHistoryRefresh } = useHistoryContext();
+
   const ConfirmPackage = (amount: number, price: number,key: number) => {
          setSelectedAmount(amount);
          setKey(key);
@@ -60,12 +62,13 @@ const Popup2: React.FC = () => {
       amount_t: a,
     }); 
     setTimeout(() => {
-      refresh();
-    }, 2000);
+      triggerRefresh();
+      triggerHistoryRefresh();
+    }, 1400);
 
     updateCoinBalance(a,setBalance);
     setVerify(false);
-    setTimeout(() => setShowAlert(true), 300); // Show Alert after verifying
+    setTimeout(() => setShowAlert(true), 1500); // Show Alert after verifying
   };
   
   const closeVerify = () => setVerify(false);
@@ -75,7 +78,7 @@ const Popup2: React.FC = () => {
     if (showAlert) {
       const timer = setTimeout(() => {
         closeAlert();
-      }, 1500); // Auto-close after 5 seconds
+      }, 4000); 
 
       return () => clearTimeout(timer); // Clear the timeout if the component unmounts or showAlert changes
     }

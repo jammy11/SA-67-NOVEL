@@ -9,7 +9,8 @@ import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
-
+import { useBalanceContext } from '../Home_components/BalanceContext';
+import { useHistoryContext } from './HistoryContext';
 
 const Popup3: React.FC = () => {
   const [Package, setPackage] = useState<boolean>(false);
@@ -32,8 +33,8 @@ const Popup3: React.FC = () => {
   const [Key, setKey] = useState(0);
   const userIdstr = localStorage.getItem("id");
   const userId = Number(userIdstr || 0);
-
-
+  const { triggerRefresh } = useBalanceContext(); 
+  const { triggerHistoryRefresh } = useHistoryContext();
 
 
   const handleFormChange = (event: React.FormEvent<HTMLFormElement>) => {
@@ -69,12 +70,13 @@ const Popup3: React.FC = () => {
       amount_t: a,
     }); 
     setTimeout(() => {
-      refresh();
-    }, 2000);
+      triggerRefresh();
+      triggerHistoryRefresh();
+    }, 1400);
 
     updateCoinBalance(a,setBalance);
     setShowVerifyPopup(false);
-    setTimeout(() => setShowAlert(true), 300);
+    setTimeout(() => setShowAlert(true), 1500);
   };
 
   const cursorStyle = isFormValid ? {} : { cursor: 'not-allowed' };
@@ -84,7 +86,7 @@ const Popup3: React.FC = () => {
     if (showAlert) {
       const timer = setTimeout(() => {
         setShowAlert(false);
-      }, 1500);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [showAlert]);
@@ -100,6 +102,21 @@ const Popup3: React.FC = () => {
 
     fetchPackages();
   }, []);
+
+  const [cardNumber, setCardNumber] = useState("");
+  
+  const formatCardNumber = (value: string) => {
+    return value .replace(/\s+/g, '') // ลบช่องว่างเดิมทั้งหมด
+    .replace(/[^0-9]/g, '') // อนุญาตเฉพาะตัวเลขเท่านั้น
+    .replace(/(\d{4})/g, '$1 ') // เพิ่มช่องว่างหลังจากทุก 4 หลัก
+    .trim()
+  };
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let formattedValue = formatCardNumber(e.target.value);
+    setCardNumber(formattedValue);
+  };
+
   return (
     <>
       <div className="cardPayment" onClick={showPackage}>
@@ -154,7 +171,7 @@ const Popup3: React.FC = () => {
               <form action="/submit-credit-card" method="POST" onChange={handleFormChange}>
                 <div className="o1">
                   <label htmlFor="credit-card">หมายเลขบัตรเครดิต</label><br/>
-                  <input type="text" id="credit-card" name="credit-card" pattern="\d{4}-\d{4}-\d{4}-\d{4}" placeholder="xxxx-xxxx-xxxx-xxxx" required /><br /><br />
+                  <input type="text" id="credit-card" value={cardNumber} name="credit-card"     onChange={handleCardNumberChange} maxLength={19} placeholder="หมายเลข 16 หลัก" required /><br /><br />
                   <img id='imgcredit' src="./src/assets/credit-card.png" alt="credit-card" />
                 </div>
                 <div className="o2">
@@ -165,12 +182,12 @@ const Popup3: React.FC = () => {
                   <div className="exp">
                     <label htmlFor="expiry-date">วันหมดอายุ</label><br/>
                   </div>
-                  <input type="text" id="expiry-date" name="expiry-date" pattern="\d{2}" placeholder="MM" required /><br /><br />
-                  <input type="text" id="expiry-date" name="expiry-date" pattern="\d{2}" placeholder="YY" required /><br /><br />
+                  <input type="text" id="expiry-date" name="expiry-date" pattern="\d{2}" maxLength={2}  placeholder="MM" required /><br /><br />
+                  <input type="text" id="expiry-date" name="expiry-date" pattern="\d{2}" maxLength={2} placeholder="YY" required /><br /><br />
                 </div>
                 <div className="o4">
                   <label htmlFor="cvc">CVC/CVV</label><br/>
-                  <input type="text" id="cvc" name="cvc" pattern="\d{3}" placeholder="xxx" required /><br /><br />
+                  <input type="text" id="cvc" name="cvc" pattern="\d{3}" placeholder="xxx" maxLength={3} required /><br /><br />
                 </div>
                 <div className="o5">
                   <div className="o5_2">

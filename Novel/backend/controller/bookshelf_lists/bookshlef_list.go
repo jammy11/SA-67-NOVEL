@@ -21,20 +21,23 @@ func GetAllBookshelves(c *gin.Context) {
 	c.JSON(http.StatusOK, Lbookshelves)
 }
 
-// GetLBookshelf retrieves a single Bookshelf_List entry by ID
+// GetLBookshelf retrieves a single Bookshelf_List entry by Bookshelf_ID
 func GetLBookshelf(c *gin.Context) {
 	ID := c.Param("id")
-	var bookshelfList entity.Bookshelf_List
+	var bookshelfList []entity.Bookshelf_List
 	db := config.DB()
 
 	// Preload Bookshelf and Novel for the given Bookshelf_List entry
-	results := db.Preload("Bookshelf").Preload("Novel").First(&bookshelfList, ID)
+	results := db.Preload("Bookshelf").Preload("Novel").Where("bookshelf_id = ?", ID).Find(&bookshelfList)
 	if results.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Bookshelf_List entry not found"})
 		return
 	}
+
 	c.JSON(http.StatusOK, bookshelfList)
 }
+
+
 
 // CreateLBookshelf creates a new Bookshelf_List entry, linking a bookshelf with a novel
 func CreateLBookshelf(c *gin.Context) {

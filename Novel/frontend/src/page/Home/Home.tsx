@@ -39,7 +39,7 @@ const Home: React.FC = () => {
     <a id='cat2'  className='hide'>2</a>
     <div className='l1_2' >
         <div className='headder'>
-    <h2>นิยายใหม่</h2>
+    <h2>โรแมนติก</h2>
     </div>
    
     <CardList1 />
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
    <a id='cat3'  className='hide'>3</a>
    <div className='l1_2' >
         <div className='headder'>
-    <h2>สุดฮิต</h2>
+    <h2>แอ็คชั่น</h2>
     </div>
     <CardList2 />
     </div> 
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
     <a id='cat4'  className='hide'>4</a>
    <div className='l1_2'>
         <div className='headder'>
-    <h2>โรแมนติก</h2>
+    <h2>สยองขวัญ</h2>
     </div>
     <CardList3 />
    </div>
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
    <a id='cat6'  className='hide'>6</a>
     <div className='l1_2' >
         <div className='headder'>
-    <h2>สืบสวน</h2>
+    <h2>คอมเมดี้</h2>
     </div>
     <CardList5 />
     

@@ -8,6 +8,8 @@ import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
+import { useBalanceContext } from '../Home_components/BalanceContext';
+import { useHistoryContext } from './HistoryContext';
 
 const Popup1: React.FC = () => {
   const [Package, setPackage] = useState(false);
@@ -26,10 +28,9 @@ const Popup1: React.FC = () => {
   const [balance, setBalance] = useState<number>(0);
   const userIdstr = localStorage.getItem("id");
   const userId = Number(userIdstr || 0);
-  const refresh = () => {
-    window.location.reload();
-};
 
+  const { triggerRefresh } = useBalanceContext(); 
+  const { triggerHistoryRefresh } = useHistoryContext();
 
   const ConfirmPackage = (amount: number,price: number,key: number ) => {
     setAmount(amount);
@@ -50,17 +51,11 @@ const Popup1: React.FC = () => {
       user_id: userId,
       amount_t: Amount,
     });
-    // CreateTransaction({
-    //   trans_type: "รายได้",
-    //   user_id: 1,
-    //   amount_t: 50,
-    //   order_id:1,
-    // });
-
 
     setTimeout(() => {
-      refresh();
-    }, 2000);
+      triggerRefresh();
+      triggerHistoryRefresh();
+    }, 1400);
     
 
     const newAlert = {
@@ -74,7 +69,7 @@ const Popup1: React.FC = () => {
     if (alerts.length > 0) {
       const timer = setTimeout(() => {
         setAlerts(prev => prev.slice(0, -1)); // Remove the last alert after 15 seconds
-      }, 1500);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [alerts]);

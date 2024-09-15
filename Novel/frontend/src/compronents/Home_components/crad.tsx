@@ -8,6 +8,7 @@ import { CreateOrder } from '../../services/https/Order/order';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { updateIncome } from '../../services/https/User/user';
 import { useBalanceContext } from './BalanceContext';
+import { CreateBookshelfList ,GetBookshelfListById,checkNovelIdInBookshelf} from '../../services/https/Bookshelf/bookshelf';
 interface Novel {
   ID: number;
   novel_name: string;
@@ -26,10 +27,12 @@ interface Novel {
     user_name: string;
     email: string;
   };
+ 
 }
 
 interface CardProps {
   novel: Novel;
+
 }
 
 const Card: React.FC<CardProps> = ({ novel }) => {
@@ -39,6 +42,9 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [showCoinAlert, setShowCoinAlert] = useState(false);
   const [showToShelf,setshowToShelf] = useState(false);
+  const [showCanRead,setshowCanRead] = useState(false)
+
+  const handlCloseCanRead = () => setshowCanRead(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   
@@ -72,23 +78,32 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       console.log("User is logged in");
       console.log("Current balance:", balance);
       console.log("Novel price:", novel.novel_price);
-
-      if (balance !== null && novel.novel_price < balance) {
-        console.log("Balance is insufficient");
-        setShow2(false);
-        setShowConfirmation(true);
-      } else {
-        console.log("Balance is sufficient or null");
-        setShow2(false);
-        setShowCoinAlert(true);
-      }
-    } else {
+      if(balance !== null && novel.novel_price < balance) {
+            console.log("Balance is insufficient");
+            setShow2(false);
+            setShowConfirmation(true);
+      }else {
+            console.log("Balance is sufficient or null");
+            setShow2(false);
+            setShowCoinAlert(true);
+        }
+    }else {
       console.log("User is not logged in");
       setShow2(false);
       setshowNotLogin(true);
     }
   };
 
+
+  const cheackHave = async () => {
+    const HaveNovel = await checkNovelIdInBookshelf(userId,novel.ID);
+    if(HaveNovel ===  "true"){
+        setshowCanRead(true);
+    }else{
+        setShow2(true);
+
+  }
+  }
   const verifyPurchase = async () => {
     setShowConfirmation(false);
     try {
@@ -118,13 +133,14 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         amount_t: novel.novel_price,
       });
   
+    
       await updateCoinBalanceReduce(novel.novel_price, setBalance); // Wait for this to complete
       triggerRefresh(); // Trigger refresh after balance is updated
   
       // Continue with updating income and showing to shelf
       await updateIncome(novel.novel_price, novel.writer_id, setIncome);
       setshowToShelf(true);
-  
+      CreateBookshelfList({bookshelf_id:Number(userId),novel_id:novel.ID});
     } catch (error) {
       console.error("Error creating order or transaction:", error);
   }
@@ -134,9 +150,11 @@ const Card: React.FC<CardProps> = ({ novel }) => {
 
 
   const toggleLike = () => setIsLiked(!isLiked);
+
+
   return (
     <>
-      <div className='Mcard' onClick={handleShow2}>
+      <div className='Mcard' onClick={cheackHave}>
         <img id='Mcard' src={novel.cover} alt={novel.novel_name} />
         <div className='tailbox'>
           <span id='htailb'><b>{novel.novel_name}</b></span>
@@ -158,6 +176,101 @@ const Card: React.FC<CardProps> = ({ novel }) => {
           </div>
         </div>
       </div>
+
+      <Modal show={showCanRead} onHide={handlCloseCanRead}>
+        <div className='modal-content custom-modal'>
+          <div className="page-product">
+            <div onClick={handlCloseCanRead}>
+              <img className="cancle" src="./src/assets/no.png" alt="cancel" />
+            </div>
+            
+            <img id='Mcardnew' src={novel.cover} alt={novel.novel_name} />
+            <img
+              className="like1"
+              src={isLiked ? "./src/assets/like.png" : "./src/assets/0heart.png"}
+              alt="heart"
+              onClick={toggleLike}
+            />
+            <div className="container-26">
+              <div className="section">
+                <div className="column">
+                  <div className="body">
+                    <div className="title">
+                      <div className="text-heading">
+                        <span id='text-heading'>
+                          <span className="text-heading-1 text-cut"><b>{novel.novel_name}</b></span>
+                        </span>
+                      </div>
+                      <div className="container-11">
+                        <div className="container-4">
+                          <div className="price">
+                            <div className="tag-1">
+                              <span id='tag1'>
+                                <span className="tag2">
+                                  <span id='tag2'>{novel.novel_type1}</span>
+                                </span>
+                              </span>
+                            </div>
+                            <div className="tag-1">
+                              <span id='tag4'>
+                                <span className="tag2">
+                                  <span id='tag2'>{novel.novel_type2}</span>
+                                </span>
+                              </span>
+                            </div>
+                            <div className="tag">
+                              <span id='tag'>
+                                <span className="tag-3">
+                                  <span id='tag3'><b>{novel.rate}</b></span>
+                                </span>
+                              </span>
+                            </div>
+                            <div className="text-price">
+                              <span className="container-9">
+                                <span id='price'>
+                                  <span id='textprice'>{novel.novel_price}</span>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="component-13">
+                          <span className="f-1">
+                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text">
+                      <span className="text-1">
+                        <span id='writer'>By {novel.writername}</span>
+                      </span>
+                    </div>
+                  </div>
+                 <a href='/bookshelf'> <div className="button" >
+                    <span className="button-1" >
+                      <span id='buttonlock'style={{display:'flex',alignItems:'center', justifyContent:'center',width: '153px'}}>
+                        <span id='button1'>อ่าน</span>
+                      </span>
+                 
+                    </span>
+                  </div></a>
+                  <div className="accordion">
+                    <div className="accordion-item">
+                      <div className="title1">
+                        <span className="title1">เรื่องย่อ</span>
+                      </div>
+                      <div className="accordion-content">
+                        <span className='title2'>{novel.description}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
 
       <Modal show={show2} onHide={handleClose2}>
         <div className='modal-content custom-modal'>

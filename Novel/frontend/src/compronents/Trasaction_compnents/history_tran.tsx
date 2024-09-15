@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Select, Spin, Alert } from 'antd';
+import { useHistoryContext } from "./HistoryContext";
 import { GetTransacUserID } from "../../services/https/Transaction/transaction";
 import { Transaction } from "../../interface/transaction";
 import { format } from 'date-fns';
@@ -15,15 +16,13 @@ const History: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string>('All');
   const [isWriter, setIsWriter] = useState<boolean>(false);
+  const { triggerHistoryRefresh } = useHistoryContext();
 
   useEffect(() => {
     const fetchUserAndTransactions = async () => {
       try {
         const userData = await GetUsersById(user_id);
-        console.log("User data: ", userData); // ตรวจสอบข้อมูลผู้ใช้
-  
-        // ตรวจสอบประเภทของ userData.writer
-        console.log("Type of userData.writer: ", typeof userData.writer);
+        console.log("User data: ", userData); 
   
         if (userData.data.writer === true) {
           setIsWriter(true);
@@ -32,8 +31,14 @@ const History: React.FC = () => {
         }
   
         const data = await GetTransacUserID(user_id);
-        setTransactions(data);
-        setFilteredData(data);
+  
+        // เรียงข้อมูลจากใหม่ไปเก่าตามวันที่ CreatedAt
+        const sortedData = data.sort((a: Transaction, b: Transaction) =>
+          new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime()
+        );
+  
+        setTransactions(sortedData);
+        setFilteredData(sortedData);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch transactions");
@@ -47,7 +52,7 @@ const History: React.FC = () => {
       setError("No user ID found");
       setLoading(false);
     }
-  }, [user_id]);
+  }, [user_id, triggerHistoryRefresh]);
   
 console.log("isWriter: ", isWriter);
   useEffect(() => {

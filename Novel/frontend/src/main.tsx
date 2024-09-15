@@ -19,7 +19,7 @@ import Income from './page/writer/Income';
 import SignInPages from './page/authentication/Logintest';
 import Test from './page/test/tests';
 import L_Content from './page/Bookshelf/L_Content';
-
+import { HistoryProvider } from './compronents/Trasaction_compnents/HistoryContext';
 const router = createBrowserRouter([
   { path: "/Payment", element: <Payment /> },
   { path: "/", element: <Home /> },
@@ -34,14 +34,14 @@ const router = createBrowserRouter([
   { path: "/register", element: <Register /> },
   { path: "/test", element: <Test /> },
   { path: "/L_Content", element: <L_Content /> },
-  { path: "/bookself", element: <L_Bookshelf /> },
+  { path: "/bookshelf", element: <L_Bookshelf /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     
-    <AuthProvider><BalanceProvider>
+    <AuthProvider><HistoryProvider><BalanceProvider>
       <RouterProvider router={router} />
-    </BalanceProvider></AuthProvider>
+    </BalanceProvider></HistoryProvider></AuthProvider>
   </React.StrictMode>
 );
