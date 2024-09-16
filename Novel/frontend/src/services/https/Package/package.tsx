@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  PackageInterface  } from "../../../interface/interface"; 
+import {  PackageInterface  } from "../../../../แดนโค้ดมรณา/interface"; 
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -11,8 +11,6 @@ const requestOptions = {
     Authorization: `${Bearer} ${Authorization}`,
   },
 };
-
-
 
 async function GetPackages () {
   return await axios
@@ -32,6 +30,5 @@ async function GetPackages () {
 export {
     GetPackages,
     GetPackageById,
-    
   };
   

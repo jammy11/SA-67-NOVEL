@@ -4,7 +4,7 @@ import Headers from '../../../compronents/Pubblic_components/headerselect';
 import { useNavigate } from 'react-router-dom';
 import { SignIn } from '../../../services/https/User/user';
 import { message } from 'antd'; // ใช้ message จาก Ant Design เพื่อแสดงผล
-import { SignInInterface } from '../../../interface/interface';
+import { SignInInterface } from '../../../../แดนโค้ดมรณา/interface';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();

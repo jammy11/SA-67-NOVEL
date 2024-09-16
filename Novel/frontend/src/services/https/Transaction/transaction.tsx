@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TransactionCreateInterface, TransactionInterface} from "../../../interface/interface"; 
+import { ITransaction } from "../../../interface/transaction_interface/ITransaction";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -15,7 +15,7 @@ const requestOptions = {
 
 
 // Transaction Functions
-async function CreateTransaction(data: TransactionCreateInterface) {
+async function CreateTransaction(data: ITransaction) {
     return await axios
       .post(`${apiUrl}/transaction`, data, requestOptions)
       .then((res) => res)
@@ -32,10 +32,10 @@ async function CreateTransaction(data: TransactionCreateInterface) {
   async function GetTransacUserID(user_id: string) {
     try {
       const response = await axios.get(`${apiUrl}/transactionbyuser/${user_id}`, requestOptions);
-      return response.data; // ส่งคืนข้อมูลโดยตรงจาก response.data
+      return response.data; 
     } catch (error) {
       console.error("Error fetching transactions:", error);
-      throw error; // หรือ return ค่าผิดพลาดที่เหมาะสม
+      throw error; 
     }
   }
   
@@ -54,12 +54,12 @@ async function CreateTransaction(data: TransactionCreateInterface) {
   
       return result;
     } catch (error) {
-      return error.response;
+      return "ไม่มีข้อมูลจ้า";
     }
   }
   
   
-  async function UpdateTransactionById(id: string, data: TransactionInterface) {
+  async function UpdateTransactionById(id: string, data: ITransaction) {
     return await axios
       .put(`${apiUrl}/transaction/${id}`, data, requestOptions)
       .then((res) => res)

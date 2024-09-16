@@ -3,13 +3,13 @@ import './Home.css';
 import Headers from '../../compronents/Pubblic_components/headerselect';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Slider from '../../compronents/Home_components/slideshow';
-import CardList1 from '../../compronents/path/pathCat1';
-import CardList2 from '../../compronents/path/pathCat2';
-import CardList3 from '../../compronents/path/pathCat3';
-import CardList4 from '../../compronents/path/pathCat4';
-import CardList5 from '../../compronents/path/pathCat5';
+import CardList1 from '../../compronents/Home_components/GroupCategory/romantic';
+import CardList2 from '../../compronents/Home_components/GroupCategory/action';
+import CardList3 from '../../compronents/Home_components/GroupCategory/horror';
+import CardList4 from '../../compronents/Home_components/GroupCategory/fantasy';
+import CardList5 from '../../compronents/Home_components/GroupCategory/comedy';
 import CategoryNav from '../../compronents/Home_components/CategoryNav';
-import Trand from '../../compronents/Home_components/Trand';
+import Trand from '../../compronents/Home_components/GroupCategory/Trand';
 
 const Home: React.FC = () => {
   

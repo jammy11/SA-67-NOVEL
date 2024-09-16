@@ -1,6 +1,6 @@
 // bookshelfListService.tsx
 import axios, { AxiosResponse } from "axios";
-import { NCardPropsv,createboklist } from "../../../interface/bookey/bookshelfs";
+import { NCardPropsv,createboklist } from "../../../interface/bookey_interface/bookshelfs";
 
 // Set up the base API URL and authorization tokens from local storage
 const apiUrl = "http://localhost:8000";

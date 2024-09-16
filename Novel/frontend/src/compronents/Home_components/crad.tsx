@@ -1,5 +1,5 @@
 import './MM.css';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { HiMiniShoppingCart } from 'react-icons/hi2';
 import { useAuth } from '../Pubblic_components/AuthContextType'; // Import useAuth สำหรับดึงสถานะการล็อกอิน
@@ -8,32 +8,12 @@ import { CreateOrder } from '../../services/https/Order/order';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { updateIncome } from '../../services/https/User/user';
 import { useBalanceContext } from './BalanceContext';
-import { CreateBookshelfList ,GetBookshelfListById,checkNovelIdInBookshelf} from '../../services/https/Bookshelf/bookshelf';
+import { CreateBookshelfList, GetBookshelfListById, checkNovelIdInBookshelf } from '../../services/https/Bookshelf/bookshelf';
 import { IncrementNovelBuyAmount } from '../../services/https/Novel/novel';
-interface Novel {
-  ID: number;
-  novel_name: string;
-  content: string;
-  description: string;
-  novel_type1: string;
-  novel_type2: string;
-  rate: string;
-  writername: string;
-  cover: string;
-  novel_price: number;
-  novel_like: number;
-  buy_amount: number;
-  writer_id: string;
-  Writer: {
-    user_name: string;
-    email: string;
-  };
- 
-}
+import { IGroupCard } from '../../interface/home_interface/IGroupCard';
 
 interface CardProps {
-  novel: Novel;
-
+  novel: IGroupCard;
 }
 
 const Card: React.FC<CardProps> = ({ novel }) => {
@@ -42,26 +22,27 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [showCoinAlert, setShowCoinAlert] = useState(false);
-  const [showToShelf,setshowToShelf] = useState(false);
-  const [showCanRead,setshowCanRead] = useState(false)
+  const [showToShelf, setshowToShelf] = useState(false);
+  const [showCanRead, setshowCanRead] = useState(false);
+  const [buyAmount, setBuyAmount] = useState(novel.buy_amount);
 
   const handlCloseCanRead = () => setshowCanRead(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
-  
   const handleCloseUnlock = () => setshowNotLogin(false);
   const closeCoinAlert = () => setShowCoinAlert(false);
-  const CloseshowToShelf  = () => setshowToShelf(false);
+  const CloseshowToShelf = () => setshowToShelf(false);
   const CloseConfirmation = () => setShowConfirmation(false);
 
   const [income, setIncome] = useState<number>(0);
   const [balance, setBalance] = useState<number>(0);
   const userId = localStorage.getItem("id");
+
   useEffect(() => {
     const fetchBalance = async () => {
       try {
         const response = await GetCoinById(userId);
-        setBalance(response.data.balance); 
+        setBalance(response.data.balance);
       } catch (error) {
         console.error("Error fetching balance:", error);
       }
@@ -69,9 +50,10 @@ const Card: React.FC<CardProps> = ({ novel }) => {
 
     fetchBalance();
   }, [userId]);
+
   // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
   const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
-  const { triggerRefresh } = useBalanceContext(); 
+  const { triggerRefresh } = useBalanceContext();
 
   const checkLogin = async () => {
     console.log("checkLogin called");
@@ -79,32 +61,32 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       console.log("User is logged in");
       console.log("Current balance:", balance);
       console.log("Novel price:", novel.novel_price);
-      if(balance !== null && novel.novel_price < balance) {
-            console.log("Balance is insufficient");
-            setShow2(false);
-            setShowConfirmation(true);
-      }else {
-            console.log("Balance is sufficient or null");
-            setShow2(false);
-            setShowCoinAlert(true);
-        }
-    }else {
+      if (balance !== null && novel.novel_price < balance) {
+        console.log("Balance is insufficient");
+        setShow2(false);
+        setShowConfirmation(true);
+      } else {
+        console.log("Balance is sufficient or null");
+        setShow2(false);
+        setShowCoinAlert(true);
+      }
+    } else {
       console.log("User is not logged in");
       setShow2(false);
       setshowNotLogin(true);
     }
   };
 
+  const cheackHave = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent click event propagation to Mcard
+    const HaveNovel = await checkNovelIdInBookshelf(userId, novel.ID);
+    if (HaveNovel === "true") {
+      setshowCanRead(true);
+    } else {
+      setShow2(true);
+    }
+  };
 
-  const cheackHave = async () => {
-    const HaveNovel = await checkNovelIdInBookshelf(userId,novel.ID);
-    if(HaveNovel ===  "true"){
-        setshowCanRead(true);
-    }else{
-        setShow2(true);
-
-  }
-  }
   const verifyPurchase = async () => {
     setShowConfirmation(false);
     try {
@@ -113,11 +95,11 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         user_id: Number(userId),
         novel_id: novel.ID,
       });
-      
-      console.log("Order response:", newOrder);  // Log the entire response
+
+      console.log("Order response:", newOrder); // Log the entire response
       const orderId = newOrder?.ID;
-      console.log("Order ID:", orderId); 
-      
+      console.log("Order ID:", orderId);
+
       console.log("Creating income transaction...");
       await CreateTransaction({
         trans_type: "รายได้",
@@ -125,7 +107,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
-  
+
       console.log("Creating purchase transaction...");
       await CreateTransaction({
         trans_type: "ซื้อนิยาย",
@@ -133,26 +115,26 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
-  
-    
+
       await updateCoinBalanceReduce(novel.novel_price, setBalance); // Wait for this to complete
       triggerRefresh(); // Trigger refresh after balance is updated
-  
+
       // Continue with updating income and showing to shelf
       await updateIncome(novel.novel_price, novel.writer_id, setIncome);
       setshowToShelf(true);
-      CreateBookshelfList({bookshelf_id:Number(userId),novel_id:novel.ID});
+      CreateBookshelfList({ bookshelf_id: Number(userId), novel_id: novel.ID });
       IncrementNovelBuyAmount(String(novel.ID));
+      setBuyAmount(buyAmount + 1);
     } catch (error) {
       console.error("Error creating order or transaction:", error);
-  }
+    }
     setshowToShelf(true);
   };
 
-
-
-  const toggleLike = () => setIsLiked(!isLiked);
-
+  const toggleLike = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent click event propagation to Mcard
+    setIsLiked(!isLiked);
+  };
 
   return (
     <>
@@ -162,22 +144,23 @@ const Card: React.FC<CardProps> = ({ novel }) => {
           <span id='htailb'><b>{novel.novel_name}</b></span>
           <div className='pb'>
             <div className='ffffx'>
-            <HiMiniShoppingCart id='icart' />
-            <span id='view_likeb'>{novel.buy_amount}</span>
+              <HiMiniShoppingCart id='icart' />
+              <span id='view_likeb'>{buyAmount}</span> {/* แสดงค่าที่อัปเดต */}
             </div>
-            
             <div className='ffffx'>
-            <img
-              id="ieyeb"
-              src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
-              alt="heart"
-              onClick={toggleLike}
-            />
-            <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
+              <img
+                id="ieyeb"
+                src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
+                alt="heart"
+                onClick={toggleLike}
+              />
+              <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
             </div>
           </div>
         </div>
       </div>
+
+
 
       <Modal show={showCanRead} onHide={handlCloseCanRead}>
         <div className='modal-content custom-modal'>

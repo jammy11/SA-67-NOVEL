@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { CoinCardProps } from '../../interface/interface';
+import { ICoinCardPack } from '../../interface/transaction_interface/ICoinCardPack';
 
-const CoinCard: React.FC<CoinCardProps> = ({ key,amount, price, imgSrc, showButton = true, sendData }) => (
+const CoinCard: React.FC<ICoinCardPack> = ({ key,amount, price, imgSrc, showButton = true, sendData }) => (
   <div className="cardCoinp">
     <div className="box11p">
     <img id='iconp' src='./src/assets/coin-50.png' alt="Gold Coin" />

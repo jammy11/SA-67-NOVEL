@@ -62,9 +62,9 @@ const TOP: React.FC = () => {
 
     const handleDropdownSelect = async (eventKey: string | null) => {
         switch (eventKey) {
-            case 'bookself':
+            case 'bookshelf':
                 if (isWriter) {
-                    window.location.href = '/bookself';
+                    window.location.href = '/bookshelf';
                 } else {
                     setShowModal(true);
                 }
@@ -88,7 +88,7 @@ const TOP: React.FC = () => {
     return (
         <div className="topbar">
             {contextHolder}
-            <img id="Logo" src={logo} alt="Logo" />
+            <a href="/"><img id="Logo" src={logo} alt="Logo" /></a>
             <div className="wrapcoin">
                 <div className="cointop">
                     <img id="cointop" src={coinImage} alt="coin" />
@@ -110,9 +110,9 @@ const TOP: React.FC = () => {
                     <Dropdown.Menu>
                         <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
                         <Dropdown.Item eventKey="writer">งานเขียน</Dropdown.Item> {/* เพิ่มงานเขียนกลับมา */}
-                        <Dropdown.Item eventKey="bookself">ชั้นหนังสือ</Dropdown.Item>
+                        <Dropdown.Item eventKey="bookshelf">ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
-                        {/* <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item> */}
+                        <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
                         <Dropdown.Item onClick={Logout}>ออกจากระบบ</Dropdown.Item>
                     </Dropdown.Menu> 
                 </Dropdown>

@@ -1,29 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../Home_components/crad';
-import { GetPublicNovels } from '../../services/https/Novel/novel';
-
-export interface Novel {
-  ID: number;
-  novel_name: string;
-  content: string;
-  description: string;
-  novel_type1: string;
-  novel_type2: string;
-  rate: string;
-  writername: string;
-  cover: string;
-  novel_price: number;
-  novel_like: number;
-  buy_amount: number;
-  writer_id: string;
-  Writer: {
-    user_name: string;
-    email: string;
-  };
-}
+import Card from '../crad';
+import { GetPublicNovels } from '../../../services/https/Novel/novel';
+import { IGroupCard } from '../../../interface/home_interface/IGroupCard';
 
 const CardList3: React.FC = () => {
-  const [novels, setNovels] = useState<Novel[]>([]);
+  const [novels, setNovels] = useState<IGroupCard[]>([]);
   const userId = localStorage.getItem('id');
 
   useEffect(() => {
@@ -33,7 +14,7 @@ const CardList3: React.FC = () => {
         
         // Filter novels where novel_type1 or novel_type2 is 'โรแมนติก'
         const romanticNovels = response.data.novels.filter(
-          (novel: Novel) =>
+          (novel: IGroupCard) =>
             novel.novel_type1 === 'สยองขวัญ' || novel.novel_type2 === 'สยองขวัญ'
         );
         

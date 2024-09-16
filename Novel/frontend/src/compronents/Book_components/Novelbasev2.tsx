@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import './Novelbasev2.css';
 import { FaHeart, FaComment } from "react-icons/fa";
-import { NCardPropsv } from "../../interface/bookey/bookshelfs";
+import { NCardPropsv } from "../../interface/bookey_interface/bookshelfs";
 
 const NCardv2: React.FC<NCardPropsv> = ({ ncardv }) => {
   const [isLiked, setIsLiked] = useState(false);

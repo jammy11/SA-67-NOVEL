@@ -1,29 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { GetPublicNovels } from '../../services/https/Novel/novel';
-import Card from './cardTrand';
+import { GetPublicNovels } from '../../../services/https/Novel/novel';
+import Card from '../cardTrand';
+import { IGroupCard } from '../../../interface/home_interface/IGroupCard';
 
-export interface Novel {
-  ID: number;
-  novel_name: string;
-  content: string;
-  description: string;
-  novel_type1: string;
-  novel_type2: string;
-  rate: string;
-  writername: string;
-  cover: string;
-  novel_price: number;
-  novel_like: number;
-  buy_amount: number;
-  writer_id: string;
-  Writer: {
-    user_name: string;
-    email: string;
-  };
-
-}
 const Trand: React.FC = () => {
-  const [novels, setNovels] = useState<Novel[]>([]);
+  const [novels, setNovels] = useState<IGroupCard[]>([]);
   const userId = localStorage.getItem('id');
 
   useEffect(() => {
@@ -33,7 +14,7 @@ const Trand: React.FC = () => {
         
         // Sort novels by buy_amount in descending order and select the top 5
         const topNovels = response.data.novels
-          .sort((a: Novel, b: Novel) => b.buy_amount - a.buy_amount)
+          .sort((a: IGroupCard, b: IGroupCard) => b.buy_amount - a.buy_amount)
           .slice(0, 5);
         
         setNovels(topNovels);

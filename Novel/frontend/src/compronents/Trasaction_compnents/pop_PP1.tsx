@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
 import './pop.css';
 import './pop_PP1.css';
-import { Package } from '../../interface/interface';
+import { Package } from '../../../แดนโค้ดมรณา/interface';
 import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard';
 import { updateCoinBalance } from '../../services/https/Coin/coin';

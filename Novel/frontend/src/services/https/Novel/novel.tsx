@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Novel,NovelBuy } from "../../../interface/interface";
+import { Novel,NovelBuy } from "../../../interface/novel_interface/INovel";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -70,58 +70,6 @@ async function CreateNovel(data: Novel) {
       .then((res) => res.data) // Assuming the novel data is in `res.data`
       .catch((e) => e.response);
   }
-
-  // async function GetNovelById(id: string) {
-  //   try {
-  //     const response = await axios.get(`${apiUrl}/novels/${id}`, requestOptions);
-  //     console.log("Fetched novel data:", response.data);
-  //     return response.data;
-  //   } catch (e) {
-  //     console.error("Error fetching novel data:", e.response);
-  //     return { error: e.response?.data || "An unknown error occurred" };
-  //   }
-  // }
-  
-
-  // async function IncrementNovelBuyAmount(id: string) {
-  //   try {
-  //     // ดึงข้อมูลนวนิยาย
-  //     const novel = await GetNovelById(id);
-  //     const buyAmoun = novel.buy_amount;
-
-  //     console.log(buyAmount); 
-  //   }
-      // ตรวจสอบการอัพเดตค่า
-    //   const buyAmount = novel.buy_amount ?? 0;
-    //   const newBuyAmount = buyAmount + 1;
-    //   const updatedData = {
-    //     ...novel,
-    //     buy_amount: newBuyAmount,
-    //   };
-  
-    //   console.log("Updated data:", updatedData);
-  
-    //   // อัพเดตข้อมูลในฐานข้อมูล
-    //   const updateResponse = await UpdateNovelById(id, updatedData);
-  
-    //   // ตรวจสอบการตอบสนองหลังการอัพเดต
-    //   if ('error' in updateResponse) {
-    //     throw new Error(updateResponse.error);
-    //   }
-  
-    //   console.log("Update response:", updateResponse);
-  
-    //   return updateResponse;
-    // } catch (error) {
-    //   if (error instanceof Error) {
-    //     console.error("Error incrementing buy amount:", error.message);
-    //     return { error: error.message };
-    //   } else {
-    //     console.error("Unknown error occurred:", error);
-    //     return { error: "An unknown error occurred" };
-    //   }
-    // }
-  // }
 
   async function IncrementNovelBuyAmount(id: string) {
    

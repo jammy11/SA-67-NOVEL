@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  OrderInterface } from "../../../interface/interface"; 
+import { OrderInterface } from "../../../interface/order_interface/IOrder";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");

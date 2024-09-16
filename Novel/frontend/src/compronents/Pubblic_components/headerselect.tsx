@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TOP from './header';
 import TOP2 from './headerBefore';
-import axios from 'axios';
+
 import { useAuth } from './AuthContextType';
 const Headers: React.FC = () => {
     const { isLoggedIn } = useAuth();

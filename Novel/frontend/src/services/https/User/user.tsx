@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UsersInterface, SignInInterface, InterfaceStatusWriter,InterfaceIncome} from "../../../interface/interface"; 
+import { UsersInterface ,SignInInterface,InterfaceStatusWriter,InterfaceIncome} from "../../../interface/user_interface/IUser";
 
 
 const apiUrl = "http://localhost:8000";

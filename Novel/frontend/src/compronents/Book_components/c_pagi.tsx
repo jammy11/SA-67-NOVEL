@@ -1,6 +1,6 @@
 import React from 'react';
 import './c_pagi.css';
-import { CPaginationProps } from '../../interface/bookey/bookshelfs';
+import { CPaginationProps } from '../../interface/bookey_interface/bookshelfs';
 
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CoinInterface } from "../../../interface/interface";
+import { CoinInterface } from "../../../../แดนโค้ดมรณา/interface";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");

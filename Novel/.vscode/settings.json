@@ -1,0 +1,102 @@
+{
+    "folder-customization.folders": [
+        {
+            "path": "Novel\\frontend\\src\\compronents\\Home_components\\",
+            "color": "foldercustomization.AnsiColor158",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\compronents\\Book_components\\",
+            "badge": "📗"
+        },
+        {
+            "path": "Novel\\frontend\\src\\compronents\\path\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\compronents\\Pubblic_components\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\services\\https\\Transaction\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\compronents\\Trasaction_compnents\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\services\\https\\Package\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\home_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\services\\https\\User\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\user_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\services\\https\\Order\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\services\\https\\Bookshelf\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\bookey_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\transaction_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\order_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\แดนโค้ดมรณา\\",
+            "badge": "☠️"
+        },
+        {
+            "path": "Novel\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\frontend\\src\\interface\\novel_interface\\",
+            "badge": "CK"
+        },
+        {
+            "path": "Novel\\backend\\",
+            "badge": "😀"
+        },
+        {
+            "path": "Novel\\.vscode\\",
+            "badge": "😃"
+        },
+        {
+            "path": "Novel\\frontend\\",
+            "badge": "👽",
+            "color": "__blocked__"
+        },
+        {
+            "path": "Novel\\frontend\\src\\assets\\",
+            "badge": "🕳️"
+        },
+        {
+            "path": "Novel\\frontend\\node_modules\\",
+            "badge": "🔆"
+        },
+        {
+            "path": "Novel\\frontend\\public\\",
+            "badge": "🧸"
+        }
+    ]
+}

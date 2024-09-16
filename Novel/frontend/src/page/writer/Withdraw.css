@@ -134,3 +134,8 @@
 .popup-content button:hover {
   background-color: #e6a700;
 }
+.error-message-withdraw{
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

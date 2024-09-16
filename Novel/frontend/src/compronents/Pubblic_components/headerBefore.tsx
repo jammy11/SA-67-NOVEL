@@ -17,7 +17,7 @@ const TOP2: React.FC = () => {
 
     return (
         <div className="topbar">
-            <img id="Logo" src="/src/assets/Logo.png" alt="Logo" />
+            <a href='/'><img id="Logo" src="/src/assets/Logo.png" alt="Logo" /></a>
 
             <div className="login">
                 <Button id='login' href="/login">เข้าสู่ระบบ</Button>

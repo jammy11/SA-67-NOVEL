@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../../แดนโค้ดมรณา/maincard';
+import Card from './maincard';
 
 import '../MM.css';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Select, Spin, Alert } from 'antd';
 import { useHistoryContext } from "./HistoryContext";
 import { GetTransacUserID } from "../../services/https/Transaction/transaction";
-import { Transaction } from "../../interface/transaction";
+import { Transaction } from "../../interface/transaction_interface";
 import { format } from 'date-fns';
 import { GetUsersById } from "../../services/https/User/user";
 const { Option } = Select;

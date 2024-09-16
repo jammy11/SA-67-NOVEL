@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Card3 from './card3';
+import Card3 from '../../../แดนโค้ดมรณา/card3';
 import './slideshow.css'
 
 function Slider() {
@@ -65,13 +65,13 @@ function Slider() {
       </Carousel>
 
       {/* Modal that shows on slide click */}
-      {selectedSlide && (
+      {/* {selectedSlide && (
         <Card3
           card={selectedSlide}
           showModal={showModal}
           handleCloseModal={handleCloseModal}
         />
-      )}
+      )} */}
     </>
   );
 }
