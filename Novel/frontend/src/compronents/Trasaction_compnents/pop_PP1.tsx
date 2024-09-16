@@ -10,16 +10,16 @@ import { updateCoinBalance } from '../../services/https/Coin/coin';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 import { useBalanceContext } from '../Home_components/BalanceContext';
 import { useHistoryContext } from './HistoryContext';
-
+import { useAuth } from '../Pubblic_components/AuthContextType';
 const Popup1: React.FC = () => {
   const [Package, setPackage] = useState(false);
   const closePackage = () => setPackage(false);
   const showPackages = () => setPackage(true);
-  
+  const { isLoggedIn } = useAuth();
   const [PromPay, setPromPay] = useState(false);
   const closePromPay = () => setPromPay(false);
-
-
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false)
   const [alerts, setAlerts] = useState<Array<{ id: number; message: string }>>([]);
 
   const [Price, setPrice] = useState(0);
@@ -37,7 +37,7 @@ const Popup1: React.FC = () => {
     setPrice(price);
     setKey(key)
     setPackage(false);
-    setPromPay(true);
+   {isLoggedIn ?setPromPay(true):setShowModal(true)}
   };
 
 
@@ -154,7 +154,27 @@ const Popup1: React.FC = () => {
           </div>
         </div>
       </Modal>
-
+      
+      <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
+                <div className="modal-contentnew2 custom-modalnew">
+                  <div className="confirmation-message">
+                    <div onClick={handleCloseModal}>
+                      <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+                    </div>
+                    <img className="ready" src="./src/assets/error.png" alt="error" />
+                    <span className="text2"><b>&nbsp;เกิดข้อผิดพลาด</b></span>
+                    <span className="text-1">
+                      <span id="ready2">&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
+                    </span>
+                    <div>
+                      <span id="buttonin">
+                        <a href="/login"><span id="button3">เข้าสู่ระบบ</span></a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            
       {/* Alerts */}
       <div className="alert-container">
         {alerts.map(alert => (

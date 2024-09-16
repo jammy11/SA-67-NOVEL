@@ -112,7 +112,7 @@ const TOP: React.FC = () => {
                         <Dropdown.Item eventKey="writer">งานเขียน</Dropdown.Item> {/* เพิ่มงานเขียนกลับมา */}
                         <Dropdown.Item eventKey="bookself">ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
-                        <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
+                        {/* <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item> */}
                         <Dropdown.Item onClick={Logout}>ออกจากระบบ</Dropdown.Item>
                     </Dropdown.Menu> 
                 </Dropdown>

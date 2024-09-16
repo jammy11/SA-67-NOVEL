@@ -11,13 +11,14 @@ import { CreateTransaction } from '../../services/https/Transaction/transaction'
 import { updateCoinBalance } from '../../services/https/Coin/coin';
 import { useBalanceContext } from '../Home_components/BalanceContext';
 import { useHistoryContext } from './HistoryContext';
-
+import { useAuth } from '../Pubblic_components/AuthContextType';
 const Popup3: React.FC = () => {
   const [Package, setPackage] = useState<boolean>(false);
   const [Credit, setCredit] = useState<boolean>(false);
-
+  const { isLoggedIn } = useAuth();
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false)
   const [showVerify, setShowVerifyPopup] = useState<boolean>(false);
   const [selectedPrice, setSelectedPrice] = useState<number >(0);
   const [selectedAmount, setSelectedAmount] = useState<number>(0);
@@ -48,6 +49,7 @@ const Popup3: React.FC = () => {
 
   const handleConfirm = () => {
     setCredit(false);
+
     setTimeout(() => setShowVerifyPopup(true), 300);
   };
 
@@ -57,7 +59,8 @@ const Popup3: React.FC = () => {
     setSelectedAmount(amount);
     setSelectedPrice(price);
     setPackage(false);
-    setTimeout(() => setCredit(true), 300); 
+    {isLoggedIn ?setCredit(true):setShowModal(true)}
+   
   };
 
   const VerifyConfirm = () => {
@@ -233,6 +236,25 @@ const Popup3: React.FC = () => {
           </div>
         </div>
       </Modal>
+      <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
+                <div className="modal-contentnew2 custom-modalnew">
+                  <div className="confirmation-message">
+                    <div onClick={handleCloseModal}>
+                      <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+                    </div>
+                    <img className="ready" src="./src/assets/error.png" alt="error" />
+                    <span className="text2"><b>&nbsp;เกิดข้อผิดพลาด</b></span>
+                    <span className="text-1">
+                      <span id="ready2">&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
+                    </span>
+                    <div>
+                      <span id="buttonin">
+                        <a href="/login"><span id="button3">เข้าสู่ระบบ</span></a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
 
       {/* Alert */}
       {showAlert && (

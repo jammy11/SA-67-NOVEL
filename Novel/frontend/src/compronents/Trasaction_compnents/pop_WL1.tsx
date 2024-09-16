@@ -12,12 +12,13 @@ import { CreateTransaction } from '../../services/https/Transaction/transaction'
 import { updateCoinBalance } from '../../services/https/Coin/coin';
 import { useBalanceContext } from '../Home_components/BalanceContext';
 import { useHistoryContext } from './HistoryContext';
-
+import { useAuth } from '../Pubblic_components/AuthContextType';
 const Popup2: React.FC = () => {
+
   const [Packgage, setPackgage] = useState<boolean>(false);
   const showPackgage =() => setPackgage(true);
   const closePackgage =() => setPackgage(false);
-
+  const { isLoggedIn } = useAuth();
   const [TrueWallet, setTrueWallet] = useState<boolean>(false);
   const closeTrueWallet=() => setTrueWallet(false);
 
@@ -33,13 +34,16 @@ const Popup2: React.FC = () => {
   const { triggerRefresh } = useBalanceContext(); 
   const { triggerHistoryRefresh } = useHistoryContext();
 
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false)
+
   const ConfirmPackage = (amount: number, price: number,key: number) => {
          setSelectedAmount(amount);
          setKey(key);
          setSelectedPrice(price);
          setPackgage(false);
          
-    setTimeout(() => setTrueWallet(true), 300); 
+    {isLoggedIn ? setTrueWallet(true):setShowModal(true)} 
   };
 
   const handleFormChange = (event: React.FormEvent<HTMLFormElement>) => {
@@ -129,6 +133,7 @@ const Popup2: React.FC = () => {
               price={data.pack_price}  
               imgSrc={data.pack_pic} 
               sendData={() => ConfirmPackage(data.pack_amount, data.pack_price, data.ID)}
+              
             />
           ))}
             </div>
@@ -180,6 +185,7 @@ const Popup2: React.FC = () => {
         </div>
       </Modal>
 
+
       {/* Popup Verify */}
       <Modal show={Verify} onHide={closeVerify}>
         <div className='aap'>
@@ -203,6 +209,26 @@ const Popup2: React.FC = () => {
         </div>
       </Modal>
 
+      <Modal show={showModal} onHide={handleCloseModal} className="custom-modal">
+                <div className="modal-contentnew2 custom-modalnew">
+                  <div className="confirmation-message">
+                    <div onClick={handleCloseModal}>
+                      <img className="cancle3" src="./src/assets/no.png" alt="cancel" />
+                    </div>
+                    <img className="ready" src="./src/assets/error.png" alt="error" />
+                    <span className="text2"><b>&nbsp;เกิดข้อผิดพลาด</b></span>
+                    <span className="text-1">
+                      <span id="ready2">&nbsp;&nbsp;กรุณาเข้าสู่ระบบ</span>
+                    </span>
+                    <div>
+                      <span id="buttonin">
+                        <a href="/login"><span id="button3">เข้าสู่ระบบ</span></a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+              
       {/* Alert */}
       {showAlert && (
         <Alert
