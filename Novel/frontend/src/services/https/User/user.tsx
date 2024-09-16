@@ -104,10 +104,11 @@ async function updateIncome(
   }
 }
 
+
 async function updateIncomeReduce(
   x: number,
   userId: string,
-  setIncome: React.Dispatch<React.SetStateAction<number>>
+  setIncome: React.Dispatch<React.SetStateAction<number | null>>
 ) {
   try {
     const getResponse = await GetUsersById(userId);
@@ -119,7 +120,7 @@ async function updateIncomeReduce(
     const currentIncome = getResponse.data.income;
 
     // Add x to the current income
-    const newIncome = currentIncome + x;
+    const newIncome = currentIncome - x;
 
     // Ensure that the object matches InterfaceIncome, not UsersInterface
     const updateIncomeData: InterfaceIncome = {
@@ -143,6 +144,7 @@ async function updateIncomeReduce(
   }
 }
 
+
 async function DeleteUsersById(id: string) {
   return await axios
     .delete(`${apiUrl}/user/${id}`, requestOptions)
@@ -160,5 +162,6 @@ export {
   DeleteUsersById,
   UpdateStatusWriterById,
   UpdateIncomeById,
-  updateIncome
+  updateIncome,
+  updateIncomeReduce
 };

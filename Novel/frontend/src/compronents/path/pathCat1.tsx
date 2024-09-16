@@ -45,7 +45,7 @@ const CardList1: React.FC = () => {
  
     fetchData();
   }, [userId]);
-
+  // [triggerGropRefresh]
   return (
     <div className='card-list'>
       {novels.map((novel, index) => (

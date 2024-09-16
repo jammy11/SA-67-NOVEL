@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Withdraw.css'; 
-import Headers from '../../compronents/Pubblic_components/headerselect';
+import Headers from '../src/compronents/Pubblic_components/headerselect';
 import { DollarCircleOutlined, DownOutlined } from '@ant-design/icons';
-import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
-import WithdrawConfirm from '../../compronents/WriterComponents/withdraw/WithdrawConfirmPopup';
-import SuccessPopup from '../../compronents/WriterComponents/withdraw/SuccessPopup_withdraw';
-import { InterfaceWriter } from '../../interface/writer_interface/writerPersonalInterface';
+import CategoryNavWriter from '../src/compronents/WriterComponents/CatogoryNavWriter';
+import WithdrawConfirm from '../src/compronents/WriterComponents/withdraw/WithdrawConfirmPopup';
+import SuccessPopup from '../src/compronents/WriterComponents/withdraw/SuccessPopup_withdraw';
+import { InterfaceWriter } from '../src/interface/writer_interface/writerPersonalInterface';
 
 interface WithdrawProps extends Pick<InterfaceWriter, 'WriterID' | 'Income'> {}
 
