@@ -29,7 +29,6 @@ func SetupDatabase() {
 	err := db.AutoMigrate(
 		&entity.Coin{},
 		&entity.User{},
-		&entity.WriterTransaction{},
 		&entity.Order{},
 		&entity.Package{},
 		&entity.Transaction{},

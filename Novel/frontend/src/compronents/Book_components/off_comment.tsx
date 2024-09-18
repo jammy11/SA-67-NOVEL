@@ -1,17 +1,19 @@
 import React,{ useState } from 'react';
-import { Button } from 'react-bootstrap';
+
+import { useParams } from 'react-router-dom';
 import { Offcanvas } from 'react-bootstrap';
 import Commentsb from './comment';
 import './comment.css'
-import Button_s from './return_button';
+
 import { FaComment } from 'react-icons/fa';
+
 
 function Off_comment() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const { novelId } = useParams();
   return (
     <>
       <FaComment className='icon-text-icon_fc' onClick={handleShow}>
@@ -23,7 +25,7 @@ function Off_comment() {
           <Offcanvas.Title>Comment</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Commentsb/>
+          <Commentsb novelId={novelId as string}/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

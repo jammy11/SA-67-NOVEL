@@ -42,13 +42,12 @@
   .contentv {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: flex-start;
     justify-content: space-around;
     flex: 1;
     height: 100%;
     min-width: 200px;
-    gap: 12px; 
     padding: 8px;
   }
   

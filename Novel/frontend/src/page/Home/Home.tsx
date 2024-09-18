@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MusicProvider } from '../../compronents/song_components/musicprovider';
 import './Home.css';
 import Headers from '../../compronents/Pubblic_components/headerselect';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -12,10 +13,11 @@ import CategoryNav from '../../compronents/Home_components/CategoryNav';
 import Trand from '../../compronents/Home_components/GroupCategory/Trand';
 
 const Home: React.FC = () => {
-  
+
 
     return (
-        <>
+        <MusicProvider>
+       
         <Headers/>
         <a id='cat1' className='hide'>1</a>
         <CategoryNav/>
@@ -78,10 +80,10 @@ const Home: React.FC = () => {
     
    </div>
 </div>
-
+</MusicProvider>
 
         
-        </>
+        
     );
 };
 

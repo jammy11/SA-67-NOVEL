@@ -23,7 +23,7 @@ const L_Bookshelf: React.FC = () => {
   return (
     <>
       {/* Header component */}
-      <Headers />
+      <Headers/>
 
       {/* Header and Return Button */}
       <div className="head-box">

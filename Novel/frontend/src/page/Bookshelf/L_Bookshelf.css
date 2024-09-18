@@ -11,8 +11,8 @@
 .head-box{
     display: flex;
     width: 100%;
-    height: auto;
-    background-color: rgb(189, 224, 255);
+    height: 50   px;
+    background:linear-gradient(to right, #ffffff, #5e4d4df9, #392f2ffc, #1e1c1c);
     flex-direction: row;
     margin-top: 60px; 
 }
@@ -29,13 +29,13 @@
     flex-wrap: wrap;
     align-content: flex-start;
     /* min-width: 45%; */
-    width: 75%;
+    width: 73%;
     height: auto;
     background-color: rgb(166, 161, 161);
     background: linear-gradient(180deg, orange 60%, cyan);
     justify-content: space-between;
     border-radius: 8px;
-    padding: 5px;
+    padding: 10px;
     /* margin-left: 20px; */
     /* margin-top: 120px; */
 }

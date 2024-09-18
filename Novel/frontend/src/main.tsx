@@ -20,7 +20,8 @@ import SignInPages from '../แดนโค้ดมรณา/Logintest';
 import Test from './page/test/tests';
 import L_Content from './page/Bookshelf/L_Content';
 import { HistoryProvider } from './compronents/Trasaction_compnents/HistoryContext';
-
+import { LikeProvider } from './compronents/Book_components/LikeContext';
+import { MusicProvider } from './compronents/song_components/musicprovider';
 
 const router = createBrowserRouter([
   { path: "/Payment", element: <Payment /> },
@@ -34,18 +35,21 @@ const router = createBrowserRouter([
   { path: "/a", element: <SignInPages /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
-  { path: "/test", element: <Test /> },
+  { path: "/settings", element: <Test /> },
   { path: "/L_Content", element: <L_Content /> },
   { path: "/bookshelf", element: <L_Bookshelf /> },
+  { path: "/L_content/:novelId", element: <L_Content />}
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    
     <AuthProvider>
         <HistoryProvider>
             <BalanceProvider>
+            <LikeProvider>
                  <RouterProvider router={router} />
+            </LikeProvider>
         </BalanceProvider>
       </HistoryProvider>
     </AuthProvider>

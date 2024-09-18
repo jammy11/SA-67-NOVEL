@@ -148,28 +148,40 @@
     align-self: flex-start;
     box-sizing: border-box;
   }
+
+ .wraptag{
+  /* background-color: #21ED00; */
+  width: 300px;
+  height: 50px;
+  position: absolute;
+  top: 50px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
+  left:  185px; 
+ } 
+ .wraptagin{
+  /* background-color: #0000ed; */
+  display: flex;
+  margin: 5px;
+  width: 90%;
+  height: 90%;
+  
+ }
+
 #tag {
+    margin-right: 4px;
     border-radius: 6.9px;
-        background: #CFF7D3;
-        padding: 2px 6px 2px 6px;
-        box-sizing: border-box;
-        position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
-    top: 55px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
-    left: 342px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
+    background: #CFF7D3;
+    padding: 2px 4px ;
+    margin-bottom: 3.4px;
+      
   }
-#tag1 {
+#tag1 { 
+        margin-right: 4px;
+        padding: 2px 4px ;
         border-radius: 6.9px;
         background: #FCB3AD;
         margin-bottom: 3.4px;
-        display: flex;
-        padding: 2px 6px 2px 6px ;
-        box-sizing: border-box;
-        position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
-    top: 55px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
-    left: 195px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
   }
 #tag2 {
-    overflow-wrap: break-word;
     font-family: var(--single-line-body-base-font-family, 'Inter');
     font-weight: var(--single-line-body-base-font-weight, 400);
     font-size: var(--single-line-body-base-font-size, 14px);
@@ -182,10 +194,6 @@
     margin-bottom: 3.4px;
     display: flex;
     padding: 2px 6px 2px 6px ;
-    box-sizing: border-box;
-    position: absolute; /* หรือ relative, fixed, sticky ขึ้นอยู่กับความต้องการ */
-top: 55px; /* ระยะห่างจากด้านบนของพื้นที่บรรจุ */
-left: 270px; /* ระยะห่างจากด้านซ้ายของพื้นที่บรรจุ */
 }
 #buttonlock {
     border-radius: 6.9px;
@@ -792,5 +800,10 @@ left: 270px; /* ระยะห่างจากด้านซ้ายขอ�
 
 .dropdown-toggle {
   color: #000;
-}rgba(0, 0, 0, 0)
+}
 
+.tag-1{
+  width: 500px;
+  height: 40px;
+  background-color: #21ED00;
+}

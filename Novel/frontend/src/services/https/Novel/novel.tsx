@@ -51,7 +51,7 @@ async function CreateNovel(data: Novel) {
 
   async function UpdateNovelById(id: string, data: NovelBuy) {
     return await axios
-    .put(`${apiUrl}/novels/${id}`, data, requestOptions)
+    .put(`${apiUrl}/novel/${id}`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
   }
@@ -59,21 +59,28 @@ async function CreateNovel(data: Novel) {
   
   async function DeleteNovelById(id: string) {
     return await axios
-      .delete(`${apiUrl}/novels/${id}`, requestOptions)
+      .delete(`${apiUrl}/novel/${id}`, requestOptions)
       .then((res) => res)
       .catch((e) => e.response);
   }
 
   async function GetNovelById(id: string) {
     return await axios
-      .get(`${apiUrl}/novels/${id}`, requestOptions)
+      .get(`${apiUrl}/novel/${id}`, requestOptions)
+      .then((res) => res)
+      .catch((e) => e.response);
+  }
+
+  async function GetNovelByIdd(id: string) {
+    return await axios
+      .get(`${apiUrl}/novel/${id}`, requestOptions)
       .then((res) => res.data) // Assuming the novel data is in `res.data`
       .catch((e) => e.response);
   }
 
   async function IncrementNovelBuyAmount(id: string) {
    
-      const response = await GetNovelById(id);
+      const response = await GetNovelByIdd(id);
   
       // ตรวจสอบว่ามีข้อมูลหรือไม่
       if (!response || !response.novel) {
@@ -102,5 +109,6 @@ async function CreateNovel(data: Novel) {
     UpdateNovelById,
     DeleteNovelById,
     GetPublicNovels,
-    IncrementNovelBuyAmount
+    IncrementNovelBuyAmount,
+    GetNovelByIdd
   };

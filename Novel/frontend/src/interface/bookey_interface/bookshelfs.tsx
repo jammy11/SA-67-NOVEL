@@ -18,10 +18,6 @@ export interface NCardProps {
       cover: string
   };
 }
-export interface createboklist{
-  bookshelf_id?:number | null;
-  novel_id:number;
-}
 
 export interface NCardPropsv {
   id: number;
@@ -51,3 +47,8 @@ export const sampleNovelData = {
   comments: 42,
   author: 'Luna Rivers',
 };
+
+export interface createboklist{
+  bookshelf_id?:number | null;
+  novel_id:number;
+}

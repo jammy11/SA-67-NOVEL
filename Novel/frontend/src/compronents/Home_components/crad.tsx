@@ -1,5 +1,5 @@
 import './MM.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { HiMiniShoppingCart } from 'react-icons/hi2';
 import { useAuth } from '../Pubblic_components/AuthContextType'; // Import useAuth สำหรับดึงสถานะการล็อกอิน
@@ -11,16 +11,25 @@ import { useBalanceContext } from './BalanceContext';
 import { CreateBookshelfList, GetBookshelfListById, checkNovelIdInBookshelf } from '../../services/https/Bookshelf/bookshelf';
 import { IncrementNovelBuyAmount } from '../../services/https/Novel/novel';
 import { IGroupCard } from '../../interface/home_interface/IGroupCard';
+import { useNavigate } from "react-router-dom";
+import { useLikes } from '../Book_components/LikeContext';
+import { Flike, CountLikeByNovelID, CreateLike, DeleteLikeByNIdandUId } from "../../services/https/Likes/like";
 
 interface CardProps {
   novel: IGroupCard;
 }
 
 const Card: React.FC<CardProps> = ({ novel }) => {
+  const navigate = useNavigate();
+  const { likes, setLikes } = useLikes();
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(likes[novel.ID] || novel.novel_like);
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const [show2, setShow2] = useState(false);
   const [showNotLogin, setshowNotLogin] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+ 
   const [showCoinAlert, setShowCoinAlert] = useState(false);
   const [showToShelf, setshowToShelf] = useState(false);
   const [showCanRead, setshowCanRead] = useState(false);
@@ -47,9 +56,38 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         console.error("Error fetching balance:", error);
       }
     };
-
+   
+    const fetchLikecount = async () => {
+      try {
+        const response = await CountLikeByNovelID(novel.ID.toString());
+        if (response.status === 200) {
+          setLikesCount(response.data.likeCount || 0);
+        } else {
+          console.error("Failed to fetch like count", response);
+        }
+      } catch (error) {
+        console.error("Error fetching like count:", error);
+      }
+    };
+    
+    const fetchLike = async () => {
+      if (userId) {
+        try {
+          const response = await Flike(userId, novel.ID.toString());
+          setIsLiked(response.data.exists);
+        } catch (error) {
+          console.error("Error fetching like status:", error);
+        }
+      }
+    };
+  
+   
+    fetchLikecount();
+    fetchLike();
     fetchBalance();
-  }, [userId]);
+  }, [userId,novel.ID]);
+
+  
 
   // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
   const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
@@ -88,6 +126,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   };
 
   const verifyPurchase = async () => {
+    setIsDisabled(true);
     setShowConfirmation(false);
     try {
       console.log("Creating order...");
@@ -122,7 +161,12 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       // Continue with updating income and showing to shelf
       await updateIncome(novel.novel_price, novel.writer_id, setIncome);
       setshowToShelf(true);
-      CreateBookshelfList({ bookshelf_id: Number(userId), novel_id: novel.ID });
+      setTimeout(() => {
+        CreateBookshelfList({ bookshelf_id: Number(userId), novel_id: novel.ID });
+      }, 3000);
+       
+    
+
       IncrementNovelBuyAmount(String(novel.ID));
       setBuyAmount(buyAmount + 1);
     } catch (error) {
@@ -131,10 +175,46 @@ const Card: React.FC<CardProps> = ({ novel }) => {
     setshowToShelf(true);
   };
 
-  const toggleLike = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent click event propagation to Mcard
-    setIsLiked(!isLiked);
+  
+  
+  const handleLikeClick = async (e: React.MouseEvent) => {
+      e.stopPropagation();
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
+    try {
+      // Check if the like exists
+      const response = await Flike(userId, novel.ID.toString());
+      const checkLikestate = response.data.exists;
+  
+      if (checkLikestate) {
+        // If the like exists, delete it
+        await DeleteLikeByNIdandUId(userId, novel.ID);
+      } else {
+        // If the like does not exist, create it
+        await CreateLike({
+          user_id: Number(userId),
+          novel_id: novel.ID,
+        });
+      }
+  
+      // Update the like count and toggle the like status
+      const newLikesCount = isLiked ? likesCount - 1 : likesCount + 1;
+      setLikes(novel.ID.toString(), newLikesCount); // Update likes in the context
+      setLikesCount(newLikesCount); // Update local likes count state
+      setIsLiked(!isLiked); // Toggle the like status
+    } catch (error) {
+      console.error("Error handling like:", error);
+    }
   };
+  
+
+  const handleReadClick = () => {
+    navigate(`/L_content/${novel.ID}`);
+  };
+
 
   return (
     <>
@@ -152,8 +232,9 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                 id="ieyeb"
                 src={isLiked ? "/src/assets/like.png" : "/src/assets/0heart.png"}
                 alt="heart"
-                onClick={toggleLike}
+                onClick={handleLikeClick}
               />
+           
               <span id='view_likeb'>{isLiked ? novel.novel_like + 1 : novel.novel_like}</span>
             </div>
           </div>
@@ -174,7 +255,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               className="like1"
               src={isLiked ? "./src/assets/like.png" : "./src/assets/0heart.png"}
               alt="heart"
-              onClick={toggleLike}
+              onClick={handleLikeClick}
             />
             <div className="container-26">
               <div className="section">
@@ -189,27 +270,32 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                       <div className="container-11">
                         <div className="container-4">
                           <div className="price">
-                            <div className="tag-1">
-                              <span id='tag1'>
+                      <div className="wraptag">         
+                          <div className="wraptagin">
+                                         
+                               {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
                                   <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
-                              </span>
-                            </div>
-                            <div className="tag-1">
-                              <span id='tag4'>
+                              </span>}
+                            
+                  {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
-                                  <span id='tag2'>{novel.novel_type2}</span>
+                                  <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
-                              </span>
-                            </div>
-                            <div className="tag">
-                              <span id='tag'>
+                              </span>}
+                           
+                   {novel.rate &&<span id='tag'>
                                 <span className="tag-3">
                                   <span id='tag3'><b>{novel.rate}</b></span>
                                 </span>
-                              </span>
+                              </span>}
+
+                              </div>
+
                             </div>
+
+
                             <div className="text-price">
                               <span className="container-9">
                                 <span id='price'>
@@ -232,14 +318,14 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                       </span>
                     </div>
                   </div>
-                 <a href='/bookshelf'> <div className="button" >
+                 <div className="button" onClick={handleReadClick} >
                     <span className="button-1" >
                       <span id='buttonlock'style={{display:'flex',alignItems:'center', justifyContent:'center',width: '153px'}}>
-                        <span id='button1'>อ่าน</span>
+                        <span id='button1' >อ่าน</span>
                       </span>
                  
                     </span>
-                  </div></a>
+                  </div>
                   <div className="accordion">
                     <div className="accordion-item">
                       <div className="title1">
@@ -269,7 +355,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               className="like1"
               src={isLiked ? "./src/assets/like.png" : "./src/assets/0heart.png"}
               alt="heart"
-              onClick={toggleLike}
+              onClick={handleLikeClick}
             />
             <div className="container-26">
               <div className="section">
@@ -284,26 +370,29 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                       <div className="container-11">
                         <div className="container-4">
                           <div className="price">
-                            <div className="tag-1">
-                              <span id='tag1'>
+                        <div className="wraptag">         
+                          <div className="wraptagin">
+                                         
+                               {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
                                   <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
-                              </span>
-                            </div>
-                            <div className="tag-1">
-                              <span id='tag4'>
+                              </span>}
+                            
+                  {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
-                                  <span id='tag2'>{novel.novel_type2}</span>
+                                  <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
-                              </span>
-                            </div>
-                            <div className="tag">
-                              <span id='tag'>
+                              </span>}
+                           
+                   {novel.rate &&<span id='tag'>
                                 <span className="tag-3">
                                   <span id='tag3'><b>{novel.rate}</b></span>
                                 </span>
-                              </span>
+                              </span>}
+
+                              </div>
+
                             </div>
                             <div className="text-price">
                               <span className="container-9">
@@ -422,8 +511,8 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               </span>
             </div>
             <div onClick={verifyPurchase}>
-              <span id='buttonsubmit'>
-                <span id='button2'>ยืนยัน</span>
+               <span id='buttonsubmit'>
+                <span id='button2' >ยืนยัน</span>
                 <img className="submit" src="./src/assets/submit.png" alt="submit" />
               </span>
             </div>
@@ -446,7 +535,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                         </span>
               <div onClick={CloseshowToShelf}>
               <span id='buttonbook'>
-                <a href="/bookself"><span id='button3'>ชั้นหนังสือ</span></a>
+                <a href="/bookshelf"><span id='button3'>ชั้นหนังสือ</span></a>
                   </span>
               </div>
             </div>

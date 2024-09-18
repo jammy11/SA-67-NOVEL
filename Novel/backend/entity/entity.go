@@ -60,14 +60,10 @@ type User struct {
 	BirthDate   time.Time `json:"birth_date"`
 	Gender      string    `json:"gender"`
 	Profile     string    `gorm:"type:text" json:"profile"`
-
 	CoinID      uint
 	Coin        Coin
-
 	BookshelfID uint
 	Bookshelf   Bookshelf
-
-	
 
 	Transactions []Transaction
 	Orders       []Order
@@ -80,6 +76,7 @@ type User struct {
 
 type Like struct {
 	gorm.Model
+	
 	UserID   uint   `json:"user_id"` 
 	User     User   `gorm:"foreignKey:UserID"`
 
@@ -136,14 +133,15 @@ type Comment struct {
 }
 
 
-type WriterTransaction struct{
-    gorm.Model
-    Income float64   `json:"income"` 
 
-    WriterID  uint	`json:"writer_id"` 
-    Writer    User	`gorm:"foreignKey:WriterID"`
+// type WriterTransaction struct{
+//     gorm.Model
+//     Income float64   `json:"income"` 
 
-	NovelID uint   `json:"novel_id"`
-    Novel   Novel  `gorm:"foreignKey:NovelID"`
+//     WriterID  uint	`json:"writer_id"` 
+//     Writer    User	`gorm:"foreignKey:WriterID"`
 
-}
+// 	NovelID uint   `json:"novel_id"`
+//     Novel   Novel  `gorm:"foreignKey:NovelID"`
+
+// }
