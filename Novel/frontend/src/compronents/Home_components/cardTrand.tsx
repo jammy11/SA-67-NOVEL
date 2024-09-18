@@ -126,9 +126,9 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
       setShow2(true);
     }
   };
+  const [hasCreatedBookshelf, setHasCreatedBookshelf] = useState(false);
 
   const verifyPurchase = async () => {
-    setIsDisabled(true);
     setShowConfirmation(false);
     try {
       console.log("Creating order...");
@@ -136,11 +136,11 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
         user_id: Number(userId),
         novel_id: novel.ID,
       });
-
+  
       console.log("Order response:", newOrder); // Log the entire response
       const orderId = newOrder?.ID;
       console.log("Order ID:", orderId);
-
+  
       console.log("Creating income transaction...");
       await CreateTransaction({
         trans_type: "รายได้",
@@ -148,7 +148,7 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
-
+  
       console.log("Creating purchase transaction...");
       await CreateTransaction({
         trans_type: "ซื้อนิยาย",
@@ -156,26 +156,28 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
         order_id: orderId,
         amount_t: novel.novel_price,
       });
-
+  
+      console.log("add book to shelf ");
       await updateCoinBalanceReduce(novel.novel_price, setBalance); // Wait for this to complete
       triggerRefresh(); // Trigger refresh after balance is updated
-
+  
       // Continue with updating income and showing to shelf
       await updateIncome(novel.novel_price, novel.writer_id, setIncome);
       setshowToShelf(true);
-      CreateBookshelfList({ bookshelf_id: Number(userId), novel_id: novel.ID });
-
-      setTimeout(() => {
-        setIsDisabled(false);
-      }, 5000);
-
       IncrementNovelBuyAmount(String(novel.ID));
       setBuyAmount(buyAmount + 1);
+  
+      const HaveNovel = await checkNovelIdInBookshelf(userId, novel.ID);
+      if (HaveNovel === "false" && !hasCreatedBookshelf) {
+        await CreateBookshelfList({ bookshelf_id: Number(userId), novel_id: novel.ID });
+        setHasCreatedBookshelf(true); // Mark that bookshelf has been created
+      }
     } catch (error) {
       console.error("Error creating order or transaction:", error);
     }
     setshowToShelf(true);
   };
+  
 
   
   
