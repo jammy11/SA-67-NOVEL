@@ -20,8 +20,8 @@ export const useMusic = () => {
 
 const playlist = [
   '/AAA.mp3',
-  '/audio/another-song.mp3',
-  '/audio/yet-another-song.mp3',
+  '/AAA.mp3',
+  '/AAA.mp3',
 ];
 
 export const MusicProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

@@ -4,7 +4,7 @@ import Headers from '../../compronents/Pubblic_components/headerselect';
 import YourComponent from '../../compronents/Test_compnests/Buytest';
 import MyComponent2 from '../../compronents/Test_compnests/HoverInSideTest';
 import MusicPlayer from '../../compronents/song_components/musicBase';
-
+import { MusicProvider } from '../../compronents/song_components/musicprovider';
 
 const Test: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,14 +18,14 @@ const Test: React.FC = () => {
     };
 
     return (
-        <>
+        <MusicProvider>
             <Headers />
 
             <div className="g2">
             <MusicPlayer />
           
             </div>
-        </>
+            </MusicProvider>
     );
 };
 
