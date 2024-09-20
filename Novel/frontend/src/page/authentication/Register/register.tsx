@@ -47,7 +47,7 @@ const Register: React.FC = () => {
                             <Col span={12}>
                                 <Form.Item
                                     label="ชื่อจริง"
-                                    name="firstName"
+                                    name="first_name"
                                     rules={[{ required: true, message: 'กรุณากรอกชื่อจริง!' }]}
                                 >
                                     <Input />
@@ -56,7 +56,7 @@ const Register: React.FC = () => {
                             <Col span={12}>
                                 <Form.Item
                                     label="นามสกุล"
-                                    name="lastName"
+                                    name="last_name"
                                     rules={[{ required: true, message: 'กรุณากรอกนามสกุล!' }]}
                                 >
                                     <Input />
@@ -67,7 +67,7 @@ const Register: React.FC = () => {
                             <Col span={12}>
                                 <Form.Item
                                     label="ชื่อผู้ใช้"
-                                    name="username"
+                                    name="user_name"
                                     rules={[{ required: true, message: 'กรุณากรอกชื่อผู้ใช้!' }]}
                                 >
                                     <Input />
@@ -99,14 +99,14 @@ const Register: React.FC = () => {
                             rules={[{ required: true, message: 'กรุณาเลือกเพศ!' }]}
                         >
                             <Radio.Group>
-                                <Radio value="male">ชาย</Radio>
-                                <Radio value="female">หญิง</Radio>
-                                <Radio value="other">ไม่ระบุ</Radio>
+                                <Radio value="Male">ชาย</Radio>
+                                <Radio value="Female">หญิง</Radio>
+                                <Radio value="ไม่ระบุ">ไม่ระบุ</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <Form.Item
                             label="วันเกิด"
-                            name="birthDate"
+                            name="birth_date"
                             rules={[{ required: true, message: 'กรุณาเลือกวันเกิด!' }]}
                         >
                             <DatePicker style={{ width: '100%' }} />
