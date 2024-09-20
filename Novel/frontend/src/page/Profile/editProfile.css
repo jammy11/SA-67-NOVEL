@@ -3,8 +3,8 @@
     padding: 40px;
     color: white;
     width: 100%;
-    max-width: 12000px;
-    margin: 0 auto;
+    max-width: 1500px;
+    margin-top: 3%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -13,10 +13,10 @@
 .head {
     font-size: 20px;
     color: #ccc;
-    margin-bottom: 20px;
 }
 
 .head .current {
+    padding-top: 50px;
     color: white;
 }
 
@@ -27,15 +27,33 @@
     margin-bottom: 20px;
 }
 
-.profile-picture {
-    width: 150px;
-    height: 150px;
+.ant-upload-picture-card-wrapper {
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.ant-upload.ant-upload-select-picture-card {
+    width: 150px !important;
+    height: 150px !important;
     background-color: #555;
     border-radius: 50%;
-    background-image: url('path_to_placeholder_image');
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 10px;
+    border: none;
+    overflow: hidden;
+}
+
+.ant-upload-list-picture-card .ant-upload-list-item {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.ant-upload-list-picture-card .ant-upload-list-item-thumbnail {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 50% !important; /* Make the image fit the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .edit-box {
@@ -45,28 +63,22 @@
     flex: 1;
     max-width: 600px;
     margin: 0 auto;
+    margin-bottom: 2%;
 }
 
 .edit-item {
     margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
-.input-field {
-    background-color: #fff; /* Light background */
-    color: #000; /* Black text for visibility */
-    padding: 6px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%; /* Ensure the input takes full width within the column */
+
+
+.ant-select-selection-item,
+.ant-select-selection-placeholder {
+    color: #000 !important;
 }
 
-.input-email{
-    width: 300%;
-    padding: 6px;
+.ant-picker-input > input {
+    color: #000 !important;
 }
 
 .buttons {
@@ -75,9 +87,9 @@
     margin-top: 20px;
 }
 
-.cancel-button {
+.cancel-button,
+.save-button {
     background-color: transparent;
-    color: rgb(224, 225, 233);
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -85,20 +97,20 @@
     border-radius: 5px;
 }
 
-.cancel-button:hover, .save-button:hover {
-    background-color: #444;
+.cancel-button {
+    color: rgb(224, 225, 233);
 }
 
 .save-button {
-    background-color: transparent;
     color: rgb(243, 50, 2);
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
+}
+
+.cancel-button:hover,
+.save-button:hover {
+    background-color: #444;
 }
 
 .edit-item .ant-form-item-label > label {
-    color: #fff; 
+    color: #fff !important;
 }
+

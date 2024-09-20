@@ -12,15 +12,11 @@ const Profile: React.FC = () => {
         const fetchUsers = async () => {
             try {
                 const id = localStorage.getItem('id'); // Get the logged-in user's ID
-                console.log("Fetched ID from localStorage:", id); // Debugging
-                
                 if (!id) {
                     throw new Error("ไม่พบข้อมูลผู้ใช้");
                 }
                 
                 const response = await GetUsersById(id);
-                console.log("Fetched User Profile:", response);  // Debugging API response
-    
                 // Extract data from response and set users state
                 setUsers(response.data);  // Set the user data to the 'data' field
             } catch (error) {
@@ -36,14 +32,28 @@ const Profile: React.FC = () => {
             <Headers />
             <div className="profile-container">
                 <div className="profile-header">
-                    <div className="profile-username">
-                        {users ? `${users.first_name} ${users.last_name}` : ''}
-                    </div>
+                    {/* Profile Picture */}
+                    {users && users.profile ? (
+                        <img
+                            src={users.profile}
+                            alt="Profile"
+                            className="profile-picture w3-circle w3-margin-right"
+                            width="150px"
+                        />
+                    ) : (
+                        <div className="no-profile-picture">ไม่มีรูปประจำตัว</div>
+                    )}
                 </div>
+                
                 <div className="box">
+                <Link to="/editProfile" className="editProfile">แก้ไขข้อมูลส่วนตัว</Link>
                     <div className="item">
                         <span className="label">ชื่อผู้ใช้</span>
                         <span className="value">: {users ? users.user_name : 'กรุณาเข้าสู่ระบบ'}</span>
+                    </div>
+                    <div className="item">
+                        <span className="label">ชื่อ-นามสกุล</span>
+                        <span className="value">: {users ? `${users.first_name} ${users.last_name}` : ''}</span>
                     </div>
                     <div className="item">
                         <span className="label">อีเมล</span>
@@ -60,7 +70,6 @@ const Profile: React.FC = () => {
                         </span>
                     </div>
                 </div>
-                <Link to="/editProfile" className="editProfile">แก้ไขข้อมูลส่วนตัว</Link>
             </div>
         </>
     );

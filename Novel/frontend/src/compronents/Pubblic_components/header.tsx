@@ -4,16 +4,36 @@ import { Dropdown, Image, Modal, Button } from 'react-bootstrap';
 import { message, theme } from 'antd';  
 import logo from '../../assets/Logo.png';
 import coinImage from '../../assets/coin-50.png';
-import profileImage from '../../assets/p1.jpeg';
 import Balance from '../Home_components/showblance';
 import { GetUsersById, UpdateStatusWriterById } from '../../services/https/User/user';
+import { UsersInterface } from '../../interface/profile_interface/IProfile';
 
 const TOP: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [showModal, setShowModal] = useState(false);
     const [isWriter, setIsWriter] = useState<boolean | null>(null);
+    const [users, setUser] = useState<UsersInterface | null>(null);
 
     const { token: { colorBgContainer } } = theme.useToken();
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userId = localStorage.getItem('id');
+                if (userId) {
+                    const userData = await GetUsersById(userId);
+                    setUser(userData.data); // Set user data
+                    if (userData.status === 200) {
+                        setIsWriter(userData.data.writer);
+                    }
+                }
+            } catch (error) {
+                messageApi.error("Error fetching user data");
+            }
+        };
+
+        fetchUserData();
+    }, [messageApi]);
 
     useEffect(() => {
         const checkWriterStatus = async () => {
@@ -100,7 +120,7 @@ const TOP: React.FC = () => {
                     <div className='hindesometing'>
                         <Dropdown.Toggle variant="light" id="dropdown-profile" as="div">
                             <Image
-                                src={profileImage}
+                                src={users?.profile}
                                 roundedCircle
                                 alt="profile"
                                 style={{ borderRadius: '100%', width: '45px', height: '45px' }}

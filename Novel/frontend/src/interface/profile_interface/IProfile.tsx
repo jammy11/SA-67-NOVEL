@@ -1,5 +1,5 @@
 export interface UsersInterface {
-    Profile: string | undefined;
+    profile?: string;
     ID?: number;
     user_name?: string;
     first_name?: string;
@@ -8,6 +8,6 @@ export interface UsersInterface {
     Phone?: string;
     Age?: number;
     birth_date?: string;
-    gender?: number;
+    gender?: string;
     Password?: string;
   }
