@@ -105,6 +105,7 @@
     margin-left: 10px;
     height: 88px;
     width: 62.23px;
+    object-fit: cover;
     
 }
 .tail{
@@ -121,7 +122,7 @@
 }
 #htail{
     font: 1.2em sans-serif;
-    /* border: 1px solid red; */
+    width: 100%;
     
 }
 #ieye,#iheart{
