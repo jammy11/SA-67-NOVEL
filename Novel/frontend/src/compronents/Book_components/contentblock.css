@@ -21,9 +21,9 @@
 }
 
 .textbox {
-    flex-direction: column;
+    /* flex-direction: column;
     flex-wrap: nowrap;
-    align-items: flex-start;
+    align-items: flex-start; */
     width: 93%;
     height: auto;
     background-color: rgb(170, 173, 172);
