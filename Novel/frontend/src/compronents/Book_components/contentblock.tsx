@@ -7,6 +7,7 @@ import { useLikes } from './LikeContext';
 import { Flike, CountLikeByNovelID, CreateLike, DeleteLikeByNIdandUId } from "../../services/https/Likes/like";
 import './contentblock.css';
 
+
 interface NovelData {
   title: string;
   content: string;
@@ -17,7 +18,7 @@ interface NovelData {
 const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
   const {likes, setLikes } = useLikes();
   const [isLiked, setIsLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(likes[novelId] );
+  const [likesCount, setLikesCount] = useState(likes[novelId] || novelId.likes);
   const [novelData, setNovelData] = useState<NovelData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const userId = localStorage.getItem("id");
@@ -140,7 +141,11 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
         </div>
       </div>
       <div className='textbox'>
-        <p className='text-style'>{novelData.content}</p>
+        {/* Render HTML content */}
+        <div
+          className='text-style'
+          dangerouslySetInnerHTML={{ __html: novelData.content }}
+        />
       </div>
     </div>
   );
