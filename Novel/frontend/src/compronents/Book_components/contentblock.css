@@ -30,7 +30,7 @@
     margin-top: 10px;
     border-radius: 3px;
     padding: 5px;
-    text-indent: 50px;
+    /* text-indent: 50px; */
     transition: background-color 0.3s;
 }
 
