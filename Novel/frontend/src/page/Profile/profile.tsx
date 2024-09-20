@@ -11,18 +11,23 @@ const Profile: React.FC = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const id = localStorage.getItem('id'); // Get the logged-in user's ID 
+                const id = localStorage.getItem('id'); // Get the logged-in user's ID
+                console.log("Fetched ID from localStorage:", id); // Debugging
+                
                 if (!id) {
                     throw new Error("ไม่พบข้อมูลผู้ใช้");
                 }
-                const userProfile = await GetUsersById(id);
-                console.log(userProfile);  // Check API response 
-                setUsers(userProfile);     // Set user data
+                
+                const response = await GetUsersById(id);
+                console.log("Fetched User Profile:", response);  // Debugging API response
+    
+                // Extract data from response and set users state
+                setUsers(response.data);  // Set the user data to the 'data' field
             } catch (error) {
                 console.error('Error fetching user:', error);
             }
         };
-
+    
         fetchUsers();
     }, []);
 
