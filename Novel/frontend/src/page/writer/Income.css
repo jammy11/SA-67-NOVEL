@@ -1,85 +1,153 @@
-.bg-Income {
-  margin-top: 140px;
-  border-radius: 20px;
+.root{
   background-color: #ffffff;
-  width: 60%;
-  padding: 20px; /* เพิ่ม padding */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* เพิ่มเงา */
 }
 
-.text-income-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 2px solid #FFB800; /* เพิ่มเส้นขอบด้านล่าง */
-  padding-bottom: 20px; /* เพิ่ม padding ด้านล่าง */
-}
 
-.text-income {
-  background-color: #ffffff;
-  font-size: 2.5em;
-  color: #333;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.work-text-incomeUser {
-  margin: 40px auto;
-  text-align: center;
-  color: #000000;
-  font-size: 2.5em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.work-text-incomeUser img {
-  width: 50px;
-  height: 50px;
-}
-
-.withdraw-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.layout-bg-Withdraw{
   width: 100%;
+  height: 100%;
+  background-color: #ffffff;
 }
-
-.withdraw-input {
+.bg-Withdraw {
+  margin-top: 160px;
   margin-bottom: 20px;
-  padding: 10px;
-  font-size: 1.2em;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  width: 60%;
+  margin-left:60px ;
+  margin-right: 100px;
+  border-radius: 34px;
+  border: 4px solid #000;
+  box-shadow: 10px 10px  rgba(0, 0, 0, 0.2), /* เงาชั้นใน */
+                10px 10px 10px rgba(0, 0, 0, 0.2); /* เงาชั้นนอก */
+  background-color: #ffffff; /* Dark background for contrast */
+  width: 95%;
+  height: 75%;
+  padding: 20px; /* Add padding for spacing */
+}
+.work-text-income{
+  font-size: 40px;
+  font-weight: bolder;
 }
 
-.work-button-withdraw {
-  background-color: #FFB800;
-  color: rgb(0, 0, 0);
-  margin: 20px auto;
-  border: none;
+/* Title */
+.work-text-withdraw {
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
   padding: 12px 24px;
-  border-radius: 30px;
+  border-radius: 20px;
+  font-size: 24px;
+  color: #333; /* Dark text for better readability */
+  font-weight: bold;
+}
+
+
+/* Income Display */
+.work-text-incomeUser{
+  display:flex ;
+  align-items: center;
+  justify-content: center;
+}
+/* Dropdown Menu */
+.work-dropdown-item {
+  background-color: #ffffff;
+  color: #333;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 30%; /* Adjust width for responsiveness */
+  transition: background-color 0.3s;
+  border: 1px solid #000000; /* Define border thickness, style, and color */
+}
+
+.work-dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Input Fields */
+.input-field {
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Light border for input fields */
+  font-size: 16px;
+  width: calc(100% - 20px);
+  border: 1px solid #000000;
+}
+
+.input-field:focus {
+  border-color: #FFB800;
+  outline: none;
+}
+
+/* Submit Button */
+.button-withdraw-save {
+  background-color: #FFB800;
+  color: #000;
+  border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.5em;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s;
+  font-size: 18px;
+  padding: 12px 24px;
+  margin-top: 20px;
+  border: none;
+  width: 40%;
+
+}
+
+.button-withdraw-save:hover {
+  background-color: #e6a700;
+}
+
+.withdrawButton-container{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.work-button-withdraw:hover {
-  background-color: #e6a700;
-  transform: scale(1.05);
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Slightly less dark for a softer look */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.withdraw-success-message {
-  color: #4CAF50; /* สีเขียว */
-  font-size: 1.2em;
+.popup-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
   text-align: center;
-  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.popup-content button {
+  background-color: #FFB800;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #e6a700;
+}
+
+.error-message-withdraw{
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 }

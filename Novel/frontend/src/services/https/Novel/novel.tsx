@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Novel,NovelBuy } from "../../../interface/novel_interface/INovel";
+import { NovelBuy } from "../../../interface/novel_interface/INovel";
+import { NovelCre } from "../../../interface/novel_interface/INovelCre";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -14,9 +15,10 @@ const requestOptions = {
 
 
 // Transaction Functions
-async function CreateNovel(data: Novel) {
+async function CreateNovel(data: NovelCre) {
+  console.log('Data being sent to backend:', data); 
     return await axios
-      .post(`${apiUrl}/novels`, data, requestOptions)
+      .post(`${apiUrl}/novel`, data, requestOptions)
       .then((res) => res)
       .catch((e) => e.response);
   }

@@ -8,7 +8,6 @@ import { BalanceProvider } from './compronents/Home_components/BalanceContext';
 import Payment from './page/CoinsAndTransaction/CoinsAndTransaction';
 import Home from './page/Home/Home';
 import Writer from './page/writer/Writer';
-import Withdraw from './page/writer/Withdraw';
 import Writer_edit from './page/writer/Writer_edit';
 import Profile from './page/Profile/profile';
 import EditProfile from './page/Profile/editProfile';
@@ -28,7 +27,6 @@ const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/profile", element: <Profile /> },
   { path: "/Writer", element: <Writer /> },
-  { path: "/Withdraw", element: <Withdraw /> },
   { path: "/Writer_edit", element: <Writer_edit /> },
   { path: "/editProfile", element: <EditProfile /> },
   { path: "/Income", element: <Income /> },

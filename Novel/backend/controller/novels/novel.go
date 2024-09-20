@@ -92,6 +92,7 @@ func Create(c *gin.Context) {
     c.JSON(http.StatusCreated, gin.H{"message": "Novel created successfully", "novel": novel})
 }
 
+
 // Delete removes a novel by ID
 func Delete(c *gin.Context) {
     ID, err := strconv.Atoi(c.Param("id"))
@@ -134,4 +135,37 @@ func GetPublicNovels() ([]entity.Novel, error) {
 	}
 
 	return novels, nil
+}
+
+func GetNovelsByUser(c *gin.Context) { 
+
+    userIDStr := c.Param("id")
+    userID, err := strconv.Atoi(userIDStr)
+    if err != nil {       
+		 c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid User ID"})
+        return
+    }
+
+
+    var novels []entity.Novel
+
+
+    db := config.DB()
+
+
+    results := db.Where("writer_id = ?", userID).
+        Preload("Writer").
+        Preload("CommentUsers").
+        Preload("Bookshelves").
+        Find(&novels)
+
+
+    if results.Error != nil {
+
+        c.JSON(http.StatusInternalServerError, gin.H{"error": results.Error.Error()})
+        return
+    }
+
+    // ส่งข้อมูลกลับในรูปแบบที่ frontend คาดหวัง
+    c.JSON(http.StatusOK, gin.H{"novel": novels})
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import './Writer.css'; 
 import Headers from '../../compronents/Pubblic_components/headerselect';
-import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
-import DetailNovelOfWriter from '../../compronents/WriterComponents/WriterPage/detailNovel/detailNovelOfWriter';
-import Add_novel_button from '../../compronents/WriterComponents/WriterPage/AddNovelButton/add_novel_button';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
+import DetailNovelOfWriter from '../../compronents/Writer_components/WriterPage/detailNovel/detailNovelOfWriter';
+import Add_novel_button from '../../compronents/Writer_components/WriterPage/AddNovelButton/add_novel_button';
 
 const Writer: React.FC = () => {
 

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './Writer_edit.css'; 
 import Headers from '../../compronents/Pubblic_components/headerselect';
-import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
-import WriterEditNovel from '../../compronents/WriterComponents/WriterEdit/EditNovel/writerEditNovel';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
+import WriterEditNovel from '../../compronents/Writer_components/WriterEdit/EditNovel/writerEditNovel';
 
 
 

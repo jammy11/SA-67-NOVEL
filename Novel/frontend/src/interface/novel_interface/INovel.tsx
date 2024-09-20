@@ -18,6 +18,8 @@ export interface Novel {
     };
   }
   
+
+
   export interface NovelBuy {
     buy_amount: number;
   }

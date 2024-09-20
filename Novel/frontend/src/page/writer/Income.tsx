@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './Withdraw.css'; 
+import './Income.css'; 
 import Headers from '../../compronents/Pubblic_components/headerselect';
 import { DollarCircleOutlined, DownOutlined } from '@ant-design/icons';
-import CategoryNavWriter from '../../compronents/WriterComponents/CatogoryNavWriter';
-import WithdrawConfirm from '../../compronents/WriterComponents/withdraw/WithdrawConfirmPopup';
-import SuccessPopup from '../../compronents/WriterComponents/withdraw/SuccessPopup_withdraw';
+import CategoryNavWriter from '../../compronents/Writer_components/CatogoryNavWriter';
+import WithdrawConfirm from '../../compronents/Writer_components/withdraw/WithdrawConfirmPopup';
+import SuccessPopup from '../../compronents/Writer_components/withdraw/SuccessPopup_withdraw';
 import { GetUsersById, updateIncomeReduce } from '../../services/https/User/user';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
 
@@ -129,7 +129,8 @@ const Withdraw: React.FC = () => {
     <>
       <Headers />
       <CategoryNavWriter />
-      <div className='bg-withdraw'>
+      <div className='layout-bg-Withdraw'>
+        <div className='bg-withdraw'>
         <label className='work-text-income'>WITHDRAW</label>
         <div className='work-text-incomeUser' style={{ display: 'flex', alignItems: 'center' }}>
           <img src="..\src\assets\coin.png" style={{ marginRight: '10px', width: '80px', height: '80px' }} />
@@ -199,7 +200,8 @@ const Withdraw: React.FC = () => {
           isOpen={isSuccessPopupOpen} 
           onClose={handleCloseSuccessPopup} 
         />
-      </div>
+</div>
+</div>
     </>
   );
 };

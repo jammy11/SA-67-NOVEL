@@ -99,10 +99,12 @@
 #number{
     margin-left: 10px;
     height: 20px;
+    width: 32px;
 }
 #minicard{
     margin-left: 10px;
     height: 88px;
+    width: 62.23px;
     
 }
 .tail{
@@ -112,6 +114,7 @@
     align-content: space-between;
     margin-left: 10px;
     height: 88px;
+    width: 180px;
     
     
 
