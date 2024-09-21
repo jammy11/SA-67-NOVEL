@@ -7,6 +7,7 @@ import coinImage from '../../assets/coin-50.png';
 import Balance from '../Home_components/showblance';
 import { GetUsersById, UpdateStatusWriterById } from '../../services/https/User/user';
 import { UsersInterface } from '../../interface/profile_interface/IProfile';
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const TOP: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -119,12 +120,16 @@ const TOP: React.FC = () => {
                 <Dropdown align="end" onSelect={handleDropdownSelect}>
                     <div className='hindesometing'>
                         <Dropdown.Toggle variant="light" id="dropdown-profile" as="div">
+                            {users?.profile ? (
                             <Image
-                                src={users?.profile}
-                                roundedCircle
-                                alt="profile"
-                                style={{ borderRadius: '100%', width: '45px', height: '45px' }}
+                              src={users.profile}
+                              roundedCircle
+                              alt="profile"
+                              style={{ width: '45px', height: '45px' }}
                             />
+                            ) : (
+                              <IoPersonCircleOutline size={45} color="#aaa" />
+                            )}
                         </Dropdown.Toggle>
                     </div>
                     <Dropdown.Menu>
