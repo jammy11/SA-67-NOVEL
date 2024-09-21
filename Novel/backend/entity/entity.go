@@ -60,7 +60,7 @@ type User struct {
 	LastName    string    `json:"last_name"`
 	BirthDate   time.Time `json:"birth_date"`
 	Gender      string    `json:"gender"`
-	Profile     string    `gorm:"type:text" json:"profile"`
+	Profile     string    `gorm:"type:longtext"`
 	CoinID      uint
 	Coin        Coin
 	BookshelfID uint

@@ -99,8 +99,8 @@ const Register: React.FC = () => {
                             rules={[{ required: true, message: 'กรุณาเลือกเพศ!' }]}
                         >
                             <Radio.Group>
-                                <Radio value="Male">ชาย</Radio>
-                                <Radio value="Female">หญิง</Radio>
+                                <Radio value="ชาย">ชาย</Radio>
+                                <Radio value="หญิง">หญิง</Radio>
                                 <Radio value="ไม่ระบุ">ไม่ระบุ</Radio>
                             </Radio.Group>
                         </Form.Item>
