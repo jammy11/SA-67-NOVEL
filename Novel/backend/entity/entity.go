@@ -114,10 +114,10 @@ type Bookshelf struct {
 type Bookshelf_List struct {
 	gorm.Model
 
-	BookshelfID uint      `json:"bookshelf_id"`
+	BookshelfID uint      `json:"bookshelf_id" gorm:"constraint:OnDelete:CASCADE"`
 	Bookshelf   Bookshelf `gorm:"foreignKey:BookshelfID"`
 
-	NovelID     uint      `json:"novel_id"`
+	NovelID     uint     `json:"novel_id" gorm:"constraint:OnDelete:CASCADE"`
 	Novel       Novel     `gorm:"foreignKey:NovelID"`
 }
 
