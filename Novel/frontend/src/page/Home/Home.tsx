@@ -30,7 +30,7 @@ const Home: React.FC = () => {
     </h2>
 
     <Slider />
-        
+    <a id='cat1_2'  className='hide'>1_2</a>
     </div>
     
         <Trand />
