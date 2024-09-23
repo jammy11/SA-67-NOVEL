@@ -69,4 +69,24 @@ func GetNovelIDsFromBookshelf(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"novel_ids": uniqueNovelIDs})
 }
 
+func CountNovelsByBookshelfID(c *gin.Context) {
+	var count int64
+	bookshelfID := c.Param("bookshelf_id") // Get Bookshelf_id from URL parameter
+	db := config.DB()
+
+	// Count distinct NovelID associated with the given Bookshelf_id
+	result := db.Model(&entity.Bookshelf_List{}).
+		Where("bookshelf_id = ?", bookshelfID).
+		Distinct("novel_id").
+		Count(&count)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"bookshelf_id": bookshelfID, "unique_novel_count": count})
+}
+
+
+
 

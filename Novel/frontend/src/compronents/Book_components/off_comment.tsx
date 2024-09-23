@@ -22,7 +22,7 @@ function Off_comment() {
 
       <Offcanvas show={show} onHide={handleClose}  >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Comment</Offcanvas.Title>
+          <Offcanvas.Title>กล่องคอมเมนต์!</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Commentsb novelId={novelId as string}/>
