@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FaHeart, FaComment } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 import Off_comment from './off_comment';
 import { GetNovelById } from '../../services/https/Novel/novel';
 import { CountCommentByNovelID } from '../../services/https/Comment/comment';
 import { useLikes } from './LikeContext';
 import { Flike, CountLikeByNovelID, CreateLike, DeleteLikeByNIdandUId } from "../../services/https/Likes/like";
 import './contentblock.css';
-
+import SLoader from './simpleLoader';
 
 interface NovelData {
   title: string;
@@ -16,11 +16,12 @@ interface NovelData {
 }
 
 const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
-  const {likes, setLikes } = useLikes();
+  const { likes, setLikes } = useLikes();
   const [isLiked, setIsLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(likes[novelId] || novelId.likes);
+  const [likesCount, setLikesCount] = useState(likes[novelId] || 0);
   const [novelData, setNovelData] = useState<NovelData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [minLoading, setMinLoading] = useState<boolean>(true);
   const userId = localStorage.getItem("id");
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
             setNovelData({
               title: novel.novel_name,
               content: novel.content,
-              likes: likes[novelId] || novel.novel_like, // Use the context value
+              likes: likes[novelId] || novel.novel_like,
               comments: commentCount,
             });
           } else {
@@ -48,10 +49,15 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
-        setLoading(false);
+        // Wait at least 1 second before setting loading to false
+        setTimeout(() => {
+          setMinLoading(false);
+          setLoading(false);
+        }, 1000);
       }
     };
-    const fetchLikecount = async () => {
+
+    const fetchLikeCount = async () => {
       try {
         const response = await CountLikeByNovelID(novelId);
         if (response.status === 200) {
@@ -63,6 +69,7 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
         console.error("Error fetching like count:", error);
       }
     };
+
     const fetchLike = async () => {
       if (userId) {
         try {
@@ -74,9 +81,9 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
       }
     };
 
-    fetchLikecount();
-    fetchLike();
     fetchData();
+    fetchLikeCount();
+    fetchLike();
   }, [novelId, likes, userId]);
 
   const handleLikeClick = async () => {
@@ -84,35 +91,31 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
       console.error("User ID is not available.");
       return;
     }
-  
+
     try {
-      // Check if the like exists
       const response = await Flike(userId, novelId);
       const checkLikestate = response.data.exists;
-  
+
       if (checkLikestate) {
-        // If the like exists, delete it
         await DeleteLikeByNIdandUId(userId, Number(novelId));
       } else {
-        // If the like does not exist, create it
         await CreateLike({
           user_id: Number(userId),
           novel_id: Number(novelId),
         });
       }
-  
-      // Update the like count and toggle the like status
+
       const newLikesCount = isLiked ? likesCount - 1 : likesCount + 1;
-      setLikes(novelId, newLikesCount); // Update likes in the context
-      setLikesCount(newLikesCount); // Update local likes count state
-      setIsLiked(!isLiked); // Toggle the like status
+      setLikes(novelId, newLikesCount);
+      setLikesCount(newLikesCount);
+      setIsLiked(!isLiked);
     } catch (error) {
       console.error("Error handling like:", error);
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if (loading || minLoading) {
+    return <SLoader />; // Show the loader while loading data
   }
 
   if (!novelData) {
@@ -141,7 +144,6 @@ const Cblock: React.FC<{ novelId: string }> = ({ novelId }) => {
         </div>
       </div>
       <div className='textbox'>
-        {/* Render HTML content */}
         <div
           className='text-style'
           dangerouslySetInnerHTML={{ __html: novelData.content }}

@@ -42,6 +42,10 @@ const Commentsb: React.FC<{ novelId: string }> = ({ novelId }) => {
       console.error("Failed to fetch comments:", error);
     }
   };
+  
+  const truncateText = (text: string, limit: number) => {
+    return text.length > limit ? `${text.slice(0, limit)}...` : text;
+  };
 
   const handleAddComment = (newComment: CommentProps) => {
     setComments(prevComments => [newComment, ...prevComments]); // Prepend the new comment
@@ -72,7 +76,9 @@ const Commentsb: React.FC<{ novelId: string }> = ({ novelId }) => {
                 <div className='username'>
                   <div className='userstyle'>{data.User.user_name}</div>
                 </div>
-                <div className='comment_text'>{data.description}</div>
+                <div className='comment_text'>
+                  {truncateText(data.description, 90)}
+                </div>
               </div>
             </div>
           </div>

@@ -40,6 +40,15 @@ export const GetBookshelfLists = async (): Promise<ApiResponse<any>> => {
   }
 };
 
+export const CountUniqueNovelsByBookshelfID = async (bookshelfId: string | null): Promise<ApiResponse<any>> => {
+  try {
+    const response = await axios.get(`${apiUrl}/bookshelves/${bookshelfId}/novelcount`, requestOptions);
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 // Function to fetch a single Bookshelf_List entry by ID
 export const GetBookshelfListById = async (
   id: string | null

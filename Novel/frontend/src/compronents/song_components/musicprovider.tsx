@@ -20,8 +20,8 @@ export const useMusic = () => {
 
 const playlist = [
   '/AAA.mp3',
-  '/AAA.mp3',
-  '/AAA.mp3',
+  '/Die With A Smile.mp3',
+  '/bread.mp3',
 ];
 
 export const MusicProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -66,6 +66,7 @@ export const MusicProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (!audio) return;
 
     audio.src = currentSong;
+    audio.volume = 0.1;
     audio.onerror = () => {
       console.error('Error loading audio:', currentSong);
     };
