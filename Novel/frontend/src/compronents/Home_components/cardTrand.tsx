@@ -101,7 +101,7 @@ const CardT: React.FC<CardProps> = ({ novel, index }) => {
       console.log("User is logged in");
       console.log("Current balance:", balance);
       console.log("Novel price:", novel.novel_price);
-      if (balance !== null && novel.novel_price < balance) {
+      if (balance !== null && novel.novel_price <= balance) {
         console.log("Balance is insufficient");
         setShow2(false);
         setShowConfirmation(true);
@@ -219,14 +219,14 @@ const CardT: React.FC<CardProps> = ({ novel, index }) => {
     navigate(`/L_content/${novel.ID}`);
   };
 
-
+  
   return (
     <>
             <div className='l1_1_2_1_x' onClick={cheackHave}>
               <img id="number"  src={`/src/assets/0${index + 1}.png`} alt={`0${index + 1}`} />
               <img id="minicard" src={novel.cover} alt={novel.novel_name} />
               <div className='tail'>
-                <span id='htail'><b>{novel.novel_name}</b></span>
+                <span id='htail'><b>{novel.novel_name.length > 30 ? `${novel.novel_name.slice(0, 30)}...` : novel.novel_name}</b></span>
                 <div className='p'>
                 <HiMiniShoppingCart id='icart'/>
                   <span id='view_like'>{buyAmount}</span>
@@ -311,7 +311,7 @@ const CardT: React.FC<CardProps> = ({ novel, index }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>
@@ -409,7 +409,7 @@ const CardT: React.FC<CardProps> = ({ novel, index }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>

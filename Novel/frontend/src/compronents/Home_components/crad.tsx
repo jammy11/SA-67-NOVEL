@@ -40,12 +40,18 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const handleShow2 = () => setShow2(true);
   const handleCloseUnlock = () => setshowNotLogin(false);
   const closeCoinAlert = () => setShowCoinAlert(false);
-  const CloseshowToShelf = () => setshowToShelf(false);
+  
   const CloseConfirmation = () => setShowConfirmation(false);
 
   const [income, setIncome] = useState<number>(0);
   const [balance, setBalance] = useState<number>(0);
   const userId = localStorage.getItem("id");
+  const CloseshowToShelf = async () => {
+    setshowToShelf(false);
+    setTimeout(() => {
+      triggerRefresh();
+    }, 100);
+  };
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -56,6 +62,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         console.error("Error fetching balance:", error);
       }
     };
+    
    
     const fetchLikecount = async () => {
       try {
@@ -99,12 +106,14 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       console.log("User is logged in");
       console.log("Current balance:", balance);
       console.log("Novel price:", novel.novel_price);
-      if (balance !== null && novel.novel_price < balance) {
-        console.log("Balance is insufficient");
+  
+      // Ensure the balance is greater than zero and sufficient for the novel price
+      if (balance !== null && balance > 0 && balance >= novel.novel_price) {
+        console.log("Balance is sufficient");
         setShow2(false);
         setShowConfirmation(true);
       } else {
-        console.log("Balance is sufficient or null");
+        console.log("Balance is insufficient or zero");
         setShow2(false);
         setShowCoinAlert(true);
       }
@@ -114,6 +123,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       setshowNotLogin(true);
     }
   };
+  
   
   const cheackHave = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click event propagation to Mcard
@@ -308,7 +318,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>
@@ -406,7 +416,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>

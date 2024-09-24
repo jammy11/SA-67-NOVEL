@@ -150,7 +150,7 @@ novels := []entity.Novel{
 		Type2:       "แอ็คชั่น",
 		Rate:        "15+",
 		WriterName:  "余弗(หยู่ฝู)",
-		Cover:       "https://s3.ap-southeast-1.amazonaws.com/media.fictionlog/books/65812462c4923a001d40b0b9/659ce322q5kyKQNQ.jpeg",
+		Cover:       "https://img.enjoybook.co/img/book/B2024LaIaNA3isd0619151333.jpeg",
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
