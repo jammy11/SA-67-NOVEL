@@ -38,6 +38,7 @@ type Package struct {
 	Amount float64 `json:"pack_amount"`
 	Price  float64 `json:"pack_price"`
 	Pic    string  `gorm:"type:text" json:"pack_pic"`
+	Transactions []Transaction
 }
 
 type Order struct {
@@ -59,7 +60,7 @@ type User struct {
 	LastName    string    `json:"last_name"`
 	BirthDate   time.Time `json:"birth_date"`
 	Gender      string    `json:"gender"`
-	Profile     string    `gorm:"type:text" json:"profile"`
+	Profile     string    `gorm:"type:longtext"`
 	CoinID      uint
 	Coin        Coin
 	BookshelfID uint
@@ -133,15 +134,3 @@ type Comment struct {
 }
 
 
-
-// type WriterTransaction struct{
-//     gorm.Model
-//     Income float64   `json:"income"` 
-
-//     WriterID  uint	`json:"writer_id"` 
-//     Writer    User	`gorm:"foreignKey:WriterID"`
-
-// 	NovelID uint   `json:"novel_id"`
-//     Novel   Novel  `gorm:"foreignKey:NovelID"`
-
-// }

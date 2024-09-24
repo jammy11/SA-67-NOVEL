@@ -13,7 +13,6 @@ const requestOptions = {
   },
 };
 
-
 // User Functions
 async function SignIn(data: SignInInterface) {
   return await axios
@@ -151,7 +150,6 @@ async function DeleteUsersById(id: string) {
     .then((res) => res)
     .catch((e) => e.response);
 }
-
 
 export {
   SignIn,

@@ -25,6 +25,8 @@ export interface SignInInterface {
 
   export interface UsersInterface {
 
+    Profile?: string;
+
     ID?: number;
   
     FirstName?: string;

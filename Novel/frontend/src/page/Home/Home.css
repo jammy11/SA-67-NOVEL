@@ -163,5 +163,7 @@
 }
 .hide{
     color: #1e1c1c00;
+    /* color: #ffffff; */
+    transform: translate(0,-500px);
     text-decoration: none;
 }
