@@ -46,14 +46,14 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const [income, setIncome] = useState<number>(0);
   const [balance, setBalance] = useState<number>(0);
   const userId = localStorage.getItem("id");
+
   const CloseshowToShelf = async () => {
     setshowToShelf(false);
-    setTimeout(() => {
       triggerRefresh();
-    }, 100);
   };
 
   useEffect(() => {
+   
     const fetchBalance = async () => {
       try {
         const response = await GetCoinById(userId);
@@ -62,7 +62,6 @@ const Card: React.FC<CardProps> = ({ novel }) => {
         console.error("Error fetching balance:", error);
       }
     };
-    
    
     const fetchLikecount = async () => {
       try {
@@ -99,16 +98,16 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
   const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
   const { triggerRefresh } = useBalanceContext();
-
+  const { balance: balanceC } = useBalanceContext(); 
   const checkLogin = async () => {
     console.log("checkLogin called");
     if (isLoggedIn) {
       console.log("User is logged in");
-      console.log("Current balance:", balance);
+      console.log("Current balance:", balanceC);
       console.log("Novel price:", novel.novel_price);
   
       // Ensure the balance is greater than zero and sufficient for the novel price
-      if (balance !== null && balance > 0 && balance >= novel.novel_price) {
+      if (balanceC !== null && balanceC > 0 && balanceC >= novel.novel_price) {
         console.log("Balance is sufficient");
         setShow2(false);
         setShowConfirmation(true);
@@ -513,7 +512,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               <span id='textprice2'>{novel.novel_price}</span>
             </span>
             <span className="f-1">
-              <img id='coin2' src="./src/assets/coin.png" alt="coin" />
+              <img id='coin2' src="./src/assets/coin-50.png" alt="coin" />
             </span>
             <div onClick={CloseConfirmation}>
               <span id='buttoncancle'>
