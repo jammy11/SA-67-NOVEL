@@ -44,6 +44,7 @@ const Home: React.FC = () => {
             <Slider />
           </div>
           <Trand />
+          <a id='cat1_2'  className='hide'>1_2</a>
         </div>
 
         <a id='cat2' className='hide'>2</a>
