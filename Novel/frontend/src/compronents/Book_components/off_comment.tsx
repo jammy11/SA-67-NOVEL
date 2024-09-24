@@ -1,5 +1,4 @@
 import React,{ useState } from 'react';
-
 import { useParams } from 'react-router-dom';
 import { Offcanvas } from 'react-bootstrap';
 import Commentsb from './comment';
