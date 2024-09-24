@@ -21,7 +21,7 @@ interface CardProps {
 
 }
 
-const Card: React.FC<CardProps> = ({ novel, index }) => {
+const CardT: React.FC<CardProps> = ({ novel, index }) => {
   const navigate = useNavigate();
   const { likes, setLikes } = useLikes();
   const [isLiked, setIsLiked] = useState(false);
@@ -275,17 +275,21 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
                           <div className="wraptag">         
                           <div className="wraptagin">
                                          
-                               {novel.novel_type1 &&<span id='tag1'>
+                   {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
                                   <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
                               </span>}
                             
-                  {novel.novel_type1 &&<span id='tag1'>
+                  {novel.novel_type2 &&<span id='tag1'>
                                 <span className="tag2">
-                                  <span id='tag2'>{novel.novel_type1}</span>
+                                  <span id='tag2'>{novel.novel_type2}</span>
                                 </span>
                               </span>}
+
+                 
+                            
+                           
                            
                    {novel.rate &&<span id='tag'>
                                 <span className="tag-3">
@@ -373,15 +377,15 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
                           <div className="wraptag">         
                           <div className="wraptagin">
                                          
-                               {novel.novel_type1 &&<span id='tag1'>
+                  {novel.novel_type1 &&<span id='tag1'>
                                 <span className="tag2">
                                   <span id='tag2'>{novel.novel_type1}</span>
                                 </span>
                               </span>}
                             
-                  {novel.novel_type1 &&<span id='tag1'>
+                  {novel.novel_type2 &&<span id='tag1'>
                                 <span className="tag2">
-                                  <span id='tag2'>{novel.novel_type1}</span>
+                                  <span id='tag2'>{novel.novel_type2}</span>
                                 </span>
                               </span>}
                            
@@ -545,4 +549,4 @@ const Card: React.FC<CardProps> = ({ novel, index }) => {
     );
 };
 
-export default Card;
+export default CardT;
