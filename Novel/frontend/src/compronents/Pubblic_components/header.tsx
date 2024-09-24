@@ -83,13 +83,6 @@ const TOP: React.FC = () => {
 
     const handleDropdownSelect = async (eventKey: string | null) => {
         switch (eventKey) {
-            case 'bookshelf':
-                if (isWriter) {
-                    window.location.href = '/bookshelf';
-                } else {
-                    setShowModal(true);
-                }
-                break;
             case 'writer':
                 if (isWriter) {
                     window.location.href = '/writer';
@@ -135,7 +128,7 @@ const TOP: React.FC = () => {
                     <Dropdown.Menu>
                         <Dropdown.Item href="/profile">โปรไฟล์ของฉัน</Dropdown.Item>
                         <Dropdown.Item eventKey="writer">งานเขียน</Dropdown.Item> {/* เพิ่มงานเขียนกลับมา */}
-                        <Dropdown.Item eventKey="bookshelf">ชั้นหนังสือ</Dropdown.Item>
+                        <Dropdown.Item href="/bookshelf">ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
                         <Dropdown.Item href="/settings">ตั้งค่า</Dropdown.Item>
                         <Dropdown.Item onClick={Logout}>ออกจากระบบ</Dropdown.Item>
