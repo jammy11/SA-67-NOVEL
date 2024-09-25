@@ -127,6 +127,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "สืบแค้นคุณหนูสวมรอย",
@@ -141,6 +142,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ทะลุมิติไปเป็นแม่ลูกสามผู้มั่งคั่ง By ไหหม่า",
@@ -155,6 +157,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ทะลุมิติมาเป็นอนุนอกเรือน",
@@ -169,6 +172,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ท่านแม่ทัพ ฮูหยินเรียกท่านไปทำนา",
@@ -183,6 +187,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "คุณหนูใหญ่ผู้นี้ไม่ต้องการก้าวหน้า",
@@ -197,6 +202,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ท่านแม่ทัพ ท่านต้องการภรรยาอย่างข้าถึงจะรุ่งเรือง",
@@ -211,6 +217,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ปลายจวักครองใจ",
@@ -225,6 +232,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "เซียนหมอหญิงยอดนักฆ่า",
@@ -239,6 +247,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "แผนรักร้ายคว้าหัวใจคุณสามี",
@@ -253,6 +262,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "เซียนจอมเวทเต็มพิกัด",
@@ -267,6 +277,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "พ่อบ้านราชาปีศาจ",
@@ -281,6 +292,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "สงครามบุปผาจักรกล",
@@ -295,6 +307,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "สงครามแค้นราชาอมตะ",
@@ -309,6 +322,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ชายผู้แข็งแกร่งจากการโดนทำร้าย !!",
@@ -323,6 +337,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ซามูไรไซบอร์ก",
@@ -337,6 +352,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "พี่สาวทั้ง 7 ตามใจ ฉัน สู่สวรรค์",
@@ -351,6 +367,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ข้าคือลอร์ดที่แข็งแกร่งที่สุดในปฐพี",
@@ -365,6 +382,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "จักรพรรดิวิญญาณ",
@@ -379,6 +397,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "อภินิหารทายาทมังกรจอมราชันย์",
@@ -393,6 +412,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	
 	{
@@ -408,6 +428,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "Beside วิญญาณตามติด",
@@ -422,6 +443,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "เกาะลับ ทะเลลวง",
@@ -436,6 +458,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "Lilith: Death's Order",
@@ -450,6 +473,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "วิฬาร์นคร (วิฬาร์อาถรรพ์ภาคสมบูรณ์)",
@@ -464,6 +488,7 @@ novels := []entity.Novel{
 		LikeCount:   0,
 		BuyAmount:   0,
 		WriterID:    1,
+		Visibility: true,
 	},
 	{
 		Name:        "ศพที่สอง",
@@ -477,7 +502,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ออฟฟิศมรณะ (Exit)",
@@ -491,7 +516,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ซ่อนกลิ่นริมสุสาน (Tuberoses on The Graveyard)",
@@ -505,7 +530,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "แค้นต้องชำระ",
@@ -519,7 +544,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "BOY FROM NO WHERE",
@@ -533,7 +558,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ระบบแหวนสุดโกงสร้างตำนานในสองโลก",
@@ -547,7 +572,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "พลิกตำนานสามก๊ก",
@@ -561,7 +586,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ผมเป็นเจ้าของโรงพยาบาลจิตเวชพิศวง",
@@ -575,7 +600,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ราชันเร้นลับ (Lord of the Mysteries)",
@@ -589,7 +614,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ระบบร้านค้าแผงลอยขั้นเทพ",
@@ -602,7 +627,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "กลายเป็นอภิมหาเศรษฐีหลังจากถูกรางวัลที่ 1",
@@ -616,7 +641,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "เส้นทางสู่จอมเวท (The Leveling-Up Mage)",
@@ -630,7 +655,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "ฟู่เยี่ยน สาวน้อยเนตรสวรรค์",
@@ -644,7 +669,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "บันทึกตำนานจักรพรรดิหมิง",
@@ -658,7 +683,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "อัจฉริยะแห่งราชวงศ์ถัง",
@@ -672,7 +697,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        " เรื่องลึกลับของบ้านสุดอลเวง",
@@ -686,7 +711,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 
 
@@ -702,7 +727,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "สลับร่างสลับใจ ยัยข้างบ้าน",
@@ -716,7 +741,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 
 
@@ -732,7 +757,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "Mr.Exchang - เปลี่ยนมารักพี่หมอคนนี้",
@@ -746,7 +771,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 
 
@@ -762,7 +787,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "สาม(สาวน้อย)ร้อยปัญหา",
@@ -776,7 +801,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 
 
@@ -792,7 +817,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 	{
 		Name:        "คิวปิดน้องนก",
@@ -806,7 +831,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 
 
@@ -822,7 +847,7 @@ novels := []entity.Novel{
 		Price:       50,
 		LikeCount:   0,
 		BuyAmount:   0,
-		WriterID:    1,
+		WriterID:    1,Visibility: true,
 	},
 }
 
