@@ -90,7 +90,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose, novelId, o
         />
         {error && <p className="error">{error}</p>} {/* Display error message */}
 
-        <div style={{ display: 'inline-block', marginTop: '1em' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1em' }}>
           <button
             onClick={handleSubmit}
             style={{
