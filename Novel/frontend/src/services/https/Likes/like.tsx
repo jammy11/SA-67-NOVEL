@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Like } from "../../../interface/like/like";
+import { Like } from "../../../interface/like_interface/like";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");

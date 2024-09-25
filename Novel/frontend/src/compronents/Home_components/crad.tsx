@@ -107,7 +107,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       console.log("Novel price:", novel.novel_price);
   
       // Ensure the balance is greater than zero and sufficient for the novel price
-      if (balanceC !== null && balanceC > 0 && balanceC >= novel.novel_price) {
+      if (balanceC !== null && balanceC >= novel.novel_price) {
         console.log("Balance is sufficient");
         setShow2(false);
         setShowConfirmation(true);
