@@ -14,6 +14,7 @@ const Trand: React.FC = () => {
         
         // Sort novels by buy_amount in descending order and select the top 5
         const topNovels = response.data.novels
+          .filter((novel: IGroupCard) => novel.novel_visibility === true) // เช็คว่า novel_visibility === true
           .sort((a: IGroupCard, b: IGroupCard) => b.buy_amount - a.buy_amount)
           .slice(0, 5);
         

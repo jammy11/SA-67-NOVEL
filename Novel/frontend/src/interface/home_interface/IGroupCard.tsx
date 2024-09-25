@@ -8,6 +8,7 @@ export interface IGroupCard {
     rate: string;
     writername: string;
     cover: string;
+    novel_visibility: boolean;
     novel_price: number;
     novel_like: number;
     buy_amount: number;

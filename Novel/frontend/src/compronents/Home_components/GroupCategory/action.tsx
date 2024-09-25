@@ -17,7 +17,8 @@ const CardList2: React.FC = () => {
         // Filter novels where novel_type1 or novel_type2 is 'โรแมนติก'
         const romanticNovels = response.data.novels.filter(
           (novel: IGroupCard) =>
-            novel.novel_type1 === 'แอ็คชั่น' || novel.novel_type2 === 'แอ็คชั่น'
+            (novel.novel_type1 === 'แอ็คชั่น' || novel.novel_type2 === 'แอ็คชั่น') &&
+            novel.novel_visibility === true // เช็คว่า visibility = true (เผยแพร่ได้)
         );
         
         setNovels(romanticNovels);

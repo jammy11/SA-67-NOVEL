@@ -9,7 +9,7 @@ interface WriterEditComponentProps {
 const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData, novelData }) => {
   const [novelName, setNovelName] = useState(novelData.novel_name || '');
   const [writerName, setWriterName] = useState(novelData.writername || '');
-  const [novelVisibility, setNovelVisibility] = useState(novelData.visibility || 'เผยแพร่');
+  const [novelVisibility, setNovelVisibility] = useState<boolean>(novelData.novel_visibility || false);
   const [coverImage, setCoverImage] = useState(novelData.cover || '');
   const [description, setDescription] = useState(novelData.description || '');
   const [novelType1, setNovelType1] = useState(novelData.novel_type1 || '');
@@ -35,17 +35,19 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
       writername: writerName,
       cover: coverImage,
       description: description,
+      novel_visibility: novelVisibility, // เก็บค่าเป็น boolean
       novel_type1: novelType1,
       novel_type2: novelType2,
       rate: novelRate,
       novel_price: novelPrice,
     }));
-  }, [novelName, writerName, coverImage, description, novelType1, novelType2, novelRate, novelPrice]);
+  }, [novelName, writerName, coverImage, description, novelVisibility, novelType1, novelType2, novelRate, novelPrice]);
   
 
   useEffect(() => {
     setNovelName(novelData.novel_name || '');
     setWriterName(novelData.writername || '');
+    setNovelVisibility(novelData.novel_visibility || false);
     setCoverImage(novelData.cover || '');
     setDescription(novelData.description || '');
     setNovelType1(novelData.novel_type1 || '');
@@ -62,7 +64,7 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
             type="text"
             placeholder="ชื่อนิยาย"
             name="nameNovel"
-            className="inputNovel-test"
+            className="inputNovel-Name"
             value={novelName}
             onChange={(e) => setNovelName(e.target.value)}
           />
@@ -89,6 +91,18 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
           </label>
         </div>
 
+          <div className="input-wrapper-dropdownNovelVisibility">
+          <select
+            className="dropdownNovelVisibility "
+            value={novelVisibility ? 'true' : 'false'}
+            onChange={(e) => setNovelVisibility(e.target.value === 'true')}
+          >
+            <option value="" disabled>สถานะการเผยแพร่</option>
+            <option value="false">ส่วนตัว</option>
+            <option value="true">เผยแพร่</option>
+          </select>
+        </div>
+
         <div className="input-container-NovelNameAndWriterName">
           <input
             type="text"
@@ -104,7 +118,7 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
 
       <div className="writerEditBottomNovel">
         <div className='coverdescription'>
-          <div className="input-container-descriptionNovel">
+
             <textarea
               placeholder="คำอธิบาย"
               maxLength={150}
@@ -113,7 +127,7 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-          </div>
+          
         </div>
 
         <div className="typeAndPriceContainer">
@@ -124,7 +138,7 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
               onChange={(e) => setNovelType1(e.target.value)}
             >
               <option value="" disabled>ประเภทที่ 1</option>
-              <option value="โรมแนติก">โรแมนติก</option>
+              <option value="โรแมนติก">โรแมนติก</option>
               <option value="คอมเมดี้">คอมเมดี้</option>
               <option value="แอ็คชั่น">แอ็คชั่น</option>
               <option value="สยองขวัญ">สยองขวัญ</option>
@@ -133,18 +147,19 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
           </div>
           
           <div className="input-wrapper-dropdownNovelType">
-            <select
-              className="dropdownNovelTypeAndRate"
-              value={novelType2}
-              onChange={(e) => setNovelType2(e.target.value)}
+          <select
+          className={`dropdownNovelTypeAndRate ${novelData.novel_type1 === novelData.novel_type2 ? 'error' : ''}`}
+          value={novelType2}
+          onChange={(e) => setNovelType2(e.target.value)}
             >
-              <option value="" disabled>ประเภทที่ 2</option>
-              <option value="โรมแนติก">โรแมนติก</option>
-              <option value="คอมเมดี้">คอมเมดี้</option>
-              <option value="แอ็คชั่น">แอ็คชั่น</option>
-              <option value="สยองขวัญ">สยองขวัญ</option>
-              <option value="แฟนตาซี">แฟนตาซี</option>
-            </select>
+          <option value="" disabled>ประเภทที่ 2</option>
+          <option value="โรแมนติก">โรแมนติก</option>
+          <option value="คอมเมดี้">คอมเมดี้</option>
+          <option value="แอ็คชั่น">แอ็คชั่น</option>
+          <option value="สยองขวัญ">สยองขวัญ</option>
+          <option value="แฟนตาซี">แฟนตาซี</option>
+          </select>
+
           </div>
 
           <div className="input-wrapper-dropdownNovelType">
@@ -166,7 +181,7 @@ const WriterEditComponent: React.FC<WriterEditComponentProps> = ({ setNovelData,
               type="text"
               placeholder="ราคานิยาย"
               name="priceNovel"
-              className="inputPrice"
+              className="inputPriceNovel"
               value={novelPrice}
               onChange={(e) => setNovelPrice(e.target.value)}
             />

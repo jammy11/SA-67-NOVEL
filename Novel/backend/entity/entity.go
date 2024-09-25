@@ -89,6 +89,7 @@ type Novel struct {
 	gorm.Model
 	Name        string  `json:"novel_name"`
 	Content     string  `gorm:"type:longtext" json:"content"`
+	Visibility  bool    `json:"novel_visibility"`
 	Description string  `json:"description"`
 	Type1       string  `json:"novel_type1"`
 	Type2       string  `json:"novel_type2"`

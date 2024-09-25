@@ -1,4 +1,5 @@
-export interface InterfaceNovelOfWriter { 
+export interface InterfaceNovelOfWriter {
+    novel_visibility: any; 
     ID: number;
     novel_name: string; // เปลี่ยนจาก Name
     Cover: string;
@@ -9,4 +10,5 @@ export interface InterfaceNovelOfWriter {
     Like: number;
     Rate?: string;
     Type?: string;
+    Comment?: number;
 }

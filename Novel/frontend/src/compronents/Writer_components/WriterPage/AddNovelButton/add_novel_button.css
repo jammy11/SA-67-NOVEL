@@ -1,4 +1,4 @@
-.addNovelbutton{
+.addNovelbutton {
     background-color: #FFB800;
     border-radius: 20px;
     border: none;
@@ -9,14 +9,29 @@
     height: 40px;
     font-weight: bold;
     color: black;
+    transition: transform 0.2s ease, background-color 0.2s ease; /* เพิ่ม transition */
 }
 
-.addNovelbutton:hover{
-    font-weight: bold;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-left: 20px;
+.addNovelbutton:hover {
+    transform: scale(1.05); /* ขยายขนาดเมื่อ hover */
+    background-color: #ebad0f; /* เปลี่ยนสีเมื่อ hover */
     color: black;
-    background-color: #ebad0f;
-    border: white;
+}
+
+.addNovelbutton:active {
+    transform: scale(0.95); /* ย่อขนาด   ปุ่มเล็กลงเมื่อกด */
+    background-color: #d89a0b; /* เปลี่ยนสีเมื่อปุ่มถูกกด */
+}
+
+/* Optional animation effect */
+@keyframes clickEffect {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

@@ -53,7 +53,7 @@ async function CreateNovel(data: NovelCre) {
 
   async function UpdateNovelById(id: string, data: NovelBuy) {
     return await axios
-    .put(`${apiUrl}/novel/${id}`, data, requestOptions)
+    .put(`${apiUrl}/novel_update/${id}`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
   }

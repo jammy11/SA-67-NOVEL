@@ -19,16 +19,14 @@
 
 .textbox {
     width: 93%;
-    background-color: #aaa;
+    background-color: #eeeeee;
     margin-top: 10px;
     border-radius: 5px;
     padding: 10px;
     transition: background-color 0.3s;
 }
 
-.textbox:hover {
-    background-color: #9c9c9c;
-}
+
 
 .text-style {
     font-family: Georgia, 'Times New Roman', Times, serif;
