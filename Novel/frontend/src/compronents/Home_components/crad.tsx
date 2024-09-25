@@ -380,9 +380,9 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                                 </span>
                               </span>}
                             
-                  {novel.novel_type1 &&<span id='tag1'>
+                  {novel.novel_type2 &&<span id='tag1'>
                                 <span className="tag2">
-                                  <span id='tag2'>{novel.novel_type1}</span>
+                                  <span id='tag2'>{novel.novel_type2}</span>
                                 </span>
                               </span>}
                            

@@ -1,6 +1,6 @@
-  /* NovelEditor.css */
+/* NovelEditor.css */
 
-  .textEditor {
+.textEditor {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -41,11 +41,12 @@
 
 /* ปรับแต่งเพิ่มเติมตามต้องการ */
 .ProseMirror { /* นี่คือ class หลักของ Tiptap editor content */
-    min-height: 300px; /* กำหนดความสูงขั้นต่ำ */
-    min-height: 300px; 
-    border: 2px solid #ccc; 
-    line-height: 1.2; /* หรือค่าอื่นๆ ตามที่คุณต้องการ */
-    padding: 20px;
+    min-height: 300px;
+  border: 2px solid #ccc;
+  line-height: 1.5; /* หรือค่าอื่นที่ต้องการ */
+  padding: 20px;
+  white-space: pre-wrap; /* เพื่อให้จัดการกับช่องว่างและการขึ้นบรรทัดได้อย่างเหมาะสม */
+  overflow-wrap: break-word; /* ป้องกันไม่ให้คำถูกแสดงเกินขอบหน้าต่าง */
 }
 
 .ProseMirror:focus {
@@ -53,7 +54,5 @@
 }
 
 .ProseMirror p {
-line-height: 0;
+line-height: 1.5;
 }
-
-

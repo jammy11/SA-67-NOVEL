@@ -32,20 +32,28 @@
 }
 
 .inputNovel-WriterName {
-  background-color: #eee;
-  border: none;
-  padding: 1rem;
-  font-size: 1rem;
-  font-family: 'Noto Sans Thai';
-  border-radius: 1rem;
-  color: rgb(0, 0, 0);
-  box-shadow: 0 0.4rem #000000;
-  cursor: pointer;
-  width: 20%;
-  max-width: 600px;
-  max-height: 30px; /* ปรับขนาดสูงสุดให้เหมาะสม */
-  margin-bottom: 20px;
-  margin-top: 20px;
+  width: 100%;
+  max-width: 220px;
+  height: 45px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid rgb(0, 0, 0);
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.inputNovel-WriterName:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
+}
+
+.inputNovel-WriterName:active {
+  transform: scale(0.95);
+}
+
+.inputNovel-WriterName:focus {
+  border: 2px solid grey;
 }
 
 /* แก้ไข CSS ของ custom upload ตามที่ให้มา */
@@ -54,12 +62,12 @@
   justify-content: center; /* จัดกึ่งกลางแนวนอน */
   align-items: center; /* จัดกึ่งกลางแนวตั้ง */
   width: 100%; /* ให้เต็มความกว้าง */
-  height: 200px; /* ปรับความสูงตามที่ต้องการ */
+  height: 350px; /* ปรับความสูงตามที่ต้องการ */
 }
 
 .custum-file-upload {
-  height: 200px; /* ปรับขนาดตามที่ต้องการ */
-  width: 300px; /* ปรับขนาดตามที่ต้องการ */
+  height: 310px; /* ปรับขนาดตามที่ต้องการ */
+  width: 250px; /* ปรับขนาดตามที่ต้องการ */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,16 +118,15 @@
   display: none;
 }
 
-/* การจัดการส่วน dropdown */
-.input-container-dropdownNovelVisibility {
-  display: flex;
-  justify-content: center; /* จัดกึ่งกลางแนวนอน */
-  align-items: center; /* จัดกึ่งกลางแนวตั้ง */
-  width: 100%;
+.input-wrapper-dropdownNovelVisibility {
+  width: 100%; /* ทำให้ครอบคลุมความกว้างของ container */
+  display: flex; /* ใช้ flexbox */
+  justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+  align-items: center; /* จัดให้อยู่ตรงกลางแนวตั้ง (ถ้า container มีความสูง) */
+  margin-bottom: 20px;
 }
 
 .dropdownNovelVisibility {
-  width: 100%;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
@@ -131,8 +138,10 @@
   box-shadow: 0 0.4rem #bc8700;
   cursor: pointer;
   margin-top: 10px;
-  width: 13%;
+  width: auto; /* ปรับให้ขนาดตามเนื้อหา */
+  max-width: 150px; /* จำกัดขนาดสูงสุด */
 }
+
 
 /* การจัดการส่วนคำอธิบาย */
 .coverdescription {
@@ -140,36 +149,30 @@
   justify-content: center;
 }
 
-.input-container-descriptionNovel {
-  background-color: #eee;
-  border: none;
-  margin-top: 20px;
-  padding: 1rem;
-  font-size: 1rem;
-  font-family: 'Noto Sans Thai';
-  border-radius: 1rem;
-  color: rgb(0, 0, 0);
-  box-shadow: 0 0.4rem #dfd9d9;
-  cursor: pointer;
-  display: flex;
-  justify-content: center; /* จัดกึ่งกลางแนวนอน */
-  align-items: center; /* จัดกึ่งกลางแนวตั้ง */
-  width: 80%; /* ให้เต็มความกว้าง */
-  height: 100px; /* ปรับความสูงตามที่ต้องการ */
-}
-
-.input-descriptionNovel {
+.input-descriptionNovel{
   width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #eee;
+  max-width: 600px;
+  height: 100px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid rgb(0, 0, 0);
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0px 0px 20px -18px;
 }
 
-.input-descriptionNovel::placeholder {
-  color: #aaa; /* สีของ placeholder */
-  font-style: italic; /* รูปแบบของ placeholder */
+.input-descriptionNovel:hover {
+  border: 2px solid lightgrey;
+  box-shadow: 0px 0px 20px -17px;
 }
 
+.input-descriptionNovel:active {
+  transform: scale(0.95);
+}
+
+.input-descriptionNovel:focus {
+  border: 2px solid grey;
+}
 /* การจัดการส่วนประเภทและราคา */
 .typeAndPriceContainer {
   margin-bottom: 20px;
@@ -181,6 +184,14 @@
 }
 
 .input-wrapper-dropdownNovelType {
+  display: flex;
+  justify-content: center;
+  width: auto; /* ทำให้ขนาดของ dropdown ไม่เกินเนื้อหา */
+  max-width: 150px; /* จำกัดขนาดสูงสุดให้พอดี */
+  margin-right: 10px; /* เพิ่มระยะห่างระหว่าง dropdown */
+}
+
+.dropdownNovelTypeAndRate {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -192,18 +203,9 @@
   color: #000000;
   box-shadow: 0 0.4rem #bc8700;
   cursor: pointer;
-  margin-top: 10px;
-  width: 13%;
 }
 
-.dropdownNovelTypeAndRate {
-  background-color: #FFB800;
-  border: none;
-  font-family: 'Noto Sans Thai';
-  font-weight: bold;
-}
-
-.inputPrice {
+.inputPriceNovel {
   width: 100%;
   font-size: 16px;
   font-weight: bold;
@@ -214,18 +216,16 @@
   box-shadow: 0 0.4rem #bc8700;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%;
-}
-
-.input-wrapper-Price{
-  padding-top: 10px;
 }
 
 
 
 
 
-.inputNovel-test {
+
+
+
+.inputNovel-Name {
   width: 100%;
   max-width: 220px;
   height: 45px;
@@ -237,16 +237,16 @@
   box-shadow: 0px 0px 20px -18px;
 }
 
-.inputNovel-test:hover {
+.inputNovel-Name:hover {
   border: 2px solid lightgrey;
   box-shadow: 0px 0px 20px -17px;
 }
 
-.inputNovel-test:active {
+.inputNovel-Name:active {
   transform: scale(0.95);
 }
 
-.inputNovel-test:focus {
+.inputNovel-Name:focus {
   border: 2px solid grey;
 }
 

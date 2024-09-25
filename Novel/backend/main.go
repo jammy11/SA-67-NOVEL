@@ -87,7 +87,7 @@ func main() {
 		// Novel Routes
 		router.GET("/novels", novels.GetAll)                    // Get all novels
 		router.GET("/novel/:id", novels.Get)                   // Get novel by ID
-		router.PUT("/novel/:id", novels.Update)                // Update novel by ID
+		router.PUT("/novel_update/:id", novels.Update)                // Update novel by ID
 		router.POST("/novel", novels.Create)      
 		router.GET("/novels/writer/:id", novels.GetNovelsByUser)              // Create a new novel
 		router.DELETE("/novel/:id", novels.Delete)             // Delete novel by ID
