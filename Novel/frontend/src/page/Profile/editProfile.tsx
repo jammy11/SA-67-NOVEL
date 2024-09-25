@@ -16,6 +16,7 @@ const EditProfile: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [profileDeleted, setProfileDeleted] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -31,6 +32,7 @@ const EditProfile: React.FC = () => {
                             email: res.data.email,
                             gender: res.data.gender,
                             birth_date: dayjs(res.data.birth_date),
+                            profile: res.data.profile,
                         });
                         if (res.data.profile) {
                             setFileList([{
@@ -55,6 +57,20 @@ const EditProfile: React.FC = () => {
 
     const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
         setFileList(newFileList);
+        setProfileDeleted(newFileList.length === 0);
+        
+        if (newFileList.length === 0) {
+            form.setFieldsValue({ profile: '' }); 
+        } else {
+            const file = newFileList[0];
+            if (file.originFileObj) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    form.setFieldsValue({ profile: e.target?.result });
+                };
+                reader.readAsDataURL(file.originFileObj);
+            }
+        }
     };
 
     const onPreview = async (file: UploadFile) => {
@@ -80,9 +96,13 @@ const EditProfile: React.FC = () => {
                 return;
             }
 
-            if (fileList.length > 0) {
-                values.profile = fileList[0].thumbUrl || fileList[0].url;
-            }
+            if (profileDeleted) {
+                values.profile = ''; // Set to empty string instead of null
+            } else {
+                values.profile = form.getFieldValue('profile');
+            
+    }
+
 
             const res = await UpdateUsersById(id, values);
             if (res) {
@@ -113,7 +133,7 @@ const EditProfile: React.FC = () => {
                     onChange={onChange}
                     onPreview={onPreview}
                     maxCount={1}
-                    beforeUpload={() => false} // Prevent auto upload
+                    beforeUpload={() => false} 
                 >
                     {fileList.length < 1 && (
                         <div>
