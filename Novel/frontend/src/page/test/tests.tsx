@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
-import CreditCardForm from '../../compronents/Test_compnests/credittest';
+import React, { useState, useEffect } from 'react';
 import Headers from '../../compronents/Pubblic_components/headerselect';
-import YourComponent from '../../compronents/Test_compnests/Buytest';
-import MyComponent2 from '../../compronents/Test_compnests/HoverInSideTest';
 import MusicPlayer from '../../compronents/song_components/musicBase';
 import { MusicProvider } from '../../compronents/song_components/musicprovider';
+import SLoader from '../../compronents/Book_components/simpleLoader';
+import './setting.css';
 
 const Test: React.FC = () => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const handleCardClick = () => {
-        setIsPopupOpen(true);
-    };
+    useEffect(() => {
+        const loaderTimer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000); // Show loader for 1 second
 
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    };
+        return () => clearTimeout(loaderTimer); // Cleanup the timer on unmount
+    }, []);
+
+    if (isLoading) {
+        return <SLoader />; // Show SLoader during the loading period
+    }
 
     return (
         <MusicProvider>
             <Headers />
-
-            <div className="g2">
-            <MusicPlayer />
-          
+            <div className="content-container fade-in">
+                <div className="getar transition-scale">
+                    <MusicPlayer />
+                </div>
             </div>
-            </MusicProvider>
+        </MusicProvider>
     );
 };
 

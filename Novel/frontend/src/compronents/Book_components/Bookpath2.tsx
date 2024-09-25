@@ -3,6 +3,7 @@ import './cardlist.css';
 import NCardv2 from './Novelbasev2';
 import { GetListofnovelID, GetNovelById } from '../../services/https/Bookshelf/bookshelf';
 import { NCardPropsv } from '../../interface/bookey_interface/bookshelfs';
+import SLoader from './simpleLoader';
 
 const BookshelfID = '1'; // Replace with dynamic ID if needed
 const userId = localStorage.getItem("id");

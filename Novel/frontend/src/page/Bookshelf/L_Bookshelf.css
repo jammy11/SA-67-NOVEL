@@ -32,7 +32,7 @@
     width: 73%;
     height: auto;
     background-color: rgb(166, 161, 161);
-    background: linear-gradient(180deg, orange 60%, cyan);
+    background: linear-gradient(180deg, rgb(170, 217, 236) 60%, rgb(94, 165, 143));
     justify-content: space-between;
     border-radius: 8px;
     padding: 10px;

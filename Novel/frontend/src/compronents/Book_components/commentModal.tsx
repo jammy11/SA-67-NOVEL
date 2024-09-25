@@ -68,7 +68,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose, novelId, o
     <div className={`modal-comment ${isOpen ? 'open' : ''}`}>
       <div className="modal-content-comment">
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>Write a Comment</h2>
+        <h2>แสดงความคิดเห็น</h2>
         <textarea
           placeholder="Your Comment"
           value={commentText}
@@ -76,9 +76,57 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose, novelId, o
             setCommentText(e.target.value);
             setError(""); // Clear error when user types
           }}
+          style={{
+            width: '100%',  // Full width of the modal content
+            minHeight: '100px',  // Minimum height for better UX
+            maxHeight: '200px',  // Maximum height to prevent the box from expanding indefinitely
+            resize: 'vertical',  // Allow the user to resize the textarea vertically only
+            padding: '10px',
+            fontSize: '16px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            boxSizing: 'border-box',
+          }}
         />
         {error && <p className="error">{error}</p>} {/* Display error message */}
-        <button onClick={handleSubmit}>Submit</button>
+
+        <div style={{ display: 'inline-block', marginTop: '1em' }}>
+          <button
+            onClick={handleSubmit}
+            style={{
+              fontSize: '17px',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+              borderRadius: '0.75em',
+              background: '#000000',
+              padding: '0.75em 1.5em',
+              outline: 'none',
+              position: 'relative',
+              color: '#000000',
+              display: 'block',
+              boxSizing: 'border-box',
+              transition: 'transform 0.1s ease',
+              border: '2px solid #000000',
+              backgroundColor: '#e8e8e8',
+              transform: 'translateY(-0.2em)',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'translateY(-0.33em)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'translateY(-0.2em)';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'translateY(-0.2em)';
+            }}
+          >
+            ยืนยัน
+          </button>
+        </div>
       </div>
     </div>
   );

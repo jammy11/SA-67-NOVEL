@@ -103,7 +103,7 @@ func Delete(c *gin.Context) {
 
     db := config.DB()
 
-    result := db.Preload("Writer").Preload("Bookshelf").Delete(&entity.Novel{}, ID)
+    result := db.Preload("Writer").Preload("Bookshelf_List").Delete(&entity.Novel{}, ID)
     if result.RowsAffected == 0 {
         c.JSON(http.StatusNotFound, gin.H{"error": "Novel not found"})
         return

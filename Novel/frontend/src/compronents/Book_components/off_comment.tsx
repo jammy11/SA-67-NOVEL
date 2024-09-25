@@ -1,5 +1,4 @@
 import React,{ useState } from 'react';
-
 import { useParams } from 'react-router-dom';
 import { Offcanvas } from 'react-bootstrap';
 import Commentsb from './comment';
@@ -22,7 +21,7 @@ function Off_comment() {
 
       <Offcanvas show={show} onHide={handleClose}  >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Comment</Offcanvas.Title>
+          <Offcanvas.Title>กล่องคอมเมนต์!</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Commentsb novelId={novelId as string}/>

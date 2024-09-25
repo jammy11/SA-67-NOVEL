@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GetPublicNovels } from '../../../services/https/Novel/novel';
-import Card from '../cardTrand';
+import CardT from '../cardTrand';
 import { IGroupCard } from '../../../interface/home_interface/IGroupCard';
 
 const Trand: React.FC = () => {
@@ -36,7 +36,7 @@ const Trand: React.FC = () => {
     <div className='l1_1_2_1'>
        <div className='card-list'>
        {novels.map((novel, index) => (
-          <Card key={novel.ID} novel={novel} index={index} />
+          <CardT key={novel.ID} novel={novel} index={index} />
       ))}
         </div>
     </div>

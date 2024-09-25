@@ -101,6 +101,7 @@ func main() {
 
 	// BookandNovel Routes
 		router.GET("/booknovel/:id", bookandnovel.GetNovelIDsFromBookshelf)
+		router.GET("/bookshelves/:bookshelf_id/novelcount",bookandnovel.CountNovelsByBookshelfID)
 
 		// Comment Routes
 		router.GET("/comments", comments.GetAll)             // List all comments

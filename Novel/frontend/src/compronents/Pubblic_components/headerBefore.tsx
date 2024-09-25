@@ -34,7 +34,7 @@ const TOP2: React.FC = () => {
                         <Dropdown.Item id='locks' onClick={handleWriterClick}>งานเขียน</Dropdown.Item>
                         <Dropdown.Item onClick={handleWriterClick}>ชั้นหนังสือ</Dropdown.Item>
                         <Dropdown.Item id='locks' href="/Payment">เหรียญ & ประวัติธุรกรรม</Dropdown.Item>
-                        {/* <Dropdown.Item id='locks' href="/settings">ตั้งค่า</Dropdown.Item> */}
+                        <Dropdown.Item id='locks' href="/settings">ตั้งค่า</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

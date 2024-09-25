@@ -40,14 +40,20 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   const handleShow2 = () => setShow2(true);
   const handleCloseUnlock = () => setshowNotLogin(false);
   const closeCoinAlert = () => setShowCoinAlert(false);
-  const CloseshowToShelf = () => setshowToShelf(false);
+  
   const CloseConfirmation = () => setShowConfirmation(false);
 
   const [income, setIncome] = useState<number>(0);
   const [balance, setBalance] = useState<number>(0);
   const userId = localStorage.getItem("id");
 
+  const CloseshowToShelf = async () => {
+    setshowToShelf(false);
+      triggerRefresh();
+  };
+
   useEffect(() => {
+   
     const fetchBalance = async () => {
       try {
         const response = await GetCoinById(userId);
@@ -92,19 +98,21 @@ const Card: React.FC<CardProps> = ({ novel }) => {
   // ใช้ useAuth เพื่อตรวจสอบการล็อกอิน
   const { isLoggedIn } = useAuth(); // ใช้ useAuth เพื่อดึงสถานะการล็อกอิน
   const { triggerRefresh } = useBalanceContext();
-
+  const { balance: balanceC } = useBalanceContext(); 
   const checkLogin = async () => {
     console.log("checkLogin called");
     if (isLoggedIn) {
       console.log("User is logged in");
-      console.log("Current balance:", balance);
+      console.log("Current balance:", balanceC);
       console.log("Novel price:", novel.novel_price);
-      if (balance !== null && novel.novel_price < balance) {
-        console.log("Balance is insufficient");
+  
+      // Ensure the balance is greater than zero and sufficient for the novel price
+      if (balanceC !== null && balanceC > 0 && balanceC >= novel.novel_price) {
+        console.log("Balance is sufficient");
         setShow2(false);
         setShowConfirmation(true);
       } else {
-        console.log("Balance is sufficient or null");
+        console.log("Balance is insufficient or zero");
         setShow2(false);
         setShowCoinAlert(true);
       }
@@ -114,6 +122,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
       setshowNotLogin(true);
     }
   };
+  
   
   const cheackHave = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent click event propagation to Mcard
@@ -308,7 +317,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>
@@ -406,7 +415,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
                         </div>
                         <div className="component-13">
                           <span className="f-1">
-                            <img id='coin' src="./src/assets/coin.png" alt="coin" />
+                            <img id='coin' src="./src/assets/coin-50.png" alt="coin" />
                           </span>
                         </div>
                       </div>
@@ -503,7 +512,7 @@ const Card: React.FC<CardProps> = ({ novel }) => {
               <span id='textprice2'>{novel.novel_price}</span>
             </span>
             <span className="f-1">
-              <img id='coin2' src="./src/assets/coin.png" alt="coin" />
+              <img id='coin2' src="./src/assets/coin-50.png" alt="coin" />
             </span>
             <div onClick={CloseConfirmation}>
               <span id='buttoncancle'>
