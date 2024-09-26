@@ -4,7 +4,7 @@ import { Alert } from 'antd';
 
 import './pop.css';
 import './pop_CD1.css';
-import { Package } from '../../../แดนโค้ดมรณา/interface';
+import { Package } from '../../interface/transaction_interface/IPackgae';
 import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard';
 import { CreateTransaction } from '../../services/https/Transaction/transaction';

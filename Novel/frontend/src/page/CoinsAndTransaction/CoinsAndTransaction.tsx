@@ -7,13 +7,7 @@ import Popup3 from '../../compronents/Trasaction_compnents/pop_CD1';
 import Headers from '../../compronents/Pubblic_components/headerselect';
 
 const Payment: React.FC = () => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const handleCardClick = () => {
-        setIsPopupOpen(true);
-    };
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    };
+ 
     return (
         <>
          <Headers/>
@@ -31,7 +25,7 @@ const Payment: React.FC = () => {
             <Popup2/>
             <Popup3/>
             </div>
-            <hr width='98%' />
+            <hr style={{width:"98%"} } />
             <div className="g2_1">
                
                 <h3>&nbsp; <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประวัติการทำธุรกรรม</h3>

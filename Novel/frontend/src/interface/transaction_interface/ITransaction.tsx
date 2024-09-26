@@ -1,4 +1,5 @@
 export interface ITransaction {
+   CreatedAt: string;
     trans_type: string;
     payment?: string;
     user_id: number;

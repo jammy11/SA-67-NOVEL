@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { Alert } from 'antd';
 import './pop.css';
 import './pop_PP1.css';
-import { Package } from '../../../แดนโค้ดมรณา/interface';
+import { Package } from '../../interface/transaction_interface/IPackgae';
 import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard';
 import { updateCoinBalance } from '../../services/https/Coin/coin';
@@ -11,11 +11,15 @@ import { CreateTransaction } from '../../services/https/Transaction/transaction'
 import { useBalanceContext } from '../Home_components/BalanceContext';
 import { useHistoryContext } from './HistoryContext';
 import { useAuth } from '../Pubblic_components/AuthContextType';
+
 const Popup1: React.FC = () => {
+
   const [Package, setPackage] = useState(false);
   const closePackage = () => setPackage(false);
   const showPackages = () => setPackage(true);
+
   const { isLoggedIn } = useAuth();
+
   const [PromPay, setPromPay] = useState(false);
   const closePromPay = () => setPromPay(false);
   const [showModal, setShowModal] = useState(false);
@@ -56,19 +60,18 @@ const Popup1: React.FC = () => {
       triggerRefresh();
       triggerHistoryRefresh();
     }, 1400);
-    
-
+  
     const newAlert = {
       id: Date.now(),
       message: `เสร็จสิ้น , คุณได้รับเหรียญ ${Amount} คอยน์`,
     };
-    setAlerts(prev => [newAlert, ...prev.slice(0, 1)]); // Add new alert, keep only 2 in the list
+    setAlerts(prev => [newAlert, ...prev.slice(0, 1)]); 
   };
 
   useEffect(() => {
     if (alerts.length > 0) {
       const timer = setTimeout(() => {
-        setAlerts(prev => prev.slice(0, -1)); // Remove the last alert after 15 seconds
+        setAlerts(prev => prev.slice(0, -1)); 
       }, 4000);
       return () => clearTimeout(timer);
     }
@@ -124,7 +127,6 @@ const Popup1: React.FC = () => {
     </div>
   </div>
 </Modal>
-
 
       <Modal show={PromPay} onHide={closePromPay}>
         <div className="g2r">

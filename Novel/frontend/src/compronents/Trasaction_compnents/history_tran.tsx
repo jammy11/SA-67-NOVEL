@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Select, Spin, Alert } from 'antd';
 import { useHistoryContext } from "./HistoryContext";
 import { GetTransacUserID } from "../../services/https/Transaction/transaction";
-import { Transaction } from "../../interface/transaction_interface";
+import { ITransaction } from "../../interface/transaction_interface/ITransaction";
 import { format } from 'date-fns';
 import { GetUsersById } from "../../services/https/User/user";
 const { Option } = Select;
@@ -10,8 +10,8 @@ const { Option } = Select;
 const user_id = localStorage.getItem("id") || "";
 
 const History: React.FC = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [filteredData, setFilteredData] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+  const [filteredData, setFilteredData] = useState<ITransaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string>('All');
@@ -33,7 +33,7 @@ const History: React.FC = () => {
         const data = await GetTransacUserID(user_id);
   
         // เรียงข้อมูลจากใหม่ไปเก่าตามวันที่ CreatedAt
-        const sortedData = data.sort((a: Transaction, b: Transaction) =>
+        const sortedData = data.sort((a: ITransaction, b: ITransaction) =>
           new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime()
         );
   
@@ -41,7 +41,7 @@ const History: React.FC = () => {
         setFilteredData(sortedData);
         setLoading(false);
       } catch (err) {
-        setError("Failed to fetch transactions");
+        setError("ยังไม่มีข้อมูล");
         setLoading(false);
       }
     };
@@ -49,7 +49,7 @@ const History: React.FC = () => {
     if (user_id) {
       fetchUserAndTransactions();
     } else {
-      setError("No user ID found");
+      setError("ไม่มีข้อมูลโปรดเข้าสู่ระบบ");
       setLoading(false);
     }
   }, [user_id, triggerHistoryRefresh]);

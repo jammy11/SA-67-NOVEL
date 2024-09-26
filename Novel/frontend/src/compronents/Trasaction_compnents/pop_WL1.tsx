@@ -5,7 +5,7 @@ import { Alert } from 'antd';
 import './pop.css';
 import './pop_WL1.css';
 import CountdownButton from './GETOTP';
-import { Package } from '../../../แดนโค้ดมรณา/interface';
+import { Package } from '../../interface/transaction_interface/IPackgae';
 import { GetPackages } from '../../services/https/Package/package';
 import CoinCard from './coinCard'
 import { CreateTransaction } from '../../services/https/Transaction/transaction';
