@@ -72,7 +72,7 @@ console.log("isWriter: ", isWriter);
     setSelectedType(value);
   };
 
-  const columns = {
+  const columns: Record<string, any[]> = {
     All: [
       { title: 'ประเภท', dataIndex: 'trans_type', key: 'type', render: (text: string) => text },
       { title: 'ช่องทางการทำธุรกรรม', dataIndex: 'payment', key: 'payment',align: 'center', render: (text: string) => text },
@@ -181,7 +181,7 @@ console.log("isWriter: ", isWriter);
       </Select>
       <Table
         dataSource={filteredData}
-        columns={columns[selectedType]}
+        columns={columns[selectedType]} 
         rowKey="ID"
         className="large-text-table"
       />
