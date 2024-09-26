@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ITransaction } from "../../../interface/transaction_interface/ITransaction";
+import { ITransaction,ICreTransaction } from "../../../interface/transaction_interface/ITransaction";
 
 const apiUrl = "http://localhost:8000";
 const Authorization = localStorage.getItem("token");
@@ -15,7 +15,7 @@ const requestOptions = {
 
 
 // Transaction Functions
-async function CreateTransaction(data: ITransaction) {
+async function CreateTransaction(data: ICreTransaction) {
     return await axios
       .post(`${apiUrl}/transaction`, data, requestOptions)
       .then((res) => res)
